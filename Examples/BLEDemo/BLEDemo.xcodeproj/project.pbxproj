@@ -25,6 +25,7 @@
 		E1B6277818D0614600436B8C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B6277718D0614600436B8C /* Images.xcassets */; };
 		E1B6277B18D0C3A400436B8C /* SensorData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B6277A18D0C3A400436B8C /* SensorData.m */; };
 		E1B6277E18D0DAD800436B8C /* SensorDataValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B6277D18D0DAD800436B8C /* SensorDataValue.m */; };
+		E1C3958818E0529500C2B0E4 /* NZMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */; };
 		E1D6554A18DB665D00A99748 /* NZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D6554918DB665D00A99748 /* NZConstants.m */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,8 @@
 		E1B6277A18D0C3A400436B8C /* SensorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SensorData.m; path = ../../SensorData.m; sourceTree = "<group>"; };
 		E1B6277C18D0DAD800436B8C /* SensorDataValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorDataValue.h; sourceTree = "<group>"; };
 		E1B6277D18D0DAD800436B8C /* SensorDataValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensorDataValue.m; sourceTree = "<group>"; };
+		E1C3958618E0529500C2B0E4 /* NZMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZMenuViewController.h; sourceTree = "<group>"; };
+		E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZMenuViewController.m; sourceTree = "<group>"; };
 		E1D6554818DB665D00A99748 /* NZConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZConstants.h; sourceTree = "<group>"; };
 		E1D6554918DB665D00A99748 /* NZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,13 +153,15 @@
 		9A79EAD7182AD9F200F1983C /* code */ = {
 			isa = PBXGroup;
 			children = (
+				9A79EADA182AD9F200F1983C /* MainViewController.h */,
+				9A79EADB182AD9F200F1983C /* MainViewController.m */,
+				E1C3958618E0529500C2B0E4 /* NZMenuViewController.h */,
+				E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */,
 				E1B08B1718DB01E5000DCDB5 /* GraphView */,
 				E1B6277918D0C3A400436B8C /* SensorData.h */,
 				E1B6277A18D0C3A400436B8C /* SensorData.m */,
 				9A79EAD8182AD9F200F1983C /* AppDelegate.h */,
 				9A79EAD9182AD9F200F1983C /* AppDelegate.m */,
-				9A79EADA182AD9F200F1983C /* MainViewController.h */,
-				9A79EADB182AD9F200F1983C /* MainViewController.m */,
 				E1B6277C18D0DAD800436B8C /* SensorDataValue.h */,
 				E1B6277D18D0DAD800436B8C /* SensorDataValue.m */,
 				E1D6554818DB665D00A99748 /* NZConstants.h */,
@@ -286,6 +291,7 @@
 				9A79EADD182AD9F200F1983C /* MainViewController.m in Sources */,
 				E1B08B2018DB04EC000DCDB5 /* NZGraphTextView.m in Sources */,
 				E1B6277B18D0C3A400436B8C /* SensorData.m in Sources */,
+				E1C3958818E0529500C2B0E4 /* NZMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

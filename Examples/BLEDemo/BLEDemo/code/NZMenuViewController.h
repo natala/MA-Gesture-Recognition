@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NZMenuViewController : UIViewController
+@interface NZMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *menuTableView;
+
 
 @end
