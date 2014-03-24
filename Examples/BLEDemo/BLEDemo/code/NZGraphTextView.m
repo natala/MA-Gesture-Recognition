@@ -56,7 +56,7 @@
     NSString * zero         = [NSString stringWithFormat:@"%d", 0];
     NSString * bottomValue  = [NSString stringWithFormat:@"%d",(int)(self.minAxisY/kNormalizationAxisY)];
     
-    CGRect rect1 = CGRectMake(0.0, kGraphViewGraphOffsetY/2.0f, kGraphViewAxisLabelSize.width, kGraphViewAxisLabelSize.height);
+    CGRect rect1 = CGRectMake(0.0, kGraphViewGraphOffsetY*1.5f, kGraphViewAxisLabelSize.width, kGraphViewAxisLabelSize.height);
     [topValue drawInRect:rect1 withFont:systemFont lineBreakMode:NSLineBreakByCharWrapping alignment:NSTextAlignmentRight];
     rect1 = CGRectMake(0.0, height/2.0f - kGraphViewGraphOffsetY, kGraphViewAxisLabelSize.width, kGraphViewAxisLabelSize.height);
     [zero drawInRect:rect1 withFont:systemFont lineBreakMode:NSLineBreakByCharWrapping alignment:NSTextAlignmentRight];

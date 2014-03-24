@@ -231,6 +231,7 @@ MainViewController.m
 }
 
 - (void) peripheralDiscovered:(CBPeripheral*) peripheral {
+//    [BLEDiscovery sharedInstance].supportedServiceUUIDs
     if([BLEDiscovery sharedInstance].connectedService == nil){
         [[BLEDiscovery sharedInstance] connectPeripheral:peripheral];
     }
