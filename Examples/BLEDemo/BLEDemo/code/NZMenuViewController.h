@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NZMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface NZMenuViewController : UIViewController //<UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *menuTableView;
+//@property (weak, nonatomic) IBOutlet UITableView *menuTableView;
+- (IBAction)trainButtonTaped:(id)sender;
+- (IBAction)classifyButtonTaped:(id)sender;
+- (IBAction)myClassesButtonTaped:(id)sender;
+- (IBAction)showMpuDataTaped:(id)sender;
+
 
 
 @end

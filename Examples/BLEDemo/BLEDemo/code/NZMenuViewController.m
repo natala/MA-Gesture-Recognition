@@ -19,13 +19,13 @@
     NSString *menuCellIdentifier;
 }
 
-@synthesize menuTableView;
+//@synthesize menuTableView;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-       [self commonInit];
+      // [self commonInit];
     }
     return self;
 }
@@ -34,7 +34,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self commonInit];
+      //  [self commonInit];
     }
     return self;
 }
@@ -43,17 +43,6 @@
 {
     menuOptions = [NSArray arrayWithObjects:@"Train", @"Classify", @"My Casses", nil];
     menuCellIdentifier = @"MenuCellId";
-}
-
-- (void)viewWillLayoutSubviews
-{
-    //TODO doesn't work, figure out how to dinamically adjust the size of the view without subclassing or subclass
-    [super viewWillLayoutSubviews];
-    CGRect frame = menuTableView.frame;
-    frame.size.height = MIN( menuTableView.rowHeight*[menuOptions count], self.view.frame.size.height);
-    menuTableView.frame = frame;
-    [self reloadInputViews];
-    
 }
 
 - (void)viewDidLoad
@@ -66,7 +55,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/*
 #pragma UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -85,5 +74,19 @@
 }
 
 #pragma UITableViewDelegate
+ */
 
+- (IBAction)trainButton:(id)sender {
+}
+- (IBAction)trainButtonTaped:(id)sender {
+}
+
+- (IBAction)classifyButtonTaped:(id)sender {
+}
+
+- (IBAction)myClassesButtonTaped:(id)sender {
+}
+
+- (IBAction)showMpuDataTaped:(id)sender {
+}
 @end

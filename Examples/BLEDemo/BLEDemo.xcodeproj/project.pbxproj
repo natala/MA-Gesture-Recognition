@@ -25,7 +25,13 @@
 		E1B6277818D0614600436B8C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B6277718D0614600436B8C /* Images.xcassets */; };
 		E1B6277B18D0C3A400436B8C /* SensorData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B6277A18D0C3A400436B8C /* SensorData.m */; };
 		E1B6277E18D0DAD800436B8C /* SensorDataValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B6277D18D0DAD800436B8C /* SensorDataValue.m */; };
+		E1BE079D18E5CA2300B00F54 /* NZTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */; };
 		E1C3958818E0529500C2B0E4 /* NZMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */; };
+		E1CD3BAB18E2E50200AFF986 /* SKSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BAA18E2E50200AFF986 /* SKSlideViewController.m */; };
+		E1CD3BAE18E2E90400AFF986 /* NZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BAD18E2E90400AFF986 /* NZMainViewController.m */; };
+		E1CD3BB118E2EB0100AFF986 /* NZMainSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BB018E2EB0100AFF986 /* NZMainSlideViewController.m */; };
+		E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BB318E2EB0D00AFF986 /* NZLeftSlideViewController.m */; };
+		E1CD3BFE18E3227800AFF986 /* NZBleConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */; };
 		E1D6554A18DB665D00A99748 /* NZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D6554918DB665D00A99748 /* NZConstants.m */; };
 /* End PBXBuildFile section */
 
@@ -75,8 +81,20 @@
 		E1B6277A18D0C3A400436B8C /* SensorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SensorData.m; path = ../../SensorData.m; sourceTree = "<group>"; };
 		E1B6277C18D0DAD800436B8C /* SensorDataValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorDataValue.h; sourceTree = "<group>"; };
 		E1B6277D18D0DAD800436B8C /* SensorDataValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensorDataValue.m; sourceTree = "<group>"; };
+		E1BE079B18E5CA2300B00F54 /* NZTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZTabBarController.h; sourceTree = "<group>"; };
+		E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZTabBarController.m; sourceTree = "<group>"; };
 		E1C3958618E0529500C2B0E4 /* NZMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZMenuViewController.h; sourceTree = "<group>"; };
 		E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZMenuViewController.m; sourceTree = "<group>"; };
+		E1CD3BA918E2E50200AFF986 /* SKSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSlideViewController.h; sourceTree = "<group>"; };
+		E1CD3BAA18E2E50200AFF986 /* SKSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSlideViewController.m; sourceTree = "<group>"; };
+		E1CD3BAC18E2E90400AFF986 /* NZMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZMainViewController.h; path = ../NZMainViewController.h; sourceTree = "<group>"; };
+		E1CD3BAD18E2E90400AFF986 /* NZMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZMainViewController.m; path = ../NZMainViewController.m; sourceTree = "<group>"; };
+		E1CD3BAF18E2EB0100AFF986 /* NZMainSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZMainSlideViewController.h; sourceTree = SOURCE_ROOT; };
+		E1CD3BB018E2EB0100AFF986 /* NZMainSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZMainSlideViewController.m; sourceTree = SOURCE_ROOT; };
+		E1CD3BB218E2EB0D00AFF986 /* NZLeftSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZLeftSlideViewController.h; sourceTree = SOURCE_ROOT; };
+		E1CD3BB318E2EB0D00AFF986 /* NZLeftSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZLeftSlideViewController.m; sourceTree = SOURCE_ROOT; };
+		E1CD3BFC18E3227800AFF986 /* NZBleConnectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZBleConnectionViewController.h; sourceTree = "<group>"; };
+		E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZBleConnectionViewController.m; sourceTree = "<group>"; };
 		E1D6554818DB665D00A99748 /* NZConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZConstants.h; sourceTree = "<group>"; };
 		E1D6554918DB665D00A99748 /* NZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,8 +171,12 @@
 		9A79EAD7182AD9F200F1983C /* code */ = {
 			isa = PBXGroup;
 			children = (
+				E1BE079718E5B8DD00B00F54 /* FinalVersion */,
+				E1CD3BA818E2E50200AFF986 /* SKSlideViewController */,
 				9A79EADA182AD9F200F1983C /* MainViewController.h */,
 				9A79EADB182AD9F200F1983C /* MainViewController.m */,
+				E1CD3BFC18E3227800AFF986 /* NZBleConnectionViewController.h */,
+				E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */,
 				E1C3958618E0529500C2B0E4 /* NZMenuViewController.h */,
 				E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */,
 				E1B08B1718DB01E5000DCDB5 /* GraphView */,
@@ -192,6 +214,30 @@
 				E1B08B2218DB25EB000DCDB5 /* NZGraphViewHelper.m */,
 			);
 			name = GraphView;
+			sourceTree = "<group>";
+		};
+		E1BE079718E5B8DD00B00F54 /* FinalVersion */ = {
+			isa = PBXGroup;
+			children = (
+				E1BE079B18E5CA2300B00F54 /* NZTabBarController.h */,
+				E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */,
+			);
+			name = FinalVersion;
+			sourceTree = "<group>";
+		};
+		E1CD3BA818E2E50200AFF986 /* SKSlideViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E1CD3BAC18E2E90400AFF986 /* NZMainViewController.h */,
+				E1CD3BAD18E2E90400AFF986 /* NZMainViewController.m */,
+				E1CD3BAF18E2EB0100AFF986 /* NZMainSlideViewController.h */,
+				E1CD3BB018E2EB0100AFF986 /* NZMainSlideViewController.m */,
+				E1CD3BB218E2EB0D00AFF986 /* NZLeftSlideViewController.h */,
+				E1CD3BB318E2EB0D00AFF986 /* NZLeftSlideViewController.m */,
+				E1CD3BA918E2E50200AFF986 /* SKSlideViewController.h */,
+				E1CD3BAA18E2E50200AFF986 /* SKSlideViewController.m */,
+			);
+			path = SKSlideViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,13 +331,19 @@
 				E1D6554A18DB665D00A99748 /* NZConstants.m in Sources */,
 				E1B08B1D18DB04C5000DCDB5 /* NZGraphViewSegment.m in Sources */,
 				E1B08B2318DB25EB000DCDB5 /* NZGraphViewHelper.m in Sources */,
+				E1CD3BAB18E2E50200AFF986 /* SKSlideViewController.m in Sources */,
 				E1B6277E18D0DAD800436B8C /* SensorDataValue.m in Sources */,
 				9A79EAE9182ADA1900F1983C /* main.m in Sources */,
+				E1BE079D18E5CA2300B00F54 /* NZTabBarController.m in Sources */,
+				E1CD3BAE18E2E90400AFF986 /* NZMainViewController.m in Sources */,
 				E1B08B1A18DB0230000DCDB5 /* NZGraphView.m in Sources */,
+				E1CD3BB118E2EB0100AFF986 /* NZMainSlideViewController.m in Sources */,
 				9A79EADD182AD9F200F1983C /* MainViewController.m in Sources */,
+				E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */,
 				E1B08B2018DB04EC000DCDB5 /* NZGraphTextView.m in Sources */,
 				E1B6277B18D0C3A400436B8C /* SensorData.m in Sources */,
 				E1C3958818E0529500C2B0E4 /* NZMenuViewController.m in Sources */,
+				E1CD3BFE18E3227800AFF986 /* NZBleConnectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
