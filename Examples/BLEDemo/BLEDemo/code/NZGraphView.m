@@ -35,6 +35,8 @@
 	self = [super initWithCoder:decoder];
 	if (self != nil)
 	{
+        _maxAxisY = kMaxAxisY;
+        _minAxisY = kMinAxisY;
 		[self commonInit];
 	}
 	return self;

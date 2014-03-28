@@ -8,10 +8,13 @@
 
 #import "NZTabBarController.h"
 #import "NZBleConnectionViewController.h"
+#import "NZGraphViewController.h"
+#import "SensorData.h"
 
 @interface NZTabBarController ()
 
-@property NZBleConnectionViewController *bleVC;
+@property (weak, nonatomic) NZBleConnectionViewController *bleVC;
+@property (weak, nonatomic) NZGraphViewController * graphVC;
 
 @end
 
@@ -38,6 +41,8 @@
     for (int i = 0; i < [self.viewControllers count]; i++) {
         if ([[self.viewControllers objectAtIndex:i] isKindOfClass:[NZBleConnectionViewController class]]) {
             self.bleVC = (NZBleConnectionViewController *)[self.viewControllers objectAtIndex:i];
+        } else if ([[self.viewControllers objectAtIndex:i] isKindOfClass:[NZGraphViewController class]]) {
+            self.graphVC = (NZGraphViewController *)[self.viewControllers objectAtIndex:i];
         }
     }
 }
@@ -55,7 +60,7 @@
 -(void) didReceiveData:(uint8_t *)buffer lenght:(NSInteger)length{
     BOOL extractedData = [self.bleVC extractDataFromBuffer:buffer withLength:length to:self.accelerometerData];
     if (extractedData) {
-        //update the graph view and other stuff
+        [self.graphVC updateWIthData:self.accelerometerData];
     }
 }
 
