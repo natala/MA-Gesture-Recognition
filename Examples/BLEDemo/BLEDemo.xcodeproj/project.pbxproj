@@ -25,6 +25,16 @@
 		E1B6277818D0614600436B8C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B6277718D0614600436B8C /* Images.xcassets */; };
 		E1B6277B18D0C3A400436B8C /* SensorData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B6277A18D0C3A400436B8C /* SensorData.m */; };
 		E1B6277E18D0DAD800436B8C /* SensorDataValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B6277D18D0DAD800436B8C /* SensorDataValue.m */; };
+		E1B86CF718E6FC57002475AE /* bluetooth-17-6.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CF618E6FC57002475AE /* bluetooth-17-6.png */; };
+		E1B86CFE18E6FD79002475AE /* bluetooth-17-2.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CF818E6FD79002475AE /* bluetooth-17-2.png */; };
+		E1B86CFF18E6FD79002475AE /* bluetooth-17-3.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CF918E6FD79002475AE /* bluetooth-17-3.png */; };
+		E1B86D0018E6FD79002475AE /* bluetooth-17-4.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CFA18E6FD79002475AE /* bluetooth-17-4.png */; };
+		E1B86D0118E6FD79002475AE /* bluetooth-17-5.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CFB18E6FD79002475AE /* bluetooth-17-5.png */; };
+		E1B86D0218E6FD79002475AE /* bluetooth-17.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CFC18E6FD79002475AE /* bluetooth-17.png */; };
+		E1B86D0318E6FD79002475AE /* Rss_feed_subscribe_social_button_black_square_reader_orange_news.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CFD18E6FD79002475AE /* Rss_feed_subscribe_social_button_black_square_reader_orange_news.png */; };
+		E1B86D0718E7044D002475AE /* bluetooth-17-25x25.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86D0618E7044D002475AE /* bluetooth-17-25x25.png */; };
+		E1B86D0918E71B0B002475AE /* bluetooth-logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E1B86D0818E71B0B002475AE /* bluetooth-logo.jpg */; };
+		E1B86D0B18E71B12002475AE /* bleImage.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86D0A18E71B12002475AE /* bleImage.png */; };
 		E1BE079D18E5CA2300B00F54 /* NZTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */; };
 		E1BE07A018E60C1C00B00F54 /* NZGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BE079F18E60C1C00B00F54 /* NZGraphViewController.m */; };
 		E1C3958818E0529500C2B0E4 /* NZMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */; };
@@ -82,6 +92,16 @@
 		E1B6277A18D0C3A400436B8C /* SensorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SensorData.m; path = ../../SensorData.m; sourceTree = "<group>"; };
 		E1B6277C18D0DAD800436B8C /* SensorDataValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorDataValue.h; sourceTree = "<group>"; };
 		E1B6277D18D0DAD800436B8C /* SensorDataValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensorDataValue.m; sourceTree = "<group>"; };
+		E1B86CF618E6FC57002475AE /* bluetooth-17-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-6.png"; sourceTree = SOURCE_ROOT; };
+		E1B86CF818E6FD79002475AE /* bluetooth-17-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-2.png"; sourceTree = SOURCE_ROOT; };
+		E1B86CF918E6FD79002475AE /* bluetooth-17-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-3.png"; sourceTree = SOURCE_ROOT; };
+		E1B86CFA18E6FD79002475AE /* bluetooth-17-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-4.png"; sourceTree = SOURCE_ROOT; };
+		E1B86CFB18E6FD79002475AE /* bluetooth-17-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-5.png"; sourceTree = SOURCE_ROOT; };
+		E1B86CFC18E6FD79002475AE /* bluetooth-17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17.png"; sourceTree = SOURCE_ROOT; };
+		E1B86CFD18E6FD79002475AE /* Rss_feed_subscribe_social_button_black_square_reader_orange_news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rss_feed_subscribe_social_button_black_square_reader_orange_news.png; sourceTree = SOURCE_ROOT; };
+		E1B86D0618E7044D002475AE /* bluetooth-17-25x25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-25x25.png"; sourceTree = SOURCE_ROOT; };
+		E1B86D0818E71B0B002475AE /* bluetooth-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bluetooth-logo.jpg"; sourceTree = SOURCE_ROOT; };
+		E1B86D0A18E71B12002475AE /* bleImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bleImage.png; sourceTree = SOURCE_ROOT; };
 		E1BE079B18E5CA2300B00F54 /* NZTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZTabBarController.h; sourceTree = "<group>"; };
 		E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZTabBarController.m; sourceTree = "<group>"; };
 		E1BE079E18E60C1C00B00F54 /* NZGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphViewController.h; sourceTree = "<group>"; };
@@ -153,6 +173,7 @@
 		9A17355917B11CA7001DD4A4 /* BLEDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E1B86CF318E6FB54002475AE /* Assets */,
 				9A79EAD7182AD9F200F1983C /* code */,
 				E1B6277718D0614600436B8C /* Images.xcassets */,
 				9A17355A17B11CA7001DD4A4 /* Supporting Files */,
@@ -178,10 +199,6 @@
 				E1CD3BA818E2E50200AFF986 /* SKSlideViewController */,
 				9A79EADA182AD9F200F1983C /* MainViewController.h */,
 				9A79EADB182AD9F200F1983C /* MainViewController.m */,
-				E1CD3BFC18E3227800AFF986 /* NZBleConnectionViewController.h */,
-				E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */,
-				E1C3958618E0529500C2B0E4 /* NZMenuViewController.h */,
-				E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */,
 				E1B08B1718DB01E5000DCDB5 /* GraphView */,
 				E1B6277918D0C3A400436B8C /* SensorData.h */,
 				E1B6277A18D0C3A400436B8C /* SensorData.m */,
@@ -219,6 +236,23 @@
 			name = GraphView;
 			sourceTree = "<group>";
 		};
+		E1B86CF318E6FB54002475AE /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				E1B86D0A18E71B12002475AE /* bleImage.png */,
+				E1B86D0818E71B0B002475AE /* bluetooth-logo.jpg */,
+				E1B86CF818E6FD79002475AE /* bluetooth-17-2.png */,
+				E1B86D0618E7044D002475AE /* bluetooth-17-25x25.png */,
+				E1B86CF918E6FD79002475AE /* bluetooth-17-3.png */,
+				E1B86CFA18E6FD79002475AE /* bluetooth-17-4.png */,
+				E1B86CFB18E6FD79002475AE /* bluetooth-17-5.png */,
+				E1B86CFC18E6FD79002475AE /* bluetooth-17.png */,
+				E1B86CFD18E6FD79002475AE /* Rss_feed_subscribe_social_button_black_square_reader_orange_news.png */,
+				E1B86CF618E6FC57002475AE /* bluetooth-17-6.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		E1BE079718E5B8DD00B00F54 /* FinalVersion */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +260,10 @@
 				E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */,
 				E1BE079E18E60C1C00B00F54 /* NZGraphViewController.h */,
 				E1BE079F18E60C1C00B00F54 /* NZGraphViewController.m */,
+				E1CD3BFC18E3227800AFF986 /* NZBleConnectionViewController.h */,
+				E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */,
+				E1C3958618E0529500C2B0E4 /* NZMenuViewController.h */,
+				E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */,
 			);
 			name = FinalVersion;
 			sourceTree = "<group>";
@@ -319,9 +357,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1B86D0B18E71B12002475AE /* bleImage.png in Resources */,
+				E1B86D0018E6FD79002475AE /* bluetooth-17-4.png in Resources */,
+				E1B86D0918E71B0B002475AE /* bluetooth-logo.jpg in Resources */,
+				E1B86CFE18E6FD79002475AE /* bluetooth-17-2.png in Resources */,
+				E1B86D0118E6FD79002475AE /* bluetooth-17-5.png in Resources */,
 				E1B6277818D0614600436B8C /* Images.xcassets in Resources */,
 				9A79EAEA182ADA1900F1983C /* Storyboard.storyboard in Resources */,
 				9A79EAEC182ADA2000F1983C /* Default-568h@2x.png in Resources */,
+				E1B86D0218E6FD79002475AE /* bluetooth-17.png in Resources */,
+				E1B86CFF18E6FD79002475AE /* bluetooth-17-3.png in Resources */,
+				E1B86D0718E7044D002475AE /* bluetooth-17-25x25.png in Resources */,
+				E1B86CF718E6FC57002475AE /* bluetooth-17-6.png in Resources */,
+				E1B86D0318E6FD79002475AE /* Rss_feed_subscribe_social_button_black_square_reader_orange_news.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

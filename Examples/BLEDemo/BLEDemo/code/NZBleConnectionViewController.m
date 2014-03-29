@@ -10,8 +10,6 @@
 
 @interface NZBleConnectionViewController ()
 
-@property (nonatomic,weak) UIPanGestureRecognizer *panRecognizer;
-
 @end
 
 @implementation NZBleConnectionViewController
@@ -28,7 +26,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   /* // set the background image
     
+    CGSize size = self.view.layer.bounds.size;
+    UIGraphicsBeginImageContext(size);
+    UIImage *img = [UIImage imageNamed:@"bleImage.png"];
+    [img drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *newImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:newImg];
+    */
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,13 +59,13 @@
     bool readPackage = true;
     // TODO move this to one method of the SensorData class
     if( [sensorData.x setValueFromBuffer:buffer withBufferLength:length ] ){
-        NSLog(@"finished reading X data!");
+       // NSLog(@"finished reading X data!");
     } else readPackage = false;
     if( [sensorData.y setValueFromBuffer:buffer withBufferLength:length ] ){
-        NSLog(@"finished reading Y data!");
+        //NSLog(@"finished reading Y data!");
     } else readPackage = false;
     if( [sensorData.z setValueFromBuffer:buffer withBufferLength:length ] ){
-        NSLog(@"finished reading Z data!");
+        //NSLog(@"finished reading Z data!");
     } else readPackage = false;
     
     if (readPackage) {

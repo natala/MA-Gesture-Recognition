@@ -15,6 +15,10 @@
 
 @property (weak, nonatomic) NZBleConnectionViewController *bleVC;
 @property (weak, nonatomic) NZGraphViewController * graphVC;
+@property (weak, nonatomic) UINavigationController *menuNavigationController;
+@property int bleVCIndex;
+@property int graphVCIndex;
+@property int menuNCIndex;
 
 @end
 
@@ -41,8 +45,13 @@
     for (int i = 0; i < [self.viewControllers count]; i++) {
         if ([[self.viewControllers objectAtIndex:i] isKindOfClass:[NZBleConnectionViewController class]]) {
             self.bleVC = (NZBleConnectionViewController *)[self.viewControllers objectAtIndex:i];
+            self.bleVCIndex = i;
         } else if ([[self.viewControllers objectAtIndex:i] isKindOfClass:[NZGraphViewController class]]) {
             self.graphVC = (NZGraphViewController *)[self.viewControllers objectAtIndex:i];
+            self.graphVCIndex = i;
+       } else if ([[self.viewControllers objectAtIndex:i] isKindOfClass:[UINavigationController class]]) {
+           self.menuNavigationController = (UINavigationController *)[self.viewControllers objectAtIndex:i];
+           self.menuNCIndex = i;
         }
     }
 }
@@ -52,6 +61,19 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark -
+#pragma mark Managing Tab Bar Item selection
+#pragma mark -
+
+-(void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+    NSLog(@"seleted item: %d", self.selectedIndex);
+    if ([item isEqual:[self.tabBar.items objectAtIndex:self.bleVCIndex] ]) {
+        [[self.tabBar.items objectAtIndex:self.bleVCIndex] setBadgeValue:nil];
+    }
+}
+
 
 #pragma mark -
 #pragma mark BleServiceDataDelegate
@@ -89,10 +111,12 @@
     service.delegate = self;
     service.dataDelegate = self;
     [self.bleVC updateConnectedLabel:([BLEDiscovery sharedInstance].connectedService != nil)];
+    [[self.tabBar.items objectAtIndex:self.bleVCIndex] setBadgeValue:@":)"];
     //[self updateConnectedLabel];
 }
 -(void) bleServiceDidDisconnect:(BLEService *)service{
         [self.bleVC updateConnectedLabel:([BLEDiscovery sharedInstance].connectedService != nil)];
+        [[self.tabBar.items objectAtIndex:self.bleVCIndex] setBadgeValue:@":("];
     //[self updateConnectedLabel];
 }
 

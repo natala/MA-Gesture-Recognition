@@ -154,13 +154,13 @@ MainViewController.m
     bool readPackage = true;
     // TODO move this to one method of the SensorData class
     if( [self.accelerometerData.x setValueFromBuffer:buffer withBufferLength:length ] ){
-        NSLog(@"finished reading X data!");
+        //NSLog(@"finished reading X data!");
     } else readPackage = false;
     if( [self.accelerometerData.y setValueFromBuffer:buffer withBufferLength:length ] ){
-        NSLog(@"finished reading Y data!");
+        //NSLog(@"finished reading Y data!");
     } else readPackage = false;
     if( [self.accelerometerData.z setValueFromBuffer:buffer withBufferLength:length ] ){
-        NSLog(@"finished reading Z data!");
+        //NSLog(@"finished reading Z data!");
     } else readPackage = false;
    
     if (readPackage) {
