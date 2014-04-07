@@ -18,6 +18,10 @@
 		9A79EAEA182ADA1900F1983C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A79EAE7182ADA1900F1983C /* Storyboard.storyboard */; };
 		9A79EAEC182ADA2000F1983C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A79EAEB182ADA2000F1983C /* Default-568h@2x.png */; };
 		9A95FADB18CA7343009A724F /* libBLE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A95FAD818CA4957009A724F /* libBLE.a */; };
+		E1855E3C18F19B9900F371C0 /* NZGestureRecognitionPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1855E3A18F19B9900F371C0 /* NZGestureRecognitionPipeline.mm */; };
+		E185624E18F1C4BB00F371C0 /* libGRTStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E185624B18F1C48600F371C0 /* libGRTStatic.a */; };
+		E185625118F1CCF600F371C0 /* NZTraningViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E185625018F1CCF600F371C0 /* NZTraningViewController.mm */; };
+		E185625418F1CDAC00F371C0 /* NZClassificationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E185625318F1CDAC00F371C0 /* NZClassificationController.mm */; };
 		E1B08B1A18DB0230000DCDB5 /* NZGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B08B1918DB0230000DCDB5 /* NZGraphView.m */; };
 		E1B08B1D18DB04C5000DCDB5 /* NZGraphViewSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B08B1C18DB04C5000DCDB5 /* NZGraphViewSegment.m */; };
 		E1B08B2018DB04EC000DCDB5 /* NZGraphTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B08B1F18DB04EC000DCDB5 /* NZGraphTextView.m */; };
@@ -61,6 +65,20 @@
 			remoteGlobalIDString = 9A17359517B11D87001DD4A4;
 			remoteInfo = BLE;
 		};
+		E185624A18F1C48600F371C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E185605818F1BD7C00F371C0;
+			remoteInfo = GRTStatic;
+		};
+		E185624C18F1C4AC00F371C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E185605718F1BD7C00F371C0;
+			remoteInfo = GRTStatic;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +97,13 @@
 		9A79EAE7182ADA1900F1983C /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = BLEDemo/Storyboard.storyboard; sourceTree = SOURCE_ROOT; };
 		9A79EAEB182ADA2000F1983C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9A95FAD318CA4957009A724F /* BLE.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BLE.xcodeproj; path = ../../Frameworks/BLE/BLE.xcodeproj; sourceTree = "<group>"; };
+		E1855E3A18F19B9900F371C0 /* NZGestureRecognitionPipeline.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZGestureRecognitionPipeline.mm; sourceTree = "<group>"; };
+		E1855E3B18F19B9900F371C0 /* NZGestureRecognitionPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGestureRecognitionPipeline.h; sourceTree = "<group>"; };
+		E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GRTStatic.xcodeproj; path = Frameworks/GRTStatic/GRTStatic.xcodeproj; sourceTree = "<group>"; };
+		E185624F18F1CCF600F371C0 /* NZTraningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZTraningViewController.h; sourceTree = "<group>"; };
+		E185625018F1CCF600F371C0 /* NZTraningViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZTraningViewController.mm; sourceTree = "<group>"; };
+		E185625218F1CDAC00F371C0 /* NZClassificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassificationController.h; sourceTree = "<group>"; };
+		E185625318F1CDAC00F371C0 /* NZClassificationController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZClassificationController.mm; sourceTree = "<group>"; };
 		E1B08B1818DB0230000DCDB5 /* NZGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphView.h; sourceTree = "<group>"; };
 		E1B08B1918DB0230000DCDB5 /* NZGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGraphView.m; sourceTree = "<group>"; };
 		E1B08B1B18DB04C5000DCDB5 /* NZGraphViewSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphViewSegment.h; sourceTree = "<group>"; };
@@ -127,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E185624E18F1C4BB00F371C0 /* libGRTStatic.a in Frameworks */,
 				9A95FADB18CA7343009A724F /* libBLE.a in Frameworks */,
 				9A1735D017B12BBD001DD4A4 /* QuartzCore.framework in Frameworks */,
 				9A1735CE17B12B3D001DD4A4 /* CoreBluetooth.framework in Frameworks */,
@@ -160,6 +186,7 @@
 		9A17355217B11CA7001DD4A4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */,
 				9A95FAD318CA4957009A724F /* BLE.xcodeproj */,
 				9A1735CF17B12BBD001DD4A4 /* QuartzCore.framework */,
 				9A1735CD17B12B3D001DD4A4 /* CoreBluetooth.framework */,
@@ -221,6 +248,25 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		E1855E3918F19B8B00F371C0 /* GRT wrapers */ = {
+			isa = PBXGroup;
+			children = (
+				E1855E3A18F19B9900F371C0 /* NZGestureRecognitionPipeline.mm */,
+				E1855E3B18F19B9900F371C0 /* NZGestureRecognitionPipeline.h */,
+				E185625218F1CDAC00F371C0 /* NZClassificationController.h */,
+				E185625318F1CDAC00F371C0 /* NZClassificationController.mm */,
+			);
+			name = "GRT wrapers";
+			sourceTree = "<group>";
+		};
+		E185624718F1C48500F371C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E185624B18F1C48600F371C0 /* libGRTStatic.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E1B08B1718DB01E5000DCDB5 /* GraphView */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +302,7 @@
 		E1BE079718E5B8DD00B00F54 /* FinalVersion */ = {
 			isa = PBXGroup;
 			children = (
+				E1855E3918F19B8B00F371C0 /* GRT wrapers */,
 				E1BE079B18E5CA2300B00F54 /* NZTabBarController.h */,
 				E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */,
 				E1BE079E18E60C1C00B00F54 /* NZGraphViewController.h */,
@@ -264,6 +311,8 @@
 				E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */,
 				E1C3958618E0529500C2B0E4 /* NZMenuViewController.h */,
 				E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */,
+				E185624F18F1CCF600F371C0 /* NZTraningViewController.h */,
+				E185625018F1CCF600F371C0 /* NZTraningViewController.mm */,
 			);
 			name = FinalVersion;
 			sourceTree = "<group>";
@@ -297,6 +346,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				E185624D18F1C4AC00F371C0 /* PBXTargetDependency */,
 				9A95FADA18CA733E009A724F /* PBXTargetDependency */,
 			);
 			name = BLEDemo;
@@ -334,6 +384,10 @@
 					ProductGroup = 9A95FAD418CA4957009A724F /* Products */;
 					ProjectRef = 9A95FAD318CA4957009A724F /* BLE.xcodeproj */;
 				},
+				{
+					ProductGroup = E185624718F1C48500F371C0 /* Products */;
+					ProjectRef = E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -348,6 +402,13 @@
 			fileType = archive.ar;
 			path = libBLE.a;
 			remoteRef = 9A95FAD718CA4957009A724F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E185624B18F1C48600F371C0 /* libGRTStatic.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGRTStatic.a;
+			remoteRef = E185624A18F1C48600F371C0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -390,14 +451,17 @@
 				E1BE07A018E60C1C00B00F54 /* NZGraphViewController.m in Sources */,
 				E1BE079D18E5CA2300B00F54 /* NZTabBarController.m in Sources */,
 				E1CD3BAE18E2E90400AFF986 /* NZMainViewController.m in Sources */,
+				E185625118F1CCF600F371C0 /* NZTraningViewController.mm in Sources */,
 				E1B08B1A18DB0230000DCDB5 /* NZGraphView.m in Sources */,
 				E1CD3BB118E2EB0100AFF986 /* NZMainSlideViewController.m in Sources */,
 				9A79EADD182AD9F200F1983C /* MainViewController.m in Sources */,
 				E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */,
 				E1B08B2018DB04EC000DCDB5 /* NZGraphTextView.m in Sources */,
+				E1855E3C18F19B9900F371C0 /* NZGestureRecognitionPipeline.mm in Sources */,
 				E1B6277B18D0C3A400436B8C /* SensorData.m in Sources */,
 				E1C3958818E0529500C2B0E4 /* NZMenuViewController.m in Sources */,
 				E1CD3BFE18E3227800AFF986 /* NZBleConnectionViewController.m in Sources */,
+				E185625418F1CDAC00F371C0 /* NZClassificationController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +472,11 @@
 			isa = PBXTargetDependency;
 			name = BLE;
 			targetProxy = 9A95FAD918CA733E009A724F /* PBXContainerItemProxy */;
+		};
+		E185624D18F1C4AC00F371C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GRTStatic;
+			targetProxy = E185624C18F1C4AC00F371C0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -473,6 +542,7 @@
 		9A17356E17B11CA7001DD4A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -480,7 +550,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "BLEDemo/BLEDemo-Info.plist";
 				PRODUCT_NAME = BLEDemo;
-				USER_HEADER_SEARCH_PATHS = "../../Frameworks/BLE/**";
+				USER_HEADER_SEARCH_PATHS = "../../Frameworks/BLE/** Frameworks/GRTStatic/GRT/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -488,6 +558,7 @@
 		9A17356F17B11CA7001DD4A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -495,7 +566,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "BLEDemo/BLEDemo-Info.plist";
 				PRODUCT_NAME = BLEDemo;
-				USER_HEADER_SEARCH_PATHS = "../../Frameworks/BLE/**";
+				USER_HEADER_SEARCH_PATHS = "../../Frameworks/BLE/** Frameworks/GRTStatic/GRT/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

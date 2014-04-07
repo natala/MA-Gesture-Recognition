@@ -5,6 +5,24 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
+        <!--Traning View Controller-->
+        <scene sceneID="uuV-Ws-SkJ">
+            <objects>
+                <viewController id="iH8-HS-oQE" customClass="NZTraningViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ru0-vr-5Ds"/>
+                        <viewControllerLayoutGuide type="bottom" id="MNd-4c-1BA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="x3z-wv-6rS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Eb-aD-8fR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-287" y="733"/>
+        </scene>
         <!--Menu View Controller - Ishara-->
         <scene sceneID="aKX-Ln-MgO">
             <objects>
@@ -25,6 +43,7 @@
                                 </state>
                                 <connections>
                                     <action selector="trainButtonTaped:" destination="Vby-dQ-Tyo" eventType="touchUpInside" id="hV6-nS-4za"/>
+                                    <segue destination="iH8-HS-oQE" kind="modal" id="VdG-K6-bCG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOS-wc-Ogm">
