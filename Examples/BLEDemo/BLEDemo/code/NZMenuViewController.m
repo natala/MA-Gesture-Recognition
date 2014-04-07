@@ -7,8 +7,12 @@
 //
 
 #import "NZMenuViewController.h"
+#import "NZTraningViewController.h"
+#import "NZClassificationController.h"
 
 @interface NZMenuViewController ()
+
+@property (strong, nonatomic) NZClassificationController *classificationController;
 
 @end
 
@@ -19,7 +23,7 @@
     NSString *menuCellIdentifier;
 }
 
-//@synthesize menuTableView;
+@synthesize currentClassLabel = _currentClassLabel;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -43,11 +47,14 @@
 {
     menuOptions = [NSArray arrayWithObjects:@"Train", @"Classify", @"My Casses", nil];
     menuCellIdentifier = @"MenuCellId";
+    self.recordingData = false;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _classificationController = [[NZClassificationController alloc] init];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,8 +83,19 @@
 #pragma UITableViewDelegate
  */
 
-- (IBAction)trainButton:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"train"]){
+        NZTraningViewController *trainVC =(NZTraningViewController *)[segue destinationViewController];
+        trainVC.menuVC = self;
+        trainVC.currentClassLable = self.currentClassLabel;
+    }
 }
+
+- (void)receivedData:(SensorData *)data
+{
+  // TODO
+}
+
 - (IBAction)trainButtonTaped:(id)sender {
 }
 
@@ -87,6 +105,30 @@
 - (IBAction)myClassesButtonTaped:(id)sender {
 }
 
-- (IBAction)showMpuDataTaped:(id)sender {
+
+#pragma mark -
+#pragma mark getters & setters
+#pragma mark -
+- (void)setCurrentClassLabel:(NSString *)currentClassLabel
+{
+    _currentClassLabel = currentClassLabel;
+    [self.classificationController addClassLabel:currentClassLabel];
+    //NSLog(@"adding class lable: %@", currentClassLabel);
 }
+
+- (NSString *)currentClassLabel
+{
+    if (!_currentClassLabel) {
+        _currentClassLabel = @"default";
+    }
+    
+    return _currentClassLabel;
+}
+
+#pragma mark -
+#pragma mark managing classification controller TODO: define a protocol
+#pragma mark -
+
+
+
 @end

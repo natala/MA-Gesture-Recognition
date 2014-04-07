@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NZClassificationController.h"
+#import "NZMenuViewController.h"
 
-@interface NZTraningViewController : UIViewController
+@interface NZTraningViewController : UIViewController <UITextFieldDelegate>
 
-@property NZClassificationController *classificationController;
+//@property NZClassificationController *classificationController;
+@property (weak, nonatomic) NZMenuViewController *menuVC;
 
+@property (retain, nonatomic) NSString *currentClassLable;
+
+@property (weak, nonatomic) IBOutlet UITextField *classNameTextField;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gestureType;
+@property (weak, nonatomic) IBOutlet UIButton *recordControlButton;
+@property (weak, nonatomic) IBOutlet UILabel *numberOfSamples;
 @end

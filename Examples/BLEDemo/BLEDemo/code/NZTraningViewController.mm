@@ -12,7 +12,10 @@
 
 @end
 
+
 @implementation NZTraningViewController
+
+@synthesize classNameTextField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,9 +29,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.classificationController = [[NZClassificationController alloc] init];
-    [self.classificationController addData:nil];
-    // Do any additional setup after loading the view.
+    // set the text field delegate to manage the input thext
+    self.classNameTextField.delegate = self;
+    [self.classNameTextField setText:self.currentClassLable];
+    
+ //   [self.recordControlButton setTitle:@"record" forState: (UIControlState)UIControlStateNormal];
+//    [self.recordControlButton setTitle:@"" forState: (UIControlState)UIControlStateHighlighted];
+    [self.recordControlButton addTarget:self action:@selector(recordControlButtonTapped:) forControlEvents:(UIControlEvents)UIControlEventTouchDown];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,8 +55,46 @@
 }
 */
 
+-  (void)recordControlButtonTapped:(id)sender {
+    if ( [self.recordControlButton.titleLabel.text isEqualToString:@"stop"] ) {
+        NSLog(@"start recording");
+        self.menuVC.recordingData = true;
+        // disable edidting
+        self.recordControlButton.titleLabel.text = @"record";
+    } else {
+        NSLog(@"stop recording");
+        self.menuVC.recordingData = true;
+        self.recordControlButton.titleLabel.text = @"stop";
+    }
+}
+
 #pragma mark -
-#pragma mark getters & setters
+#pragma mark UITextFieldDelegate
 #pragma mark -
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // NSLog(@"textFieldShouldReturn");
+    self.menuVC.currentClassLabel = textField.text;
+    [self.view endEditing:YES];
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    // NSLog(@"textFieldShouldBeginEditing");
+    textField.text = nil;
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+   // NSLog(@"textFieldDidBeginEditing");
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+   // NSLog(@"textFieldDidEndEditing");
+}
 
 @end

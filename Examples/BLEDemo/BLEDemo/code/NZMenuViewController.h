@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SensorData.h"
 
 @interface NZMenuViewController : UIViewController //<UITableViewDataSource, UITableViewDelegate>
+
+@property BOOL recordingData;
+@property (weak, nonatomic) NSString *currentClassLabel;
 
 //@property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 - (IBAction)trainButtonTaped:(id)sender;
@@ -16,6 +20,6 @@
 - (IBAction)myClassesButtonTaped:(id)sender;
 - (IBAction)showMpuDataTaped:(id)sender;
 
-
+- (void)receivedData:(SensorData *)data;
 
 @end

@@ -11,9 +11,12 @@
 
 @interface NZClassificationController : NSObject
 
-@property NSString *datasetName;
+@property (strong, nonatomic) NSString *datasetName;
 
+- (void)addData:(SensorData *)data withLabel:(NSString *)classLabel;
 
-- (void)addData: (SensorData *)data;
+// adds data with the label that is at the and of the classLabels
+- (void)addData:(SensorData *)data;
+- (void)addClassLabel:(NSString *)classLabel;
 
 @end    

@@ -5,23 +5,73 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Traning View Controller-->
+        <!--Traning View Controller - Train-->
         <scene sceneID="uuV-Ws-SkJ">
             <objects>
-                <viewController id="iH8-HS-oQE" customClass="NZTraningViewController" sceneMemberID="viewController">
+                <viewController title="Train" id="iH8-HS-oQE" customClass="NZTraningViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ru0-vr-5Ds"/>
                         <viewControllerLayoutGuide type="bottom" id="MNd-4c-1BA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="x3z-wv-6rS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="44" width="320" height="475"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Zxt-Bg-mCi">
+                                <rect key="frame" x="71" y="109" width="178" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="static" enabled="NO"/>
+                                    <segment title="temporal" enabled="NO"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="class label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9q-DL-Yao">
+                                <rect key="frame" x="35" y="33" width="118" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="not set" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gGk-Ma-Jcz">
+                                <rect key="frame" x="125" y="30" width="181" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ka9-iE-tc3">
+                                <rect key="frame" x="113" y="202" width="95" height="57"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="start">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="number of samples:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoh-rv-dYI">
+                                <rect key="frame" x="42" y="287" width="153" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAw-iQ-A7B">
+                                <rect key="frame" x="212" y="287" width="35" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="classNameTextField" destination="gGk-Ma-Jcz" id="U6R-Cm-lTH"/>
+                        <outlet property="gestureType" destination="Zxt-Bg-mCi" id="xI4-2R-078"/>
+                        <outlet property="numberOfSamples" destination="bAw-iQ-A7B" id="DVc-Oz-Orp"/>
+                        <outlet property="recordControlButton" destination="ka9-iE-tc3" id="xHP-ui-dWg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Eb-aD-8fR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-287" y="733"/>
+            <point key="canvasLocation" x="-292" y="733"/>
         </scene>
         <!--Menu View Controller - Ishara-->
         <scene sceneID="aKX-Ln-MgO">
@@ -43,7 +93,7 @@
                                 </state>
                                 <connections>
                                     <action selector="trainButtonTaped:" destination="Vby-dQ-Tyo" eventType="touchUpInside" id="hV6-nS-4za"/>
-                                    <segue destination="iH8-HS-oQE" kind="modal" id="VdG-K6-bCG"/>
+                                    <segue destination="iH8-HS-oQE" kind="push" identifier="train" id="VdG-K6-bCG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOS-wc-Ogm">
@@ -74,7 +124,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="evI-ih-HyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-730" y="733"/>
+            <point key="canvasLocation" x="-806" y="733"/>
         </scene>
         <!--Navigation Controller - Menu-->
         <scene sceneID="JYp-sW-dsB">
@@ -196,7 +246,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHY-Ka-gKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1324" y="-39"/>
+            <point key="canvasLocation" x="-1336" y="-155"/>
         </scene>
     </scenes>
     <resources>

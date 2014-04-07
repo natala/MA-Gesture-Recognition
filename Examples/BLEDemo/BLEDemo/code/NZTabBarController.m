@@ -10,6 +10,7 @@
 #import "NZBleConnectionViewController.h"
 #import "NZGraphViewController.h"
 #import "SensorData.h"
+#import "NZMenuViewController.h"
 
 @interface NZTabBarController ()
 
@@ -83,6 +84,8 @@
     BOOL extractedData = [self.bleVC extractDataFromBuffer:buffer withLength:length to:self.accelerometerData];
     if (extractedData) {
         [self.graphVC updateWIthData:self.accelerometerData];
+        // the root view controller of a navigation view controller is always at index 0
+        [(NZMenuViewController *)[[self.menuNavigationController viewControllers] objectsAtIndexes:0] receivedData:self.accelerometerData];
     }
 }
 
