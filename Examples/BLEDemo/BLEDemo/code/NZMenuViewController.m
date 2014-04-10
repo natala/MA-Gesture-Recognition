@@ -170,7 +170,6 @@
 {
     if (self.classifierTrained) {
         trainingVC.classifierTrainingStaus.text = @"trained";
-        trainingVC.trainClassifierButton.enabled = true;
     } else if (!self.classifierTrained) {
         trainingVC.classifierTrainingStaus.text = @"not trained";
     }

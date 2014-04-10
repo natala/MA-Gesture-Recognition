@@ -129,8 +129,8 @@
 	[self.layer insertSublayer:segment.layer below:self.text.layer];
 	// Position it properly (see the comment for kSegmentInitialPosition)
 	//segment.layer.position = kSegmentInitialPosition;
-    NSLog(@"self.layer.position: %f, %f", self.layer.position.x, self.layer.position.y);
-    NSLog(@"segment.layer.position: %f, %f", segment.layer.position.x, segment.layer.position.y);
+    //NSLog(@"self.layer.position: %f, %f", self.layer.position.x, self.layer.position.y);
+   // NSLog(@"segment.layer.position: %f, %f", segment.layer.position.x, segment.layer.position.y);
    // segment.layer.position = kSegmentInitialPosition;
 	
 	return segment;

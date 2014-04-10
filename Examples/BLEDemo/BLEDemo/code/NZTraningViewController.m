@@ -56,10 +56,10 @@
 */
 
 - (IBAction)trainClassifierButtonTapped:(id)sender {
-    [self.delegate startTrainingClassifier];
     self.classifierTrainingStaus.text = @" . . .";
     UIButton *button = (UIButton *)sender;
     button.enabled = !button.enabled;
+    [self.delegate startTrainingClassifier];
 }
 
 - (IBAction)recordControlButtonTapped:(id)sender {
