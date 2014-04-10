@@ -42,7 +42,7 @@
     [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
     self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:'x' Y:'y' Z:'z'];
     
-    NSLog(@"#controllers: %d", [self.viewControllers count]);
+    NSLog(@"#controllers: %luu",(unsigned long)([self.viewControllers count]));
     for (int i = 0; i < [self.viewControllers count]; i++) {
         if ([[self.viewControllers objectAtIndex:i] isKindOfClass:[NZBleConnectionViewController class]]) {
             self.bleVC = (NZBleConnectionViewController *)[self.viewControllers objectAtIndex:i];
@@ -69,7 +69,7 @@
 
 -(void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    NSLog(@"seleted item: %d", self.selectedIndex);
+    NSLog(@"seleted item: %lu", self.selectedIndex);
     if ([item isEqual:[self.tabBar.items objectAtIndex:self.bleVCIndex] ]) {
         [[self.tabBar.items objectAtIndex:self.bleVCIndex] setBadgeValue:nil];
     }
@@ -84,8 +84,18 @@
     BOOL extractedData = [self.bleVC extractDataFromBuffer:buffer withLength:length to:self.accelerometerData];
     if (extractedData) {
         [self.graphVC updateWIthData:self.accelerometerData];
-        // the root view controller of a navigation view controller is always at index 0
-        [(NZMenuViewController *)[[self.menuNavigationController viewControllers] objectsAtIndexes:0] receivedData:self.accelerometerData];
+        // the root view controller of a navigation view controller is always
+        if (![[self.menuNavigationController viewControllers] objectAtIndex:0]) {
+            NSLog(@"The root controller of the navigation controller is nill!!!");
+        } else if ([[[self.menuNavigationController viewControllers] objectAtIndex:0] isKindOfClass:[NZMenuViewController class]]) {
+            if (!self.accelerometerData) {
+                NSLog(@"self.accelerometerData not set!!!");
+            } else {
+                [(NZMenuViewController *)([[self.menuNavigationController viewControllers] objectAtIndex:0]) receivedData:self.accelerometerData];
+            }
+        } else {
+            NSLog(@"the root controller of navigation controller is not a NZMenuViewController!!!");
+        }
     }
 }
 

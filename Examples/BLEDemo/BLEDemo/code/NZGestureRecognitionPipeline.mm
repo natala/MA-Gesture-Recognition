@@ -7,7 +7,7 @@
 //
 
 #import "NZGestureRecognitionPipeline.h"
-#import <GRT/GRT.h>
+#import "GRT.h"
 
 @interface NZGestureRecognitionPipeline ()
 

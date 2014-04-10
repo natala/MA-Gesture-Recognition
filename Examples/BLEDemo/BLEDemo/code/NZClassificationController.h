@@ -19,4 +19,11 @@
 - (void)addData:(SensorData *)data;
 - (void)addClassLabel:(NSString *)classLabel;
 
+// returns true if managed to train classifier, fals if training failed
+- (BOOL)trainClassifier;
+
+- (NSNumber *)numberOfDataSamples;
+- (NSNumber *)numberOfClasses;
+- (NSDictionary *)numberOfSamplesPerClass;
+
 @end    

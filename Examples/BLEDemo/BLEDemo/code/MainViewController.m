@@ -153,13 +153,13 @@ MainViewController.m
 */
     bool readPackage = true;
     // TODO move this to one method of the SensorData class
-    if( [self.accelerometerData.x setValueFromBuffer:buffer withBufferLength:length ] ){
+    if( [self.accelerometerData.x setValueFromBuffer:buffer withBufferLength:(int)length ] ){
         //NSLog(@"finished reading X data!");
     } else readPackage = false;
-    if( [self.accelerometerData.y setValueFromBuffer:buffer withBufferLength:length ] ){
+    if( [self.accelerometerData.y setValueFromBuffer:buffer withBufferLength:(int)length ] ){
         //NSLog(@"finished reading Y data!");
     } else readPackage = false;
-    if( [self.accelerometerData.z setValueFromBuffer:buffer withBufferLength:length ] ){
+    if( [self.accelerometerData.z setValueFromBuffer:buffer withBufferLength:(int)length ] ){
         //NSLog(@"finished reading Z data!");
     } else readPackage = false;
    
@@ -221,7 +221,7 @@ MainViewController.m
 }
 
 -(void)updateSensorDataText{
-    self.receivedLabel.text = [[NSString alloc] initWithFormat:@"ax: %d, ay: %d, az: %d", self.accelerometerData.x.value, self.accelerometerData.y.value, self.accelerometerData.z.value ];
+    self.receivedLabel.text = [[NSString alloc] initWithFormat:@"ax: %ld, ay: %ld, az: %ld", self.accelerometerData.x.value, self.accelerometerData.y.value, self.accelerometerData.z.value ];
 }
 
 

@@ -58,13 +58,13 @@
     }
     bool readPackage = true;
     // TODO move this to one method of the SensorData class
-    if( [sensorData.x setValueFromBuffer:buffer withBufferLength:length ] ){
+    if( [sensorData.x setValueFromBuffer:buffer withBufferLength:(int)length ] ){
        // NSLog(@"finished reading X data!");
     } else readPackage = false;
-    if( [sensorData.y setValueFromBuffer:buffer withBufferLength:length ] ){
+    if( [sensorData.y setValueFromBuffer:buffer withBufferLength:(int)length ] ){
         //NSLog(@"finished reading Y data!");
     } else readPackage = false;
-    if( [sensorData.z setValueFromBuffer:buffer withBufferLength:length ] ){
+    if( [sensorData.z setValueFromBuffer:buffer withBufferLength:(int)length ] ){
         //NSLog(@"finished reading Z data!");
     } else readPackage = false;
     
@@ -81,7 +81,7 @@
 }
 
 -(void)updateSensorDataTextWithSensorData:(SensorData*)data{
-    self.receivedDataLabel.text = [[NSString alloc] initWithFormat:@"ax: %d, ay: %d, az: %d", data.x.value, data.y.value, data.z.value ];
+    self.receivedDataLabel.text = [[NSString alloc] initWithFormat:@"ax: %ld, ay: %ld, az: %ld", data.x.value, data.y.value, data.z.value ];
 }
 
 @end

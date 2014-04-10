@@ -7,12 +7,15 @@
 //
 
 #import "NZMenuViewController.h"
-#import "NZTraningViewController.h"
 #import "NZClassificationController.h"
 
 @interface NZMenuViewController ()
 
 @property (strong, nonatomic) NZClassificationController *classificationController;
+@property (weak, nonatomic) NZTraningViewController *trainingVC;
+#warning only temporary
+@property NSNumber *numberOfSamples;
+@property BOOL classifierTrained;
 
 @end
 
@@ -24,6 +27,7 @@
 }
 
 @synthesize currentClassLabel = _currentClassLabel;
+@synthesize classificationController = _classificationController;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -48,12 +52,14 @@
     menuOptions = [NSArray arrayWithObjects:@"Train", @"Classify", @"My Casses", nil];
     menuCellIdentifier = @"MenuCellId";
     self.recordingData = false;
+    self.classifierTrained = false;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     _classificationController = [[NZClassificationController alloc] init];
+    self.numberOfSamples = [[NSNumber alloc] initWithInt:0];
 
 }
 
@@ -62,38 +68,31 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-/*
-#pragma UITableViewDataSource
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [menuOptions count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:menuCellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:menuCellIdentifier];
-    }
-    cell.textLabel.text = [menuOptions objectAtIndex:indexPath.row];
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    return cell;
-}
-
-#pragma UITableViewDelegate
- */
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"train"]){
         NZTraningViewController *trainVC =(NZTraningViewController *)[segue destinationViewController];
-        trainVC.menuVC = self;
         trainVC.currentClassLable = self.currentClassLabel;
+        trainVC.delegate = self;
+        self.trainingVC = trainVC;
+        NSNumber *numSamples = [self.classificationController numberOfDataSamples];
+        [self updateNumberOfRecordedSamples:numSamples in:trainVC];
     }
 }
 
 - (void)receivedData:(SensorData *)data
 {
-  // TODO
+    //NSLog(@"menuViewConrroller has received data!!!");
+    if (self.recordingData) {
+        [ self.classificationController addData:data];
+        int value = [self.numberOfSamples intValue];
+        self.numberOfSamples = [NSNumber numberWithInt:value + 1];
+        //to the appropriate things
+        if (self.trainingVC) {
+            [self updateNumberOfRecordedSamples:[self.classificationController numberOfDataSamples] in:self.trainingVC];
+        }
+    }
+    
 }
 
 - (IBAction)trainButtonTaped:(id)sender {
@@ -130,5 +129,56 @@
 #pragma mark -
 
 
+#pragma mark -
+#pragma mark NZTrainViewControllerDelegate
+#pragma mark -
+
+-(void)stopRecordingData
+{
+    self.recordingData = false;
+}
+
+-(void)startRecordingData
+{
+    self.recordingData = true;
+}
+
+-(void)newDataClassLabel:(NSString *) newClassLabel{
+    self.currentClassLabel = newClassLabel;
+}
+
+-(void)updateNumberOfRecordedSamples:(NSNumber *)numberOfSamples in:(NZTraningViewController *)trainVC
+{
+    [trainVC updateNumberOfSamples:numberOfSamples];
+}
+
+- (void)startTrainingClassifier
+{
+    NSLog(@"start training the classifier");
+#warning start training the classifier, once done -> update the trainVC
+    if ([self.classificationController trainClassifier]) {
+        self.classifierTrained = true;
+    } else {
+        self.classifierTrained = false;
+    }
+    // once training doen
+    [self updateClassifierStatusIn:self.trainingVC];
+    [self updateInfo:@"precision and so on.... \n ...." aboutTrainingOutcomeIn:self.trainingVC];
+}
+
+- (void)updateClassifierStatusIn:(NZTraningViewController *)trainingVC
+{
+    if (self.classifierTrained) {
+        trainingVC.classifierTrainingStaus.text = @"trained";
+        trainingVC.trainClassifierButton.enabled = true;
+    } else if (!self.classifierTrained) {
+        trainingVC.classifierTrainingStaus.text = @"not trained";
+    }
+    trainingVC.trainClassifierButton.enabled = true;
+}
+- (void)updateInfo:(NSString *)info aboutTrainingOutcomeIn:(NZTraningViewController *)trainingVC
+{
+    trainingVC.trainingOutcomeText.text = info;
+}
 
 @end

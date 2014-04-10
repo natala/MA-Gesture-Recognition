@@ -35,7 +35,7 @@
     
  //   [self.recordControlButton setTitle:@"record" forState: (UIControlState)UIControlStateNormal];
 //    [self.recordControlButton setTitle:@"" forState: (UIControlState)UIControlStateHighlighted];
-    [self.recordControlButton addTarget:self action:@selector(recordControlButtonTapped:) forControlEvents:(UIControlEvents)UIControlEventTouchDown];
+//  [self.recordControlButton addTarget:self action:@selector(recordControlButtonTapped:) forControlEvents:(UIControlEvents)UIControlEventTouchDown];
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,17 +55,33 @@
 }
 */
 
--  (void)recordControlButtonTapped:(id)sender {
+- (IBAction)trainClassifierButtonTapped:(id)sender {
+    [self.delegate startTrainingClassifier];
+    self.classifierTrainingStaus.text = @" . . .";
+    UIButton *button = (UIButton *)sender;
+    button.enabled = !button.enabled;
+}
+
+- (IBAction)recordControlButtonTapped:(id)sender {
+    
     if ( [self.recordControlButton.titleLabel.text isEqualToString:@"stop"] ) {
-        NSLog(@"start recording");
-        self.menuVC.recordingData = true;
-        // disable edidting
-        self.recordControlButton.titleLabel.text = @"record";
-    } else {
         NSLog(@"stop recording");
-        self.menuVC.recordingData = true;
-        self.recordControlButton.titleLabel.text = @"stop";
+        [self.delegate stopRecordingData];
+#warning disable edidting parameters while recording
+        [self.recordControlButton setTitle:@"record" forState:UIControlStateNormal];
+       // self.recordControlButton.titleLabel.text = @"record";
+    } else {
+        NSLog(@"start recording");
+        [self.delegate startRecordingData];
+        [self.recordControlButton setTitle:@"stop" forState:UIControlStateNormal];
+       // self.recordControlButton.titleLabel.text = @"stop";
     }
+
+}
+
+- (void)updateNumberOfSamples:(NSNumber *)numberOfSamples
+{
+    self.numberOfSamples.text = [numberOfSamples stringValue];
 }
 
 #pragma mark -
@@ -75,7 +91,7 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     // NSLog(@"textFieldShouldReturn");
-    self.menuVC.currentClassLabel = textField.text;
+    [self.delegate newDataClassLabel:textField.text];
     [self.view endEditing:YES];
     return YES;
 }
