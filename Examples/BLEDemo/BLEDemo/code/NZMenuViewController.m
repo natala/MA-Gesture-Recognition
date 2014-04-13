@@ -13,9 +13,11 @@
 
 @property (strong, nonatomic) NZClassificationController *classificationController;
 @property (weak, nonatomic) NZTraningViewController *trainingVC;
+@property (weak, nonatomic) NZClassifyViewController *classifyVC;
 #warning only temporary
 @property NSNumber *numberOfSamples;
 @property BOOL classifierTrained;
+@property BOOL classify;
 
 @end
 
@@ -53,6 +55,7 @@
     menuCellIdentifier = @"MenuCellId";
     self.recordingData = false;
     self.classifierTrained = false;
+    self.classify = false;
 }
 
 - (void)viewDidLoad
@@ -77,6 +80,15 @@
         self.trainingVC = trainVC;
         NSNumber *numSamples = [self.classificationController numberOfDataSamples];
         [self updateNumberOfRecordedSamples:numSamples in:trainVC];
+        if ([self classifierTrained]) {
+            trainVC.classifierTrainingStaus = @"trained";
+        } else {
+            trainVC.classifierTrainingStaus = @"not trained";
+        }
+    } else if ([segue.identifier isEqualToString:@"classify"]){
+        NZClassifyViewController *classifyVC = (NZClassifyViewController *)[segue destinationViewController];
+        classifyVC.delegate = self;
+        self.classifyVC = classifyVC;
     }
 }
 
@@ -91,6 +103,9 @@
         if (self.trainingVC) {
             [self updateNumberOfRecordedSamples:[self.classificationController numberOfDataSamples] in:self.trainingVC];
         }
+    } else if (self.classify){
+        NSString *classLabel = [self.classificationController predict:data];
+        [self updateClassifiedLable:self.classifyVC withLabel:classLabel];
     }
     
 }
@@ -178,6 +193,26 @@
 - (void)updateInfo:(NSString *)info aboutTrainingOutcomeIn:(NZTraningViewController *)trainingVC
 {
     trainingVC.trainingOutcomeText.text = info;
+}
+
+- (void)saveLabelledDataToCsvFile
+{
+    if (![self.classificationController saveLabelledDataToCSVFile]) {
+        NSLog(@"couldn't save labelled data to csv file!!");
+    }
+}
+
+#pragma mark -
+#pragma mark NZTrainClassifyControllerDelegate
+#pragma mark -
+
+- (void)startClassifying
+{
+    self.classify = !self.classify;
+}
+
+- (void)updateClassifiedLable:(NZClassifyViewController *)classificationVC withLabel:(NSString *)classLabel{
+    classificationVC.classifiedClassLabel.text = classLabel;
 }
 
 @end

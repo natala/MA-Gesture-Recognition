@@ -62,6 +62,11 @@
     [self.delegate startTrainingClassifier];
 }
 
+- (IBAction)saveLabelledDataButtonTapped:(id)sender {
+    
+    [self.delegate saveLabelledDataToCsvFile];
+}
+
 - (IBAction)recordControlButtonTapped:(id)sender {
     
     if ( [self.recordControlButton.titleLabel.text isEqualToString:@"stop"] ) {

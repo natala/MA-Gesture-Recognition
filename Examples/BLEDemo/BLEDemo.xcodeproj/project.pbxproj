@@ -19,6 +19,7 @@
 		9A79EAEC182ADA2000F1983C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A79EAEB182ADA2000F1983C /* Default-568h@2x.png */; };
 		9A95FADB18CA7343009A724F /* libBLE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A95FAD818CA4957009A724F /* libBLE.a */; };
 		E1182D2A18FA84FB003B8EED /* NZGestureRecognitionPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1182D2918FA84FB003B8EED /* NZGestureRecognitionPipeline.mm */; };
+		E1182D2D18FB2972003B8EED /* NZClassifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1182D2C18FB2972003B8EED /* NZClassifyViewController.m */; };
 		E185624E18F1C4BB00F371C0 /* libGRTStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E185624B18F1C48600F371C0 /* libGRTStatic.a */; };
 		E185625118F1CCF600F371C0 /* NZTraningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E185625018F1CCF600F371C0 /* NZTraningViewController.m */; };
 		E185625418F1CDAC00F371C0 /* NZClassificationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E185625318F1CDAC00F371C0 /* NZClassificationController.mm */; };
@@ -99,6 +100,8 @@
 		9A95FAD318CA4957009A724F /* BLE.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BLE.xcodeproj; path = ../../Frameworks/BLE/BLE.xcodeproj; sourceTree = "<group>"; };
 		E1182D2818FA84FB003B8EED /* NZGestureRecognitionPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGestureRecognitionPipeline.h; sourceTree = "<group>"; };
 		E1182D2918FA84FB003B8EED /* NZGestureRecognitionPipeline.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZGestureRecognitionPipeline.mm; sourceTree = "<group>"; };
+		E1182D2B18FB2972003B8EED /* NZClassifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassifyViewController.h; sourceTree = "<group>"; };
+		E1182D2C18FB2972003B8EED /* NZClassifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZClassifyViewController.m; sourceTree = "<group>"; };
 		E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GRTStatic.xcodeproj; path = Frameworks/GRTStatic/GRTStatic.xcodeproj; sourceTree = "<group>"; };
 		E185624F18F1CCF600F371C0 /* NZTraningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZTraningViewController.h; sourceTree = "<group>"; };
 		E185625018F1CCF600F371C0 /* NZTraningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZTraningViewController.m; sourceTree = "<group>"; };
@@ -325,6 +328,8 @@
 				E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */,
 				E185624F18F1CCF600F371C0 /* NZTraningViewController.h */,
 				E185625018F1CCF600F371C0 /* NZTraningViewController.m */,
+				E1182D2B18FB2972003B8EED /* NZClassifyViewController.h */,
+				E1182D2C18FB2972003B8EED /* NZClassifyViewController.m */,
 			);
 			name = FinalVersion;
 			sourceTree = "<group>";
@@ -465,6 +470,7 @@
 				E1CD3BAE18E2E90400AFF986 /* NZMainViewController.m in Sources */,
 				E185625118F1CCF600F371C0 /* NZTraningViewController.m in Sources */,
 				E1B08B1A18DB0230000DCDB5 /* NZGraphView.m in Sources */,
+				E1182D2D18FB2972003B8EED /* NZClassifyViewController.m in Sources */,
 				E1CD3BB118E2EB0100AFF986 /* NZMainSlideViewController.m in Sources */,
 				9A79EADD182AD9F200F1983C /* MainViewController.m in Sources */,
 				E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */,

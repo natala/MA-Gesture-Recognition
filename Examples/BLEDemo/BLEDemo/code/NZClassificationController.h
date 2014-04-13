@@ -22,8 +22,16 @@
 // returns true if managed to train classifier, fals if training failed
 - (BOOL)trainClassifier;
 
+- (void)setUpPipeline;
+
+- (NSString *)predict:(SensorData *)data;
+
+- (BOOL)saveLabelledDataToCSVFile;
+- (BOOL)loadLabelledDataFromCSVFile;
+
 - (NSNumber *)numberOfDataSamples;
 - (NSNumber *)numberOfClasses;
 - (NSDictionary *)numberOfSamplesPerClass;
+- (BOOL)classifyierIsTrained;
 
 @end    

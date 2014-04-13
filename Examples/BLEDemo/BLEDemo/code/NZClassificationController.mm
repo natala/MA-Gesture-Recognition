@@ -10,9 +10,10 @@
 #import "GRT.h"
 #import "NZGestureRecognitionPipeline.h"
 
-#define kPipelineKey        @"Pipeline"
-//#define kPipelineFile       @"pipeline.plist"
-#define kPipelineFile       @"pipeline.txt"
+#define kPipelineKey            @"Pipeline"
+//#define kPipelineFile         @"pipeline.plist"
+#define kPipelineFile           @"pipeline.txt"
+#define kLabelledDataFile       @"labelledData.csv"
 
 @interface NZClassificationController ()
 
@@ -81,34 +82,24 @@ GRT::LabelledClassificationData labelledData;
         return false;
     }
     
-    // 3.a save pipeline to file
-    //if( ! [self.pipeline savePipelineTo:@"HelloWorldPipeline"] ){
-    //    cout << "ERROR: Failed to save the pipeline!\n";
-    //    return false;
-    //}
-    self.pipeline.pipelineName = @"newName";
-    if (![self savePipeline]){
-        NSLog(@"error saving pipeline to file!");
-        return false;
-    }
-    
-    // 3.b load it from file again
-    //if( ![self.pipeline loadPipelineFrom:@"HelloWorldPipeline"]){
-    //    cout << "ERROR: Failed to load the pipeline!\n";
-    //    return false;
-    //}
-    
-    self.pipeline.pipelineName = @"fakeName";
-    if (![self loadPipeline]){
-        NSLog(@"error loading pipeline from file!");
-        return false;
-    }
-    
     // 4. Test the pipeline using the test data
     if( ![self.pipeline test:testData] ){
         NSLog( @"ERROR: Failed to test the pipeline!");
         return false;
     }
+    
+    //save pipeline to file
+    if (![self savePipeline]){
+        NSLog(@"error saving pipeline to file!");
+        return false;
+    }
+
+    //load it from file again
+    /*if (![self loadPipeline]){
+        NSLog(@"error loading pipeline from file!");
+        return false;
+    }*/
+    
     /*
     cout << "Precision: ";
     for(UINT k=0; k<pipeline.getNumClassesInModel(); k++){
@@ -140,6 +131,37 @@ GRT::LabelledClassificationData labelledData;
     
 }
 
+- (void)setUpPipeline
+{
+    [self.pipeline setUpPipeline];
+}
+
+- (NSString *)predict:(SensorData *)data
+{
+    GRT::VectorDouble grtData = [NZClassificationController SensorDataToGrtFormat:data];
+    int predictedLable = [self.pipeline predict:grtData];
+    if (predictedLable == -1) {
+        return @"unknown";
+    }
+    if (predictedLable > [self.classLabels count]) {
+        return @"unknown";
+    }
+    NSString *classLabel = [self.classLabels objectAtIndex:(predictedLable-1)];
+    return classLabel;
+}
+
+- (BOOL)saveLabelledDataToCSVFile
+{
+     NSString *path = [[self documentPath] stringByAppendingPathComponent:kLabelledDataFile];
+    return labelledData.saveDatasetToCSVFile([path UTF8String]);
+}
+
+- (BOOL)loadLabelledDataFromCSVFile
+{
+    NSString *path = [[self documentPath] stringByAppendingPathComponent:kLabelledDataFile];
+    return labelledData.loadDatasetFromCSVFile([path UTF8String]);
+}
+
 #pragma mark -
 #pragma mark getters & setters
 #pragma mark -
@@ -156,7 +178,7 @@ GRT::LabelledClassificationData labelledData;
 {
     //TODO: check if not same being added;
     [self.classLabels addObject:classLabel];
-    uint classLabelNumber = (uint)([self.classLabels count]-1);
+    uint classLabelNumber = (uint)([self.classLabels count]);
     labelledData.addClass(classLabelNumber);
     NSLog(@"number of classes: %ud", [self.classLabels count]);
 }
@@ -167,6 +189,11 @@ GRT::LabelledClassificationData labelledData;
     int num = labelledData.getNumSamples();
     NSNumber *nsNumber = [[NSNumber alloc] initWithInt:num];
     return nsNumber;
+}
+
+-(BOOL)classifyierIsTrained
+{
+    return [self.pipeline isTrained];
 }
 
 #pragma mark -

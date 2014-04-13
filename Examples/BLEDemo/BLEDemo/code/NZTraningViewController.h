@@ -19,6 +19,7 @@
 - (void)startTrainingClassifier;
 - (void)updateClassifierStatusIn:(NZTraningViewController *)trainingVC;
 - (void)updateInfo:(NSString *)info aboutTrainingOutcomeIn:(NZTraningViewController *)trainingVC;
+- (void)saveLabelledDataToCsvFile;
 
 @end
 
@@ -49,6 +50,7 @@
 
 - (IBAction)trainClassifierButtonTapped:(id)sender;
 
+- (IBAction)saveLabelledDataButtonTapped:(id)sender;
 
 - (IBAction)recordControlButtonTapped:(id)sender;
 - (void)updateNumberOfSamples:(NSNumber *)numberOfSamples;

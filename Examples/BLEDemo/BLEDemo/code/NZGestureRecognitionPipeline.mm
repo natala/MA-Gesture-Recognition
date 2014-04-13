@@ -42,11 +42,19 @@ GRT::GestureRecognitionPipeline pipeline;
     }
 }
 
-- (BOOL)train:(GRT::LabelledClassificationData &)labelledData
+- (void)setUpPipeline
 {
+    // add filter
     GRT::HighPassFilter filter = GRT::HighPassFilter(0.1, 1, 3);
     pipeline.addPreProcessingModule(filter);
     
+    // add Feature extractors
+    GRT::ZeroCrossingCounter zeroCrossing = GRT::ZeroCrossingCounter(30, 0.1, 3);
+    //pipeline.addFeatureExtractionModule(zeroCrossing);
+}
+
+- (BOOL)train:(GRT::LabelledClassificationData &)labelledData
+{
     if( !pipeline.train( labelledData ) ){
         NSLog(@"ERROR: Failed to train the pipeline!");
         return false;
@@ -93,6 +101,20 @@ GRT::GestureRecognitionPipeline pipeline;
      }
      */
     return true;
+}
+
+- (int)predict:(GRT::VectorDouble &)data
+{
+    if (!pipeline.getTrained()) {
+        return -1;
+    }
+    pipeline.predict(data);
+    return pipeline.getPredictedClassLabel();
+}
+
+- (BOOL)isTrained
+{
+    return pipeline.getTrained();
 }
 
 - (BOOL)savePipelineTo:(NSString *)name

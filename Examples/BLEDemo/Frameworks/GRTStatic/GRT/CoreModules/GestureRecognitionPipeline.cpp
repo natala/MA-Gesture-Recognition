@@ -779,9 +779,6 @@ bool GestureRecognitionPipeline::test(const LabelledClassificationData &testData
 	for(UINT i=0; i<testData.getNumClasses(); i++){
 		bool labelFound = false;
 		for(UINT k=0; k<classifier->getNumClasses(); k++){
-            int ii = testData.getClassTracker()[i].classLabel;
-            int size = classifier->getClassLabels().size();
-            int jj = classifier->getClassLabels()[k];
 			if( testData.getClassTracker()[i].classLabel == classifier->getClassLabels()[k] ){
 				labelFound = true;
 				break;

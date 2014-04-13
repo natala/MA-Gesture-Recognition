@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SensorData.h"
 #import "NZTraningViewController.h"
+#import "NZClassifyViewController.h"
 
-@interface NZMenuViewController : UIViewController <NZTraningViewControllerDelegate>
+@interface NZMenuViewController : UIViewController <NZTraningViewControllerDelegate, NZClassifyViewControllerDelegate>
 
 @property BOOL recordingData;
 @property (weak, nonatomic) NSString *currentClassLabel;

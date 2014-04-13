@@ -16,7 +16,10 @@
 - (void)setClassifier:(NSString *)classifier;
 - (BOOL)train:(GRT::LabelledClassificationData &)labelledData;
 - (BOOL)test:(GRT::LabelledClassificationData &)testData;
+- (int)predict:(GRT::VectorDouble &)data;
+- (void)setUpPipeline;
 
+- (BOOL)isTrained;
 
 - (BOOL)savePipelineTo:(NSString *)name;
 - (BOOL)loadPipelineFrom:(NSString *)name;
