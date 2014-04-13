@@ -8,10 +8,16 @@
 
 #import "NZClassificationController.h"
 #import "GRT.h"
+#import "NZGestureRecognitionPipeline.h"
+
+#define kPipelineKey        @"Pipeline"
+//#define kPipelineFile       @"pipeline.plist"
+#define kPipelineFile       @"pipeline.txt"
 
 @interface NZClassificationController ()
 
 @property (strong, nonatomic) NSMutableArray *classLabels;
+@property (strong, nonatomic) NZGestureRecognitionPipeline *pipeline;
 
 @end
 
@@ -20,14 +26,15 @@
 @synthesize classLabels = _classLabels;
 
 
-GRT::GestureRecognitionPipeline pipeline;
+//GRT::GestureRecognitionPipeline pipeline;
 GRT::LabelledClassificationData labelledData;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        pipeline = GRT::GestureRecognitionPipeline();
+        //pipeline = GRT::GestureRecognitionPipeline();
+        _pipeline = [[NZGestureRecognitionPipeline alloc] init];
         labelledData = GRT::LabelledClassificationData(3);
     }
     return self;
@@ -66,23 +73,42 @@ GRT::LabelledClassificationData labelledData;
     GRT::LabelledClassificationData testData = labelledData.partition(80);
     
     // 2. Create a new Gesture Recognition Pipeline using an Adaptive Naive Bayes Classifier
-    pipeline.setClassifier( GRT::SVM() );
+    [self.pipeline setClassifier:@"SVM"];
     
     // 3. Train the pipeline using the training data
-    if( !pipeline.train( labelledData ) ){
+    if( ![self.pipeline train:labelledData] ){
         NSLog(@"ERROR: Failed to train the pipeline!");
         return false;
     }
     
-    // 4. Test the pipeline using the test data
-    if( !pipeline.test( testData ) ){
-        NSLog( @"ERROR: Failed to test the pipeline!");
+    // 3.a save pipeline to file
+    //if( ! [self.pipeline savePipelineTo:@"HelloWorldPipeline"] ){
+    //    cout << "ERROR: Failed to save the pipeline!\n";
+    //    return false;
+    //}
+    self.pipeline.pipelineName = @"newName";
+    if (![self savePipeline]){
+        NSLog(@"error saving pipeline to file!");
         return false;
     }
     
-    // 5. Print some stats about the testing
-    NSLog(@"Test Accuracy: %d", pipeline.getTestAccuracy());
+    // 3.b load it from file again
+    //if( ![self.pipeline loadPipelineFrom:@"HelloWorldPipeline"]){
+    //    cout << "ERROR: Failed to load the pipeline!\n";
+    //    return false;
+    //}
     
+    self.pipeline.pipelineName = @"fakeName";
+    if (![self loadPipeline]){
+        NSLog(@"error loading pipeline from file!");
+        return false;
+    }
+    
+    // 4. Test the pipeline using the test data
+    if( ![self.pipeline test:testData] ){
+        NSLog( @"ERROR: Failed to test the pipeline!");
+        return false;
+    }
     /*
     cout << "Precision: ";
     for(UINT k=0; k<pipeline.getNumClassesInModel(); k++){
@@ -159,6 +185,57 @@ GRT::LabelledClassificationData labelledData;
     sample[3] = (int)data.z.value;
      */
     return sample;
+}
+
+// writing to file
+- (NSString *)documentPath
+{
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                               NSUserDomainMask, YES);
+    
+    NSString *documentsPath = [searchPaths objectAtIndex:0];
+    return documentsPath;
+    /*NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    //NSString *path = [url.path stringByAppendingPathComponent:kPipelineFile];
+    return url;*/
+}
+
+- (BOOL)savePipeline
+{
+    if (!self.pipeline) {
+        return false;
+    }
+    NSString *path = [[self documentPath] stringByAppendingPathComponent:kPipelineFile];
+    /*
+    NSMutableData *data = [[NSMutableData alloc] init];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject:self.pipeline forKey:kPipelineKey];
+    [archiver finishEncoding];
+    [data writeToFile:path atomically:YES];
+    //[archiver release];
+    //[data release];
+    return true;
+     */
+    return [self.pipeline savePipelineTo:path];
+}
+
+- (BOOL)loadPipeline
+{
+    NSString *dataPath = [self documentPath];
+    NSString *path = [[self documentPath] stringByAppendingPathComponent:kPipelineFile];
+    return[ self.pipeline loadPipelineFrom:path];
+    /*NSData *codedData = [[NSData alloc] initWithContentsOfFile:path];//autorelease];
+    if (codedData == nil){
+        return nil;
+    }
+    
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:codedData];
+    self.pipeline = [unarchiver decodeObjectForKey:kPipelineKey];
+    [unarchiver finishDecoding];
+    if (self.pipeline) {
+        return true;
+    }
+    return false;*/
 }
 
 @end

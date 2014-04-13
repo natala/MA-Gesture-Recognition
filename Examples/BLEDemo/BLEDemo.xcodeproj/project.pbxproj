@@ -18,7 +18,7 @@
 		9A79EAEA182ADA1900F1983C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A79EAE7182ADA1900F1983C /* Storyboard.storyboard */; };
 		9A79EAEC182ADA2000F1983C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A79EAEB182ADA2000F1983C /* Default-568h@2x.png */; };
 		9A95FADB18CA7343009A724F /* libBLE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A95FAD818CA4957009A724F /* libBLE.a */; };
-		E1855E3C18F19B9900F371C0 /* NZGestureRecognitionPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1855E3A18F19B9900F371C0 /* NZGestureRecognitionPipeline.mm */; };
+		E1182D2A18FA84FB003B8EED /* NZGestureRecognitionPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1182D2918FA84FB003B8EED /* NZGestureRecognitionPipeline.mm */; };
 		E185624E18F1C4BB00F371C0 /* libGRTStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E185624B18F1C48600F371C0 /* libGRTStatic.a */; };
 		E185625118F1CCF600F371C0 /* NZTraningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E185625018F1CCF600F371C0 /* NZTraningViewController.m */; };
 		E185625418F1CDAC00F371C0 /* NZClassificationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E185625318F1CDAC00F371C0 /* NZClassificationController.mm */; };
@@ -97,8 +97,8 @@
 		9A79EAE7182ADA1900F1983C /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = BLEDemo/Storyboard.storyboard; sourceTree = SOURCE_ROOT; };
 		9A79EAEB182ADA2000F1983C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9A95FAD318CA4957009A724F /* BLE.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BLE.xcodeproj; path = ../../Frameworks/BLE/BLE.xcodeproj; sourceTree = "<group>"; };
-		E1855E3A18F19B9900F371C0 /* NZGestureRecognitionPipeline.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZGestureRecognitionPipeline.mm; sourceTree = "<group>"; };
-		E1855E3B18F19B9900F371C0 /* NZGestureRecognitionPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGestureRecognitionPipeline.h; sourceTree = "<group>"; };
+		E1182D2818FA84FB003B8EED /* NZGestureRecognitionPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGestureRecognitionPipeline.h; sourceTree = "<group>"; };
+		E1182D2918FA84FB003B8EED /* NZGestureRecognitionPipeline.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZGestureRecognitionPipeline.mm; sourceTree = "<group>"; };
 		E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GRTStatic.xcodeproj; path = Frameworks/GRTStatic/GRTStatic.xcodeproj; sourceTree = "<group>"; };
 		E185624F18F1CCF600F371C0 /* NZTraningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZTraningViewController.h; sourceTree = "<group>"; };
 		E185625018F1CCF600F371C0 /* NZTraningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZTraningViewController.m; sourceTree = "<group>"; };
@@ -253,8 +253,8 @@
 		E1855E3918F19B8B00F371C0 /* GRT wrapers */ = {
 			isa = PBXGroup;
 			children = (
-				E1855E3A18F19B9900F371C0 /* NZGestureRecognitionPipeline.mm */,
-				E1855E3B18F19B9900F371C0 /* NZGestureRecognitionPipeline.h */,
+				E1182D2818FA84FB003B8EED /* NZGestureRecognitionPipeline.h */,
+				E1182D2918FA84FB003B8EED /* NZGestureRecognitionPipeline.mm */,
 				E185625218F1CDAC00F371C0 /* NZClassificationController.h */,
 				E185625318F1CDAC00F371C0 /* NZClassificationController.mm */,
 			);
@@ -469,10 +469,10 @@
 				9A79EADD182AD9F200F1983C /* MainViewController.m in Sources */,
 				E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */,
 				E1B08B2018DB04EC000DCDB5 /* NZGraphTextView.m in Sources */,
-				E1855E3C18F19B9900F371C0 /* NZGestureRecognitionPipeline.mm in Sources */,
 				E1B6277B18D0C3A400436B8C /* SensorData.m in Sources */,
 				E1C3958818E0529500C2B0E4 /* NZMenuViewController.m in Sources */,
 				E1CD3BFE18E3227800AFF986 /* NZBleConnectionViewController.m in Sources */,
+				E1182D2A18FA84FB003B8EED /* NZGestureRecognitionPipeline.mm in Sources */,
 				E185625418F1CDAC00F371C0 /* NZClassificationController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

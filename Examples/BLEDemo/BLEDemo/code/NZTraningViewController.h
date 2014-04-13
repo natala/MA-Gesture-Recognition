@@ -25,7 +25,7 @@
 #import <UIKit/UIKit.h>
 #import "NZMenuViewController.h"
 
-@interface NZTraningViewController : UIViewController <UITextFieldDelegate>
+@interface NZTraningViewController : UIViewController <UITextFieldDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) id<NZTraningViewControllerDelegate> delegate;
 

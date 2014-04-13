@@ -779,6 +779,9 @@ bool GestureRecognitionPipeline::test(const LabelledClassificationData &testData
 	for(UINT i=0; i<testData.getNumClasses(); i++){
 		bool labelFound = false;
 		for(UINT k=0; k<classifier->getNumClasses(); k++){
+            int ii = testData.getClassTracker()[i].classLabel;
+            int size = classifier->getClassLabels().size();
+            int jj = classifier->getClassLabels()[k];
 			if( testData.getClassTracker()[i].classLabel == classifier->getClassLabels()[k] ){
 				labelFound = true;
 				break;
@@ -1714,6 +1717,7 @@ bool GestureRecognitionPipeline::savePipelineToFile(const string &filename){
             return false;
         }
     }
+    
     
     switch( pipelineMode ){
         case PIPELINE_MODE_NOT_SET:
@@ -2947,5 +2951,13 @@ UINT GestureRecognitionPipeline::getPipelineModeFromString(string pipelineModeAs
 	return PIPELINE_MODE_NOT_SET;
 }
 
+    void GestureRecognitionPipeline::setPipelineMode(PipelineModes mode){
+    pipelineMode = mode;
+}
+    
+    void GestureRecognitionPipeline::setTrained(bool newTrained){
+        trained = newTrained;
+    }
+    
 } //End of namespace GRT
 

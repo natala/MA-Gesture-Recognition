@@ -958,7 +958,8 @@ bool SVM::loadModelFromFile(fstream &file){
                 model->SV[i][numInputDimensions].value = 0;
             }
         }
-        
+    //Finally, flag that the model has been trained to show it has been loaded and can be used for prediction
+    trained = true;
         //Set the class labels
         this->numClasses = getNumClasses();
         classLabels.resize(getNumClasses());
@@ -968,10 +969,7 @@ bool SVM::loadModelFromFile(fstream &file){
         
         //The SV have now been loaded so flag that they should be deleted
         model->free_sv = 1;
-        
-        //Finally, flag that the model has been trained to show it has been loaded and can be used for prediction
-        trained = true;
-        
+
         return true;
 }
     

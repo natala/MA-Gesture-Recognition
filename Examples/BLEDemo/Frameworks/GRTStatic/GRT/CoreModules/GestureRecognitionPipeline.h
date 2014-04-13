@@ -52,6 +52,11 @@ namespace GRT{
 class GestureRecognitionPipeline : public GRTBase
 {
 public:
+    
+    enum PipelineModes{PIPELINE_MODE_NOT_SET=0,CLASSIFICATION_MODE,REGRESSION_MODE};
+    
+    enum ContextLevels{START_OF_PIPELINE=0,AFTER_PREPROCESSING,AFTER_FEATURE_EXTRACTION,AFTER_CLASSIFIER,END_OF_PIPELINE,NUM_CONTEXT_LEVELS};
+    
 	/**
      Default Constructor
 	*/
@@ -811,7 +816,21 @@ public:
      */
     bool addPreProcessingModule(const PreProcessing &preProcessingModule,UINT insertIndex = INSERT_AT_END_INDEX);
 
-	/**
+    /**
+	 This function sets the pipeline mode. Added by Natalia Zarawska for personal reasons
+     
+     @param pipelineMode:
+     */
+    void setPipelineMode(PipelineModes mode);
+	
+    /**
+	 This function sets the propery trained. Added by Natalia Zarawska for personal reasons
+     
+     @param newTrained: true if pipeline was trained, false if otherwise
+     */
+    void setTrained(bool newTrained);
+    
+    /**
 	 This function removes any existing pre processing modules, then it adds the new pre processing module.
      
      @param const PreProcessing &preProcessingModule: a reference to the pre processing module you want to add
@@ -1024,11 +1043,6 @@ protected:
     Regressifier *regressifier;
     vector< PostProcessing* > postProcessingModules;
     vector< vector< Context* > > contextModules;
-    
-    enum PipelineModes{PIPELINE_MODE_NOT_SET=0,CLASSIFICATION_MODE,REGRESSION_MODE};
-    
-public:
-    enum ContextLevels{START_OF_PIPELINE=0,AFTER_PREPROCESSING,AFTER_FEATURE_EXTRACTION,AFTER_CLASSIFIER,END_OF_PIPELINE,NUM_CONTEXT_LEVELS};
     
 };
 

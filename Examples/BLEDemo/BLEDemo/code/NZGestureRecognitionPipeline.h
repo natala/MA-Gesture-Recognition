@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GRT.h"
 
-@interface NZGestureRecognitionPipeline : NSObject
+@interface NZGestureRecognitionPipeline : NSObject <NSCoding>
+
+@property (strong) NSString *pipelineName;
+
+- (void)setClassifier:(NSString *)classifier;
+- (BOOL)train:(GRT::LabelledClassificationData &)labelledData;
+- (BOOL)test:(GRT::LabelledClassificationData &)testData;
+
+
+- (BOOL)savePipelineTo:(NSString *)name;
+- (BOOL)loadPipelineFrom:(NSString *)name;
 
 @end
