@@ -2,18 +2,11 @@
 //  NZGestureRecognitionPipeline.m
 //  BLEDemo
 //
-//  Created by Natalia Zarawska on 06/04/14.
+//  Created by Natalia Zarawska on 13/04/14.
 //  Copyright (c) 2014 TUM. All rights reserved.
 //
 
 #import "NZGestureRecognitionPipeline.h"
-#import "GRT.h"
-
-@interface NZGestureRecognitionPipeline ()
-
-@property GRT::GestureRecognitionPipeline *pipeline;
-
-@end
 
 @implementation NZGestureRecognitionPipeline
 
