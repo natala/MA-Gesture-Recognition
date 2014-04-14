@@ -10,6 +10,8 @@
 
 @interface NZTraningViewController ()
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 @end
 
 
@@ -32,7 +34,12 @@
     // set the text field delegate to manage the input thext
     self.classNameTextField.delegate = self;
     [self.classNameTextField setText:self.currentClassLable];
-    
+    CGRect frame = self.view.frame;
+    frame.size.height = frame.size.height*2.0;
+    self.scrollView.contentSize = frame.size;
+    //self.scrollView.frame = frame;
+    //self.scrollView.delegate = self;
+    //self.view;
  //   [self.recordControlButton setTitle:@"record" forState: (UIControlState)UIControlStateNormal];
 //    [self.recordControlButton setTitle:@"" forState: (UIControlState)UIControlStateHighlighted];
 //  [self.recordControlButton addTarget:self action:@selector(recordControlButtonTapped:) forControlEvents:(UIControlEvents)UIControlEventTouchDown];
