@@ -20,6 +20,7 @@
 		9A95FADB18CA7343009A724F /* libBLE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A95FAD818CA4957009A724F /* libBLE.a */; };
 		E1182D2A18FA84FB003B8EED /* NZGestureRecognitionPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1182D2918FA84FB003B8EED /* NZGestureRecognitionPipeline.mm */; };
 		E1182D2D18FB2972003B8EED /* NZClassifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1182D2C18FB2972003B8EED /* NZClassifyViewController.m */; };
+		E171C18818FC2246002FCEEE /* NZNotificationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E171C18718FC2246002FCEEE /* NZNotificationConstants.m */; };
 		E185624E18F1C4BB00F371C0 /* libGRTStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E185624B18F1C48600F371C0 /* libGRTStatic.a */; };
 		E185625118F1CCF600F371C0 /* NZTraningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E185625018F1CCF600F371C0 /* NZTraningViewController.m */; };
 		E185625418F1CDAC00F371C0 /* NZClassificationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E185625318F1CDAC00F371C0 /* NZClassificationController.mm */; };
@@ -102,6 +103,8 @@
 		E1182D2918FA84FB003B8EED /* NZGestureRecognitionPipeline.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZGestureRecognitionPipeline.mm; sourceTree = "<group>"; };
 		E1182D2B18FB2972003B8EED /* NZClassifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassifyViewController.h; sourceTree = "<group>"; };
 		E1182D2C18FB2972003B8EED /* NZClassifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZClassifyViewController.m; sourceTree = "<group>"; };
+		E171C18618FC2246002FCEEE /* NZNotificationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZNotificationConstants.h; sourceTree = "<group>"; };
+		E171C18718FC2246002FCEEE /* NZNotificationConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZNotificationConstants.m; sourceTree = "<group>"; };
 		E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GRTStatic.xcodeproj; path = Frameworks/GRTStatic/GRTStatic.xcodeproj; sourceTree = "<group>"; };
 		E185624F18F1CCF600F371C0 /* NZTraningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZTraningViewController.h; sourceTree = "<group>"; };
 		E185625018F1CCF600F371C0 /* NZTraningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZTraningViewController.m; sourceTree = "<group>"; };
@@ -120,8 +123,6 @@
 		E1B6277A18D0C3A400436B8C /* SensorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SensorData.m; path = ../../SensorData.m; sourceTree = "<group>"; };
 		E1B6277C18D0DAD800436B8C /* SensorDataValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorDataValue.h; sourceTree = "<group>"; };
 		E1B6277D18D0DAD800436B8C /* SensorDataValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensorDataValue.m; sourceTree = "<group>"; };
-		E1B7E4BC18F5E05D00B266CB /* BLEFNZClassificationControllerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLEFNZClassificationControllerManager.h; sourceTree = "<group>"; };
-		E1B7E4BD18F5E39D00B266CB /* NZTrainViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZTrainViewControllerDelegate.h; sourceTree = "<group>"; };
 		E1B86CF618E6FC57002475AE /* bluetooth-17-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-6.png"; sourceTree = SOURCE_ROOT; };
 		E1B86CF818E6FD79002475AE /* bluetooth-17-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-2.png"; sourceTree = SOURCE_ROOT; };
 		E1B86CF918E6FD79002475AE /* bluetooth-17-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-3.png"; sourceTree = SOURCE_ROOT; };
@@ -229,17 +230,8 @@
 			children = (
 				E1BE079718E5B8DD00B00F54 /* FinalVersion */,
 				E1CD3BA818E2E50200AFF986 /* SKSlideViewController */,
-				9A79EADA182AD9F200F1983C /* MainViewController.h */,
-				9A79EADB182AD9F200F1983C /* MainViewController.m */,
-				E1B08B1718DB01E5000DCDB5 /* GraphView */,
-				E1B6277918D0C3A400436B8C /* SensorData.h */,
-				E1B6277A18D0C3A400436B8C /* SensorData.m */,
 				9A79EAD8182AD9F200F1983C /* AppDelegate.h */,
 				9A79EAD9182AD9F200F1983C /* AppDelegate.m */,
-				E1B6277C18D0DAD800436B8C /* SensorDataValue.h */,
-				E1B6277D18D0DAD800436B8C /* SensorDataValue.m */,
-				E1D6554818DB665D00A99748 /* NZConstants.h */,
-				E1D6554918DB665D00A99748 /* NZConstants.m */,
 			);
 			name = code;
 			path = BLEDemo/code;
@@ -251,6 +243,49 @@
 				9A95FAD818CA4957009A724F /* libBLE.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E171C18218FC20F0002FCEEE /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				E1D6554818DB665D00A99748 /* NZConstants.h */,
+				E1D6554918DB665D00A99748 /* NZConstants.m */,
+				E171C18618FC2246002FCEEE /* NZNotificationConstants.h */,
+				E171C18718FC2246002FCEEE /* NZNotificationConstants.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		E171C18318FC2108002FCEEE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E1B6277918D0C3A400436B8C /* SensorData.h */,
+				E1B6277A18D0C3A400436B8C /* SensorData.m */,
+				E1B6277C18D0DAD800436B8C /* SensorDataValue.h */,
+				E1B6277D18D0DAD800436B8C /* SensorDataValue.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E171C18418FC2164002FCEEE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9A79EADA182AD9F200F1983C /* MainViewController.h */,
+				9A79EADB182AD9F200F1983C /* MainViewController.m */,
+				E1BE079B18E5CA2300B00F54 /* NZTabBarController.h */,
+				E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */,
+				E1BE079E18E60C1C00B00F54 /* NZGraphViewController.h */,
+				E1BE079F18E60C1C00B00F54 /* NZGraphViewController.m */,
+				E1CD3BFC18E3227800AFF986 /* NZBleConnectionViewController.h */,
+				E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */,
+				E1C3958618E0529500C2B0E4 /* NZMenuViewController.h */,
+				E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */,
+				E185624F18F1CCF600F371C0 /* NZTraningViewController.h */,
+				E185625018F1CCF600F371C0 /* NZTraningViewController.m */,
+				E1182D2B18FB2972003B8EED /* NZClassifyViewController.h */,
+				E1182D2C18FB2972003B8EED /* NZClassifyViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		E1855E3918F19B8B00F371C0 /* GRT wrapers */ = {
@@ -287,15 +322,6 @@
 			name = GraphView;
 			sourceTree = "<group>";
 		};
-		E1B7E4BB18F5E04600B266CB /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				E1B7E4BC18F5E05D00B266CB /* BLEFNZClassificationControllerManager.h */,
-				E1B7E4BD18F5E39D00B266CB /* NZTrainViewControllerDelegate.h */,
-			);
-			name = Protocols;
-			sourceTree = "<group>";
-		};
 		E1B86CF318E6FB54002475AE /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,20 +342,11 @@
 		E1BE079718E5B8DD00B00F54 /* FinalVersion */ = {
 			isa = PBXGroup;
 			children = (
-				E1B7E4BB18F5E04600B266CB /* Protocols */,
+				E171C18418FC2164002FCEEE /* ViewControllers */,
 				E1855E3918F19B8B00F371C0 /* GRT wrapers */,
-				E1BE079B18E5CA2300B00F54 /* NZTabBarController.h */,
-				E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */,
-				E1BE079E18E60C1C00B00F54 /* NZGraphViewController.h */,
-				E1BE079F18E60C1C00B00F54 /* NZGraphViewController.m */,
-				E1CD3BFC18E3227800AFF986 /* NZBleConnectionViewController.h */,
-				E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */,
-				E1C3958618E0529500C2B0E4 /* NZMenuViewController.h */,
-				E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */,
-				E185624F18F1CCF600F371C0 /* NZTraningViewController.h */,
-				E185625018F1CCF600F371C0 /* NZTraningViewController.m */,
-				E1182D2B18FB2972003B8EED /* NZClassifyViewController.h */,
-				E1182D2C18FB2972003B8EED /* NZClassifyViewController.m */,
+				E171C18318FC2108002FCEEE /* Model */,
+				E1B08B1718DB01E5000DCDB5 /* GraphView */,
+				E171C18218FC20F0002FCEEE /* Constants */,
 			);
 			name = FinalVersion;
 			sourceTree = "<group>";
@@ -460,6 +477,7 @@
 			files = (
 				9A79EADC182AD9F200F1983C /* AppDelegate.m in Sources */,
 				E1D6554A18DB665D00A99748 /* NZConstants.m in Sources */,
+				E171C18818FC2246002FCEEE /* NZNotificationConstants.m in Sources */,
 				E1B08B1D18DB04C5000DCDB5 /* NZGraphViewSegment.m in Sources */,
 				E1B08B2318DB25EB000DCDB5 /* NZGraphViewHelper.m in Sources */,
 				E1CD3BAB18E2E50200AFF986 /* SKSlideViewController.m in Sources */,

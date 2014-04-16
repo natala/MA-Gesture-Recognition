@@ -9,6 +9,7 @@
 #import "NZClassificationController.h"
 #import "GRT.h"
 #import "NZGestureRecognitionPipeline.h"
+#import "NZNotificationConstants.h"
 
 #define kPipelineKey            @"Pipeline"
 //#define kPipelineFile         @"pipeline.plist"
@@ -17,15 +18,22 @@
 
 @interface NZClassificationController ()
 
+typedef enum classifierControllerStates {
+    INITIAL_STATE       = 0,
+    RECORDING_SAMPLES   = 1,
+    PREDICTING          = 2
+} ClassifierControllerStates;
+
 @property (strong, nonatomic) NSMutableArray *classLabels;
+
 @property (strong, nonatomic) NZGestureRecognitionPipeline *pipeline;
+
+@property ClassifierControllerStates state;
 
 @end
 
 @implementation NZClassificationController
-
 @synthesize classLabels = _classLabels;
-
 
 //GRT::GestureRecognitionPipeline pipeline;
 GRT::LabelledClassificationData labelledData;
@@ -37,6 +45,13 @@ GRT::LabelledClassificationData labelledData;
         //pipeline = GRT::GestureRecognitionPipeline();
         _pipeline = [[NZGestureRecognitionPipeline alloc] init];
         labelledData = GRT::LabelledClassificationData(3);
+        _state = ClassifierControllerStates::INITIAL_STATE;
+        
+        // sunscribe
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveData:) name:NZDidReceiveSensorDataNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateState:) name:NZClassifyVCDidTapClassifyButtonNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateState:) name:NZTrainingVCDidTapRecordButtonNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trainClassifier:) name:NZTrainingVCDidTapTrainClassifierButtonNotification object:nil];
     }
     return self;
 }
@@ -66,9 +81,12 @@ GRT::LabelledClassificationData labelledData;
     }
     NSString *label = (NSString *)[self.classLabels lastObject];
     [self addData:data withLabel:label];
+    NSNumber *num = [[NSNumber alloc] initWithInt:labelledData.getNumSamples()];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys: num, NZNumOfRecordedDataKey, nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NZClassificationControllerAddedDataNotification object:self userInfo:dic];
 }
 
-- (BOOL)trainClassifier
+- (BOOL)train
 {
     // 1. Partition the training data into a training dataset and a test dataset. 80 means that 80% of the data will be used for the training data and 20% will be returned as the test dataset
     GRT::LabelledClassificationData testData = labelledData.partition(80);
@@ -128,7 +146,6 @@ GRT::LabelledClassificationData labelledData;
     }
     */
     return true;
-    
 }
 
 - (void)setUpPipeline
@@ -153,7 +170,9 @@ GRT::LabelledClassificationData labelledData;
 - (BOOL)saveLabelledDataToCSVFile
 {
      NSString *path = [[self documentPath] stringByAppendingPathComponent:kLabelledDataFile];
-    return labelledData.saveDatasetToCSVFile([path UTF8String]);
+    BOOL res = labelledData.saveDatasetToCSVFile([path UTF8String]);
+    NSLog(@"saving labelled data to CSV file: %d", res);
+    return res;
 }
 
 - (BOOL)loadLabelledDataFromCSVFile
@@ -191,7 +210,7 @@ GRT::LabelledClassificationData labelledData;
     return nsNumber;
 }
 
--(BOOL)classifyierIsTrained
+-(BOOL)isTrained
 {
     return [self.pipeline isTrained];
 }
@@ -263,6 +282,60 @@ GRT::LabelledClassificationData labelledData;
         return true;
     }
     return false;*/
+}
+
+#pragma mark - 
+#pragma mark Responding to Notifications
+#pragma mark -
+
+- (void)didReceiveData:(NSNotification *)notification
+{
+    // 1. if state = record => add data to labelledData
+    // 2. if state = classify & and trained = true => predict
+    // 3. otherwise dont do anything
+    
+    if (self.state == ClassifierControllerStates::INITIAL_STATE) {
+        //don't do anything with the data
+        return;
+    }
+    SensorData *sensorData = [[notification userInfo] valueForKey:NZSensorDataKey];
+    if (self.state == ClassifierControllerStates::RECORDING_SAMPLES) {
+        [self addData:sensorData];
+    } else if (self.state == ClassifierControllerStates::PREDICTING) {
+        [self predict:sensorData];
+    }
+    NSLog(@"got notification :D");
+}
+
+- (void)updateState:(NSNotification *)notification
+{
+    // 1. check weather the notification comes forom the record or classify button
+    // 2. change the state accordingly (remember to check if the classifier is trained)
+    NSString *msg = [[notification userInfo] objectForKey:NZStartStopButtonStateKey];
+    if ([[notification name] isEqualToString:NZClassifyVCDidTapClassifyButtonNotification]) {
+        if ([msg isEqualToString:@"stop"] && (self.state == ClassifierControllerStates::PREDICTING)) {
+            self.state = ClassifierControllerStates::INITIAL_STATE;
+        } else if ([msg isEqualToString:@"start"] && [self isTrained]) {
+            self.state = ClassifierControllerStates::PREDICTING;
+        }
+    } else if ([[notification name] isEqualToString:NZTrainingVCDidTapRecordButtonNotification]) {
+        if ([msg isEqualToString:@"stop"] && (self.state == ClassifierControllerStates::RECORDING_SAMPLES)) {
+            self.state = ClassifierControllerStates::INITIAL_STATE;
+        } else if ([msg isEqualToString:@"start"]) {
+            self.state = ClassifierControllerStates::RECORDING_SAMPLES;
+        }
+    }
+}
+
+- (void)trainClassifier:(NSNotification *)notification
+{
+    NSString *msg;
+    if ([self train]) {
+        msg = @"trained";
+    } else msg = @"not trained";
+    NSString *classifierStats = [self.pipeline statistics];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:msg, NZClassifierStatusKey,classifierStats, NZClassifierStatisticsKey, nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NZClassificationControllerFinishedTrainingNotification object:self userInfo:dic];
 }
 
 @end

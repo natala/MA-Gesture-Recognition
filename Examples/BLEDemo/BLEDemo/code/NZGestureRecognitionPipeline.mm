@@ -103,6 +103,12 @@ GRT::GestureRecognitionPipeline pipeline;
     return true;
 }
 
+- (NSString *)statistics
+{
+    NSString *stats = @"some stats";
+    return stats;
+}
+
 - (int)predict:(GRT::VectorDouble &)data
 {
     if (!pipeline.getTrained()) {

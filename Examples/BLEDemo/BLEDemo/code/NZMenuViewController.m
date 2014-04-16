@@ -171,7 +171,7 @@
 {
     NSLog(@"start training the classifier");
 #warning start training the classifier, once done -> update the trainVC
-    if ([self.classificationController trainClassifier]) {
+/*    if ([self.classificationController trainClassifier]) {
         self.classifierTrained = true;
     } else {
         self.classifierTrained = false;
@@ -179,6 +179,7 @@
     // once training doen
     [self updateClassifierStatusIn:self.trainingVC];
     [self updateInfo:@"precision and so on.... \n ...." aboutTrainingOutcomeIn:self.trainingVC];
+ */
 }
 
 - (void)updateClassifierStatusIn:(NZTraningViewController *)trainingVC

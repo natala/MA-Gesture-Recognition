@@ -11,6 +11,7 @@
 #import "NZGraphViewController.h"
 #import "SensorData.h"
 #import "NZMenuViewController.h"
+#import "NZNotificationConstants.h"
 
 @interface NZTabBarController ()
 
@@ -83,6 +84,10 @@
 -(void) didReceiveData:(uint8_t *)buffer lenght:(NSInteger)length{
     BOOL extractedData = [self.bleVC extractDataFromBuffer:buffer withLength:length to:self.accelerometerData];
     if (extractedData) {
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:self.accelerometerData, NZSensorDataKey, nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NZDidReceiveSensorDataNotification object:self userInfo:dic];
+
+#warning implement the Notification mechanism
         [self.graphVC updateWIthData:self.accelerometerData];
         // the root view controller of a navigation view controller is always
         if (![[self.menuNavigationController viewControllers] objectAtIndex:0]) {

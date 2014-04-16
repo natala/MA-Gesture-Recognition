@@ -7,6 +7,7 @@
 //
 
 #import "NZClassifyViewController.h"
+#import "NZNotificationConstants.h"
 
 @interface NZClassifyViewController ()
 
@@ -35,27 +36,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (IBAction)classifyButtonTapped:(id)sender {
-    if (!self.delegate) {
-        return;
-    }
-    [self.delegate startClassifying];
+    //if (!self.delegate) {
+    //    return;
+    //}
+    //[self.delegate startClassifying];
     UIButton *button = (UIButton *)sender;
+    NSString *msg;
     if ([button.currentTitle isEqual:@"Classify"]) {
         [button setTitle:@"Stop classifying" forState:UIControlStateNormal];
+        msg = @"start";
     } else {
         [button setTitle:@"Classify" forState:UIControlStateNormal];
+        msg = @"stop";
     }
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:msg, NZStartStopButtonStateKey, nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NZClassifyVCDidTapClassifyButtonNotification object:self userInfo:dic];
 }
 @end

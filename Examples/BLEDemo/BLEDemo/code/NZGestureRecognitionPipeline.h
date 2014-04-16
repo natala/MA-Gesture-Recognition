@@ -18,7 +18,7 @@
 - (BOOL)test:(GRT::LabelledClassificationData &)testData;
 - (int)predict:(GRT::VectorDouble &)data;
 - (void)setUpPipeline;
-
+- (NSString *)statistics;
 - (BOOL)isTrained;
 
 - (BOOL)savePipelineTo:(NSString *)name;

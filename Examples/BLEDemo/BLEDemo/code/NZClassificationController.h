@@ -20,7 +20,7 @@
 - (void)addClassLabel:(NSString *)classLabel;
 
 // returns true if managed to train classifier, fals if training failed
-- (BOOL)trainClassifier;
+//- ()trainClassifier;
 
 - (void)setUpPipeline;
 
@@ -32,6 +32,6 @@
 - (NSNumber *)numberOfDataSamples;
 - (NSNumber *)numberOfClasses;
 - (NSDictionary *)numberOfSamplesPerClass;
-- (BOOL)classifyierIsTrained;
+- (BOOL)isTrained;
 
 @end    

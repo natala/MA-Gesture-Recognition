@@ -41,6 +41,7 @@ MainViewController.m
 #import "MainViewController.h"
 #import "NZGraphViewHelper.h"
 #import "NZConstants.h"
+#import "NZNotificationConstants.h"
 
 @implementation MainViewController{
 
