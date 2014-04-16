@@ -111,40 +111,6 @@ GRT::LabelledClassificationData labelledData;
         NSLog(@"error saving pipeline to file!");
         return false;
     }
-
-    //load it from file again
-    /*if (![self loadPipeline]){
-        NSLog(@"error loading pipeline from file!");
-        return false;
-    }*/
-    
-    /*
-    cout << "Precision: ";
-    for(UINT k=0; k<pipeline.getNumClassesInModel(); k++){
-        UINT classLabel = pipeline.getClassLabels()[k];
-        cout << "\t" << pipeline.getTestPrecision(classLabel);
-    }cout << endl;
-    
-    cout << "Recall: ";
-    for(UINT k=0; k<pipeline.getNumClassesInModel(); k++){
-        UINT classLabel = pipeline.getClassLabels()[k];
-        cout << "\t" << pipeline.getTestRecall(classLabel);
-    }cout << endl;
-    
-    cout << "FMeasure: ";
-    for(UINT k=0; k<pipeline.getNumClassesInModel(); k++){
-        UINT classLabel = pipeline.getClassLabels()[k];
-        cout << "\t" << pipeline.getTestFMeasure(classLabel);
-    }cout << endl;
-    
-    Matrix< double > confusionMatrix = pipeline.getTestConfusionMatrix();
-    cout << "ConfusionMatrix: \n";
-    for(UINT i=0; i<confusionMatrix.getNumRows(); i++){
-        for(UINT j=0; j<confusionMatrix.getNumCols(); j++){
-            cout << confusionMatrix[i][j] << "\t";
-        }cout << endl;
-    }
-    */
     return true;
 }
 

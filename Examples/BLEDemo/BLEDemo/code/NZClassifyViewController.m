@@ -15,6 +15,8 @@
 
 @implementation NZClassifyViewController
 
+bool pipelineTrained = false;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,6 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pipelineDidFinishTraning:) name:NZClassificationControllerFinishedTrainingNotification object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -37,10 +40,11 @@
 }
 
 - (IBAction)classifyButtonTapped:(id)sender {
-    //if (!self.delegate) {
-    //    return;
-    //}
-    //[self.delegate startClassifying];
+    // first check if the pipeline is trained
+    if (!pipelineTrained) {
+        self.classifiedClassLabel.text = @"classifier is not trained!";
+        return;
+    }
     UIButton *button = (UIButton *)sender;
     NSString *msg;
     if ([button.currentTitle isEqual:@"Classify"]) {
@@ -52,5 +56,16 @@
     }
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:msg, NZStartStopButtonStateKey, nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:NZClassifyVCDidTapClassifyButtonNotification object:self userInfo:dic];
+}
+
+#pragma mark - 
+#pragma mark managing notifications
+#pragma mark -
+
+- (void)pipelineDidFinishTraning:(NSNotification *)notification
+{
+    if ([[[notification userInfo] objectForKey:NZClassifierStatusKey] isEqualToString:@"trained"]) {
+        pipelineTrained = true;
+    } else pipelineTrained = false;
 }
 @end
