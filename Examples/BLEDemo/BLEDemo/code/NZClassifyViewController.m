@@ -58,7 +58,7 @@ bool pipelineTrained = false;
     [[NSNotificationCenter defaultCenter] postNotificationName:NZClassifyVCDidTapClassifyButtonNotification object:self userInfo:dic];
 }
 
-#pragma mark - 
+#pragma mark -
 #pragma mark managing notifications
 #pragma mark -
 
