@@ -10,6 +10,8 @@
 
 // BLEDelegate
 NSString * const NZDidReceiveSensorDataNotification                     = @"NZDidReceiveSensorDataNotification";
+NSString * const NZDidConnectToBle = @"NZDidConnectToBleNotification";
+
 
 // NZClassificationController
 NSString * const NZDidFinishTrainingClassifierNotification              = @"NZDidFinishTrainingClassifierNotification";

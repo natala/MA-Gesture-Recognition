@@ -11,6 +11,6 @@
 
 @interface NZGraphViewController : UIViewController
 
-- (void)updateWIthData:(SensorData*) accelerometerData;
+- (void)updateWithData:(SensorData*) accelerometerData;
 
 @end

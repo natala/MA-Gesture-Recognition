@@ -51,7 +51,8 @@
         } else if ([[self.viewControllers objectAtIndex:i] isKindOfClass:[NZGraphViewController class]]) {
             self.graphVC = (NZGraphViewController *)[self.viewControllers objectAtIndex:i];
             self.graphVCIndex = i;
-       } else if ([[self.viewControllers objectAtIndex:i] isKindOfClass:[UINavigationController class]]) {
+           // [self.graphVC loadView];
+        } else if ([[self.viewControllers objectAtIndex:i] isKindOfClass:[UINavigationController class]]) {
            self.menuNavigationController = (UINavigationController *)[self.viewControllers objectAtIndex:i];
            self.menuNCIndex = i;
         }
@@ -82,13 +83,14 @@
 #pragma mark -
 
 -(void) didReceiveData:(uint8_t *)buffer lenght:(NSInteger)length{
-    BOOL extractedData = [self.bleVC extractDataFromBuffer:buffer withLength:length to:self.accelerometerData];
+    BOOL extractedData = [self.accelerometerData sensorDataFromBuffer:buffer withLength:length];
     if (extractedData) {
+        [self.bleVC updateSensorDataTextWithSensorData:self.accelerometerData];
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:self.accelerometerData, NZSensorDataKey, nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NZDidReceiveSensorDataNotification object:self userInfo:dic];
 
 #warning implement the Notification mechanism
-        [self.graphVC updateWIthData:self.accelerometerData];
+        [self.graphVC updateWithData:self.accelerometerData];
         // the root view controller of a navigation view controller is always
         if (![[self.menuNavigationController viewControllers] objectAtIndex:0]) {
             NSLog(@"The root controller of the navigation controller is nill!!!");
@@ -130,12 +132,13 @@
     service.dataDelegate = self;
     [self.bleVC updateConnectedLabel:([BLEDiscovery sharedInstance].connectedService != nil)];
     [[self.tabBar.items objectAtIndex:self.bleVCIndex] setBadgeValue:@":)"];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:NZDidConnectToBle object:self];
     //[self updateConnectedLabel];
 }
 -(void) bleServiceDidDisconnect:(BLEService *)service{
         [self.bleVC updateConnectedLabel:([BLEDiscovery sharedInstance].connectedService != nil)];
         [[self.tabBar.items objectAtIndex:self.bleVCIndex] setBadgeValue:@":("];
-    //[self updateConnectedLabel];
+        //[self updateConnectedLabel];
 }
 
 -(void) bleServiceIsReady:(BLEService *)service{

@@ -10,6 +10,7 @@
 
 // BLEDelegate
 extern NSString * const NZDidReceiveSensorDataNotification;
+extern NSString * const NZDidConnectToBle;
 
 // NZClassificationController
 extern NSString * const NZDidFinishTrainingClassifierNotification;

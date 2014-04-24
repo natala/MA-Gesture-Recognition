@@ -18,4 +18,6 @@
 
 -(id)initWithValueHeadersX:(uint8_t) _x Y:(uint8_t) _y Z:(uint8_t) _z;
 
+- (BOOL)sensorDataFromBuffer:(uint8_t *)buffer withLength:(NSInteger)length;
+
 @end

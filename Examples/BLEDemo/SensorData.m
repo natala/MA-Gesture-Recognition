@@ -21,4 +21,21 @@
     } else return nil;
 }
 
+- (BOOL)sensorDataFromBuffer:(uint8_t *)buffer withLength:(NSInteger)length;
+{
+    bool readPackage = true;
+    // TODO move this to one method of the SensorData class
+    if( [self.x setValueFromBuffer:buffer withBufferLength:(int)length ] ){
+        // NSLog(@"finished reading X data!");
+    } else readPackage = false;
+    if( [self.y setValueFromBuffer:buffer withBufferLength:(int)length ] ){
+        //NSLog(@"finished reading Y data!");
+    } else readPackage = false;
+    if( [self.z setValueFromBuffer:buffer withBufferLength:(int)length ] ){
+        //NSLog(@"finished reading Z data!");
+    } else readPackage = false;
+
+    return readPackage;
+}
+
 @end

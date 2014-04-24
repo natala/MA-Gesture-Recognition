@@ -116,7 +116,7 @@
 - (NZGraphViewSegment *)addSegment
 {
 	// Create a new segment and add it to the segments array.
-    CGRect frame = CGRectMake(kGraphViewLeftAxisWidth-kGraphSegmentSize-1, 0.0, kGraphSegmentSize-1, self.frame.size.height);
+    CGRect frame = CGRectMake(kGraphViewLeftAxisWidth-kGraphSegmentSize-1, 0.0, kGraphSegmentSize-1, kSegmentHeight/*self.frame.size.height*/);
     NZGraphViewSegment *segment = [[NZGraphViewSegment alloc] initWithFrame:frame];
 	// We add it at the front of the array because -recycleSegment expects the oldest segment
 	// to be at the end of the array. As long as we always insert the youngest segment at the front

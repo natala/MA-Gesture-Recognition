@@ -18,6 +18,8 @@
 
 @implementation NZGraphViewController
 
+BOOL loaded = false;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,6 +34,7 @@
     [super viewDidLoad];
     CGRect rect = [self.view layer].bounds;
     rect.size.height = 180.0;
+    loaded = true;
 	// Do any additional setup after loading the view.
 }
 
@@ -41,9 +44,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)updateWIthData:(SensorData*) accelerometerData
+- (void)updateWithData:(SensorData*) accelerometerData
 {
-    [self.graphView addData:accelerometerData];
+    if (loaded) {
+        [self.graphView addData:accelerometerData];
+    }
 }
 
 @end

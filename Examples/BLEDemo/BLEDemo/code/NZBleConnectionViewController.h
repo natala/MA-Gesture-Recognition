@@ -12,7 +12,7 @@
 #import "SensorData.h"
 #import "NZGraphView.h"
 
-@interface NZBleConnectionViewController : UIViewController //<BLEDiscoveryDelegate, BLEServiceDelegate, BLEServiceDataDelegate>
+@interface NZBleConnectionViewController : UIViewController
 
 #pragma mark -
 #pragma mark properties
@@ -31,8 +31,10 @@
 /*
  * called to update the the accelerometer data
  */
--(BOOL)extractDataFromBuffer:(uint8_t *)buffer withLength:(NSInteger)length to:(SensorData *)sensorData;
+//-(BOOL)extractDataFromBuffer:(uint8_t *)buffer withLength:(NSInteger)length to:(SensorData *)sensorData;
 
 -(void) updateConnectedLabel:(BOOL)connected;
+
+-(void)updateSensorDataTextWithSensorData:(SensorData*)data;
 
 @end

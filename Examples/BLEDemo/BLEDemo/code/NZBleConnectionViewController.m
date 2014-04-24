@@ -7,8 +7,11 @@
 //
 
 #import "NZBleConnectionViewController.h"
+#import "NZNotificationConstants.h"
 
 @interface NZBleConnectionViewController ()
+
+@property NSString *connectedLabelText;
 
 @end
 
@@ -26,16 +29,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   /* // set the background image
-    
-    CGSize size = self.view.layer.bounds.size;
-    UIGraphicsBeginImageContext(size);
-    UIImage *img = [UIImage imageNamed:@"bleImage.png"];
-    [img drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    UIImage *newImg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:newImg];
-    */
+   // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bleDidConnect:) name:NZDidConnectToBle object:nil];
+    if (!self.connectedLabel) {
+        self.connectedLabelText = @"NOT CONNECTED";
+    }
+    self.connectedLabel.text = self.connectedLabelText;
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,12 +44,13 @@
 
 -(void) updateConnectedLabel:(BOOL)connected{
     if (connected) {
-        self.connectedLabel.text = @"CONNECTED";
+        self.connectedLabelText = @"CONNECTED";
     } else {
-        self.connectedLabel.text = @"NOT CONNECTED";
+        self.connectedLabelText = @"NOT CONNECTED";
     }
 }
 
+/*
 -(BOOL)extractDataFromBuffer:(uint8_t *)buffer withLength:(NSInteger)length to:(SensorData *)sensorData{
     if (!sensorData) {
         return false;
@@ -79,9 +78,16 @@
     }
     return readPackage;
 }
+ */
 
 -(void)updateSensorDataTextWithSensorData:(SensorData*)data{
     self.receivedDataLabel.text = [[NSString alloc] initWithFormat:@"ax: %ld, ay: %ld, az: %ld", data.x.value, data.y.value, data.z.value ];
 }
+
+
+#pragma mark -
+#pragma mark manage notifications
+#pragma mark -
+
 
 @end

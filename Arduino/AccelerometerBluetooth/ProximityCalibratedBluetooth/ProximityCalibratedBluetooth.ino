@@ -23,8 +23,13 @@ long previousMillis = 0;
 long interval = 25;  // send with frequency 40 Hrz
 byte currentCommand;
 
-void setup() {
+int led = 13;  // blink if Bluettoth or MPU not working correctly
 
+void setup() {
+  
+    // for debuging
+  pinMode(led, OUTPUT);
+digitalWrite(led, HIGH);
     Wire.begin();
     TWBR = 24; // 400kHz I2C clock (200kHz if CPU is 8MHz)
 
@@ -120,6 +125,7 @@ void loop() {
             //Serial.println(F("FIFO overflow!"));
             
         } else {
+          digitalWrite(led, LOW);  // turn off the led, everythink is fine
             // wait for correct available data length, should be a VERY short wait
             while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
 
@@ -141,6 +147,11 @@ void loop() {
                 sendData();
             }
      }
+   } else {
+     // when MPU not working properly
+     digitalWrite(led, HIGH);
+     // send an error
+     Serial.write('e');
    }
   
 }

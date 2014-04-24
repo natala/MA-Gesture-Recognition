@@ -11,7 +11,7 @@
 #import "NZTraningViewController.h"
 #import "NZClassifyViewController.h"
 
-@interface NZMenuViewController : UIViewController <NZTraningViewControllerDelegate, NZClassifyViewControllerDelegate>
+@interface NZMenuViewController : UIViewController //<NZTraningViewControllerDelegate, NZClassifyViewControllerDelegate>
 
 @property BOOL recordingData;
 @property (weak, nonatomic) NSString *currentClassLabel;

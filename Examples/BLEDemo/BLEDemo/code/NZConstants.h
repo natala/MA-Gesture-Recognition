@@ -15,6 +15,7 @@
 #define kLocalizedPause         NSLocalizedString(@"Pause","pause taking samples")
 #define kLocalizedResume        NSLocalizedString(@"Resume","resume taking samples")
 #define kSegmentSize            33
+#define kSegmentHeight          205.0
 #define kGraphViewLeftAxisWidth 42.0
 #define kGraphSegmentSize       33
 
