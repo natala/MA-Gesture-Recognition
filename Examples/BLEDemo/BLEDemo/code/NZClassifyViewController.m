@@ -14,8 +14,10 @@
 @end
 
 @implementation NZClassifyViewController
+@synthesize currentClassifiedLabel = _currentClassifiedLabel;
+@synthesize currentClassifyButtonLable = _currentClassifyButtonLable;
 
-bool pipelineTrained = false;
+//bool pipelineTrained = false;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +32,8 @@ bool pipelineTrained = false;
 {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pipelineDidFinishTraning:) name:NZClassificationControllerFinishedTrainingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updadePredictedLabel:) name:NZClassificationControllerDidPredictClassNotification object:nil];
+    self.classifiedClassLabel.text = self.currentClassifiedLabel;
     // Do any additional setup after loading the view.
 }
 
@@ -41,8 +45,8 @@ bool pipelineTrained = false;
 
 - (IBAction)classifyButtonTapped:(id)sender {
     // first check if the pipeline is trained
-    if (!pipelineTrained) {
-        self.classifiedClassLabel.text = @"classifier is not trained!";
+    if (!self.isPipelineTrained) {
+        self.currentClassifiedLabel = @"classifier is not trained!";
         return;
     }
     UIButton *button = (UIButton *)sender;
@@ -59,13 +63,50 @@ bool pipelineTrained = false;
 }
 
 #pragma mark -
-#pragma mark managing notifications
+#pragma mark Respond to Notifications
 #pragma mark -
 
 - (void)pipelineDidFinishTraning:(NSNotification *)notification
 {
     if ([[[notification userInfo] objectForKey:NZClassifierStatusKey] isEqualToString:@"trained"]) {
-        pipelineTrained = true;
-    } else pipelineTrained = false;
+        self.isPipelineTrained = true;
+    } else self.isPipelineTrained = false;
 }
+
+- (void)updadePredictedLabel:(NSNotification *)notification
+{
+    self.currentClassifiedLabel = [[notification userInfo] objectForKey:NZPredictedClassLabelKey];
+}
+
+#pragma mark - 
+#pragma mark Getters & Setters
+#pragma mark -
+- (void)setCurrentClassifiedLabel:(NSString *)currentClassifiedLabel
+{
+    _currentClassifiedLabel = currentClassifiedLabel;
+    self.classifiedClassLabel.text = currentClassifiedLabel;
+}
+
+- (NSString *)currentClassifiedLabel
+{
+    if (!_currentClassifiedLabel) {
+        _currentClassifiedLabel = @"___";
+    }
+    return _currentClassifiedLabel;
+}
+
+- (void)setCurrentClassifyButtonLable:(NSString *)currentClassifyButtonLable
+{
+    _currentClassifiedLabel = currentClassifyButtonLable;
+    [self.classifyButton setTitle:currentClassifyButtonLable forState:UIControlStateNormal];
+}
+
+- (NSString *)currentClassifyButtonLable
+{
+    if (!_currentClassifiedLabel) {
+        _currentClassifiedLabel = @"Classify";
+    }
+    return _currentClassifyButtonLable;
+}
+
 @end

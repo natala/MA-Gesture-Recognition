@@ -22,7 +22,10 @@
 
 @property (weak, nonatomic) id<NZClassifyViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIButton *classifyButton;
+@property (nonatomic) NSString *currentClassifyButtonLable;
 @property (weak, nonatomic) IBOutlet UILabel *classifiedClassLabel;
+@property (nonatomic) NSString *currentClassifiedLabel;
+@property (nonatomic) BOOL isPipelineTrained;
 
 - (IBAction)classifyButtonTapped:(id)sender;
 @end

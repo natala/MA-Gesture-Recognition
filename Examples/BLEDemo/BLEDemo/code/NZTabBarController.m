@@ -71,7 +71,7 @@
 
 -(void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    NSLog(@"seleted item: %lu", self.selectedIndex);
+   // NSLog(@"seleted item: %lu", self.selectedIndex);
     if ([item isEqual:[self.tabBar.items objectAtIndex:self.bleVCIndex] ]) {
         [[self.tabBar.items objectAtIndex:self.bleVCIndex] setBadgeValue:nil];
     }

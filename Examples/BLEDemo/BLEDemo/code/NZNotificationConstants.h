@@ -16,6 +16,9 @@ extern NSString * const NZDidConnectToBle;
 extern NSString * const NZDidFinishTrainingClassifierNotification;
 extern NSString * const NZClassificationControllerAddedDataNotification;
 extern NSString * const NZClassificationControllerFinishedTrainingNotification;
+extern NSString * const NZClassificationControllerDidLoadSavedDataNotification;
+extern NSString * const NZClassificationControllerDidAddClassLabel;
+extern NSString * const NZClassificationControllerDidPredictClassNotification;
 
 // NZTrainingViewController
 extern NSString * const NZTrainingVCDidAddClassLabelNotification;
@@ -26,9 +29,15 @@ extern NSString * const NZTrainingVCDidTapTrainClassifierButtonNotification;
 // NZClassifyViewController
 extern NSString * const NZClassifyVCDidTapClassifyButtonNotification;
 
+// NZMyClassesViewController
+extern NSString * const NZLoadSavedDataTappedNotification;
+
 // userInfo dictionary keyes
 extern NSString * const NZSensorDataKey;
 extern NSString * const NZStartStopButtonStateKey;
 extern NSString * const NZNumOfRecordedDataKey;
 extern NSString * const NZClassifierStatusKey;
 extern NSString * const NZClassifierStatisticsKey;
+extern NSString * const NZNumOfClassLabelsKey;
+extern NSString * const NZIsTrainedKey;
+extern NSString * const NZPredictedClassLabelKey;

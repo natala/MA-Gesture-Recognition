@@ -50,6 +50,8 @@
 		E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BB318E2EB0D00AFF986 /* NZLeftSlideViewController.m */; };
 		E1CD3BFE18E3227800AFF986 /* NZBleConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */; };
 		E1D6554A18DB665D00A99748 /* NZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D6554918DB665D00A99748 /* NZConstants.m */; };
+		E1F16F3319095F08004C9330 /* NZClassificationDataset.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1F16F3219095F08004C9330 /* NZClassificationDataset.mm */; };
+		E1F16F361909781A004C9330 /* NZMyClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F16F351909781A004C9330 /* NZMyClassesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +153,10 @@
 		E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZBleConnectionViewController.m; sourceTree = "<group>"; };
 		E1D6554818DB665D00A99748 /* NZConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZConstants.h; sourceTree = "<group>"; };
 		E1D6554918DB665D00A99748 /* NZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZConstants.m; sourceTree = "<group>"; };
+		E1F16F3119095F08004C9330 /* NZClassificationDataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassificationDataset.h; sourceTree = "<group>"; };
+		E1F16F3219095F08004C9330 /* NZClassificationDataset.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZClassificationDataset.mm; sourceTree = "<group>"; };
+		E1F16F341909781A004C9330 /* NZMyClassesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZMyClassesViewController.h; sourceTree = "<group>"; };
+		E1F16F351909781A004C9330 /* NZMyClassesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZMyClassesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +290,8 @@
 				E185625018F1CCF600F371C0 /* NZTraningViewController.m */,
 				E1182D2B18FB2972003B8EED /* NZClassifyViewController.h */,
 				E1182D2C18FB2972003B8EED /* NZClassifyViewController.m */,
+				E1F16F341909781A004C9330 /* NZMyClassesViewController.h */,
+				E1F16F351909781A004C9330 /* NZMyClassesViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -295,6 +303,8 @@
 				E1182D2918FA84FB003B8EED /* NZGestureRecognitionPipeline.mm */,
 				E185625218F1CDAC00F371C0 /* NZClassificationController.h */,
 				E185625318F1CDAC00F371C0 /* NZClassificationController.mm */,
+				E1F16F3119095F08004C9330 /* NZClassificationDataset.h */,
+				E1F16F3219095F08004C9330 /* NZClassificationDataset.mm */,
 			);
 			name = "GRT wrapers";
 			sourceTree = "<group>";
@@ -481,8 +491,10 @@
 				E1B08B1D18DB04C5000DCDB5 /* NZGraphViewSegment.m in Sources */,
 				E1B08B2318DB25EB000DCDB5 /* NZGraphViewHelper.m in Sources */,
 				E1CD3BAB18E2E50200AFF986 /* SKSlideViewController.m in Sources */,
+				E1F16F3319095F08004C9330 /* NZClassificationDataset.mm in Sources */,
 				E1B6277E18D0DAD800436B8C /* SensorDataValue.m in Sources */,
 				9A79EAE9182ADA1900F1983C /* main.m in Sources */,
+				E1F16F361909781A004C9330 /* NZMyClassesViewController.m in Sources */,
 				E1BE07A018E60C1C00B00F54 /* NZGraphViewController.m in Sources */,
 				E1BE079D18E5CA2300B00F54 /* NZTabBarController.m in Sources */,
 				E1CD3BAE18E2E90400AFF986 /* NZMainViewController.m in Sources */,

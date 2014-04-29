@@ -50,7 +50,9 @@ GRT::GestureRecognitionPipeline pipeline;
     
     // add Feature extractors
     GRT::ZeroCrossingCounter zeroCrossing = GRT::ZeroCrossingCounter(30, 0.1, 3);
-    //pipeline.addFeatureExtractionModule(zeroCrossing);
+    GRT::FFT fft(256,1);
+    pipeline.addFeatureExtractionModule(fft);
+    pipeline.addFeatureExtractionModule(zeroCrossing);
 }
 
 - (BOOL)train:(GRT::LabelledClassificationData &)labelledData

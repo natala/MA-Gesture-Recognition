@@ -76,19 +76,32 @@
     if([segue.identifier isEqualToString:@"train"]){
         NZTraningViewController *trainVC =(NZTraningViewController *)[segue destinationViewController];
         trainVC.currentClassLable = self.currentClassLabel;
+        trainVC.currentGestureType = 0;
+        if (self.classificationController.state == RECORDING_SAMPLES) {
+            trainVC.currentRecordControlButtonText = @"stop";
+        } else trainVC.currentRecordControlButtonText = @"record";
+        trainVC.currentNumberOfSamples = [self.classificationController numberOfDataSamples];
+        trainVC.currentNumberOfClasses = [self.classificationController numberOfClasses];
+        trainVC.currentClassifierTrained = self.classifierTrained;
+        trainVC.currentTrainingOutcomeText = @"to be set!";
         trainVC.delegate = self;
         self.trainingVC = trainVC;
-        NSNumber *numSamples = [self.classificationController numberOfDataSamples];
-        [self updateNumberOfRecordedSamples:numSamples in:trainVC];
-        if ([self classifierTrained]) {
-            trainVC.classifierTrainingStaus = @"trained";
-        } else {
-            trainVC.classifierTrainingStaus = @"not trained";
-        }
+        //NSNumber *numSamples = [self.classificationController numberOfDataSamples];
+        //[self updateNumberOfRecordedSamples:numSamples in:trainVC];
+        //if ([self classifierTrained]) {
+        //    trainVC.classifierTrainingStaus = @"trained";
+        //} else {
+        //    trainVC.classifierTrainingStaus = @"not trained";
+        //}
     } else if ([segue.identifier isEqualToString:@"classify"]){
         NZClassifyViewController *classifyVC = (NZClassifyViewController *)[segue destinationViewController];
         classifyVC.delegate = self;
         self.classifyVC = classifyVC;
+        if (self.classificationController.state == PREDICTING) {
+            classifyVC.currentClassifyButtonLable = @"Stop Classifying";
+            classifyVC.currentClassifiedLabel = self.classificationController.lastPredictedLabel;
+        } else classifyVC.currentClassifyButtonLable = @"Classify";
+        classifyVC.isPipelineTrained = self.classificationController.isTrained;
     }
 }
 
@@ -101,7 +114,7 @@
         self.numberOfSamples = [NSNumber numberWithInt:value + 1];
         //to the appropriate things
         if (self.trainingVC) {
-            [self updateNumberOfRecordedSamples:[self.classificationController numberOfDataSamples] in:self.trainingVC];
+            //[self updateNumberOfRecordedSamples:[self.classificationController numberOfDataSamples] in:self.trainingVC];
         }
     } else if (self.classify){
         NSString *classLabel = [self.classificationController predict:data];
@@ -162,10 +175,10 @@
     self.currentClassLabel = newClassLabel;
 }
 
--(void)updateNumberOfRecordedSamples:(NSNumber *)numberOfSamples in:(NZTraningViewController *)trainVC
+/*-(void)updateNumberOfRecordedSamples:(NSNumber *)numberOfSamples in:(NZTraningViewController *)trainVC
 {
-    [trainVC updateNumberOfSamples:numberOfSamples];
-}
+   // [trainVC updateNumberOfSamples:numberOfSamples];
+}*/
 
 - (void)startTrainingClassifier
 {

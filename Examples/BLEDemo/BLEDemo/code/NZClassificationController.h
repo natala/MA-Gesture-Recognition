@@ -11,13 +11,23 @@
 
 @interface NZClassificationController : NSObject
 
+typedef enum classifierControllerStates {
+    INITIAL_STATE       = 0,
+    RECORDING_SAMPLES   = 1,
+    PREDICTING          = 2
+} ClassifierControllerStates;
+
 @property (strong, nonatomic) NSString *datasetName;
+@property ClassifierControllerStates state;
+@property (strong, nonatomic) NSString *lastPredictedLabel;
 
 - (void)addData:(SensorData *)data withLabel:(NSString *)classLabel;
 
 // adds data with the label that is at the and of the classLabels
 - (void)addData:(SensorData *)data;
 - (void)addClassLabel:(NSString *)classLabel;
+- (BOOL)saveClassLabels;
+- (BOOL)loadClassLabels;
 
 // returns true if managed to train classifier, fals if training failed
 //- ()trainClassifier;

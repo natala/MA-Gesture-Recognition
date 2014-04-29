@@ -12,23 +12,15 @@
 #import "NZNotificationConstants.h"
 
 #define kPipelineKey            @"Pipeline"
-//#define kPipelineFile         @"pipeline.plist"
+#define kClassesFile            @"classes.plist"
 #define kPipelineFile           @"pipeline.txt"
 #define kLabelledDataFile       @"labelledData.csv"
 
 @interface NZClassificationController ()
 
-typedef enum classifierControllerStates {
-    INITIAL_STATE       = 0,
-    RECORDING_SAMPLES   = 1,
-    PREDICTING          = 2
-} ClassifierControllerStates;
-
 @property (strong, nonatomic) NSMutableArray *classLabels;
 
 @property (strong, nonatomic) NZGestureRecognitionPipeline *pipeline;
-
-@property ClassifierControllerStates state;
 
 @end
 
@@ -36,8 +28,14 @@ typedef enum classifierControllerStates {
 @synthesize classLabels = _classLabels;
 
 //GRT::GestureRecognitionPipeline pipeline;
+#pragma mark -
+#pragma mark variables
+#pragma mark -
 GRT::LabelledClassificationData labelledData;
 
+#pragma mark -
+#pragma mark methods
+#pragma mark -
 - (id)init
 {
     self = [super init];
@@ -52,6 +50,7 @@ GRT::LabelledClassificationData labelledData;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateState:) name:NZClassifyVCDidTapClassifyButtonNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateState:) name:NZTrainingVCDidTapRecordButtonNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trainClassifier:) name:NZTrainingVCDidTapTrainClassifierButtonNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSavedData:) name:NZLoadSavedDataTappedNotification object:nil];
     }
     return self;
 }
@@ -138,13 +137,62 @@ GRT::LabelledClassificationData labelledData;
      NSString *path = [[self documentPath] stringByAppendingPathComponent:kLabelledDataFile];
     BOOL res = labelledData.saveDatasetToCSVFile([path UTF8String]);
     NSLog(@"saving labelled data to CSV file: %d", res);
+    [self saveClassLabels];
     return res;
 }
 
 - (BOOL)loadLabelledDataFromCSVFile
 {
     NSString *path = [[self documentPath] stringByAppendingPathComponent:kLabelledDataFile];
-    return labelledData.loadDatasetFromCSVFile([path UTF8String]);
+    [self loadClassLabels];
+    bool res = labelledData.loadDatasetFromCSVFile([path UTF8String]);
+    if (res) {
+       /* NSString *loadedData = @"classes: ";
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys: num, NZNumOfRecordedDataKey, nil];
+        [NSNotificationCenter defaultCenter] postNotificationName:NZClassificationControllerDidLoadSavedDataNotification object:self userInfo:<#(NSDictionary *)#>
+        */
+    }
+    return res;
+}
+
+- (BOOL)loadClassLabels
+{
+    NSString *path = [[self documentPath] stringByAppendingPathComponent:kClassesFile];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        return false;
+    }
+    NSData *plistData = [NSData dataWithContentsOfFile:path];
+    NSError *error;
+    NSArray *plist = [NSPropertyListSerialization propertyListWithData:plistData options:NSPropertyListImmutable format:NULL error:&error];
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic in plist){
+        NSString *label = dic[@"label"];
+        [array addObject:label];
+    }
+    self.classLabels = array;
+}
+
+- (BOOL)saveClassLabels
+{
+    // 1. create the property list
+    NSMutableArray *plist = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [self.classLabels count] ; i++) {
+        [plist addObject:@{@"id": [NSNumber numberWithInt:i],
+                                     @"label": [self.classLabels objectAtIndex:i]}];
+    }
+    
+    // 2. serialize the property list
+    NSError *error;
+    NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:plist format:NSPropertyListXMLFormat_v1_0 options:0 error:&error];
+    
+    // 3. stote the serialized data
+    NSString *path = [[self documentPath] stringByAppendingPathComponent:kClassesFile];
+    if (plistData) {
+        [plistData writeToFile:path atomically:YES];
+        return true;
+    }
+    return false;
+    
 }
 
 #pragma mark -
@@ -166,6 +214,8 @@ GRT::LabelledClassificationData labelledData;
     uint classLabelNumber = (uint)([self.classLabels count]);
     labelledData.addClass(classLabelNumber);
     NSLog(@"number of classes: %ud", [self.classLabels count]);
+   // NSNumber *num = [NSNumber alloc] initWithInt:self.pipeline.numb
+    [[NSNotificationCenter defaultCenter] postNotificationName:NZClassificationControllerDidAddClassLabel object:self];
 }
 
 - (NSNumber *)numberOfDataSamples
@@ -174,6 +224,18 @@ GRT::LabelledClassificationData labelledData;
     int num = labelledData.getNumSamples();
     NSNumber *nsNumber = [[NSNumber alloc] initWithInt:num];
     return nsNumber;
+}
+
+- (NSNumber *)numberOfClasses
+{
+    int num = labelledData.getNumClasses();
+    NSNumber *nsNumber = [[NSNumber alloc] initWithInt:num];
+    return nsNumber;
+}
+
+- (NSDictionary *)numberOfSamplesPerClass
+{
+    return nil;
 }
 
 -(BOOL)isTrained
@@ -218,36 +280,14 @@ GRT::LabelledClassificationData labelledData;
         return false;
     }
     NSString *path = [[self documentPath] stringByAppendingPathComponent:kPipelineFile];
-    /*
-    NSMutableData *data = [[NSMutableData alloc] init];
-    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [archiver encodeObject:self.pipeline forKey:kPipelineKey];
-    [archiver finishEncoding];
-    [data writeToFile:path atomically:YES];
-    //[archiver release];
-    //[data release];
-    return true;
-     */
     return [self.pipeline savePipelineTo:path];
 }
 
 - (BOOL)loadPipeline
 {
-    NSString *dataPath = [self documentPath];
+    //NSString *dataPath = [self documentPath];
     NSString *path = [[self documentPath] stringByAppendingPathComponent:kPipelineFile];
     return[ self.pipeline loadPipelineFrom:path];
-    /*NSData *codedData = [[NSData alloc] initWithContentsOfFile:path];//autorelease];
-    if (codedData == nil){
-        return nil;
-    }
-    
-    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:codedData];
-    self.pipeline = [unarchiver decodeObjectForKey:kPipelineKey];
-    [unarchiver finishDecoding];
-    if (self.pipeline) {
-        return true;
-    }
-    return false;*/
 }
 
 #pragma mark - 
@@ -268,9 +308,10 @@ GRT::LabelledClassificationData labelledData;
     if (self.state == ClassifierControllerStates::RECORDING_SAMPLES) {
         [self addData:sensorData];
     } else if (self.state == ClassifierControllerStates::PREDICTING) {
-        [self predict:sensorData];
+        self.lastPredictedLabel = [self predict:sensorData];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:self.lastPredictedLabel, NZPredictedClassLabelKey, nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NZClassificationControllerDidPredictClassNotification object:self userInfo:dic];
     }
-    NSLog(@"got notification :D");
 }
 
 - (void)updateState:(NSNotification *)notification
@@ -297,11 +338,23 @@ GRT::LabelledClassificationData labelledData;
 {
     NSString *msg;
     if ([self train]) {
-        msg = @"trained";
-    } else msg = @"not trained";
+        msg = @"YES";
+    } else msg = @"NO";
     NSString *classifierStats = [self.pipeline statistics];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:msg, NZClassifierStatusKey,classifierStats, NZClassifierStatisticsKey, nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:NZClassificationControllerFinishedTrainingNotification object:self userInfo:dic];
+}
+
+- (void)loadSavedData:(NSNotification *)notification
+{
+    if ([self loadPipeline] && [self loadLabelledDataFromCSVFile]){
+        NSNumber *numOfSamples = [self numberOfDataSamples];
+        NSNumber *numOfClasses = [self numberOfClasses];
+        NSString *trained = [[NSString alloc] initWithFormat:@"%c", self.pipeline.isTrained] ;
+        
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:numOfClasses, NZNumOfClassLabelsKey, numOfSamples, NZNumOfRecordedDataKey, trained, NZIsTrainedKey, nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NZClassificationControllerDidLoadSavedDataNotification object:self userInfo:dic];
+    }
 }
 
 @end
