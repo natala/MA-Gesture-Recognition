@@ -17,10 +17,14 @@ VectorInt16 aaReal;
 VectorInt16 aaWorld;
 VectorFloat gravity;
 Quaternion q;
+float yawPitchRoll[3];
+
+int16_t ax, ay, az;
+int16_t gx, gy, gz;
 
 boolean initialized = 0;
 long previousMillis = 0;
-long interval = 25;  // send with frequency 40 Hrz
+long interval = 25;  // send with frequency 40 Hrz 
 byte currentCommand;
 
 int led = 13;  // blink if Bluettoth or MPU not working correctly
@@ -29,7 +33,6 @@ void setup() {
   
     // for debuging
   pinMode(led, OUTPUT);
-digitalWrite(led, HIGH);
     Wire.begin();
     TWBR = 24; // 400kHz I2C clock (200kHz if CPU is 8MHz)
 
@@ -65,15 +68,79 @@ digitalWrite(led, HIGH);
     }
 }
 
-
 void sendData(){
+  /*
+  //TEST
+  int16_t minT = -32768;
+  int16_t maxT = 32767;
+  uint16_t uMinT, uMaxT;
+  */
+  /*
+  // LINEAR ACCELERATION
+  Serial.write('x');
+   if(aaReal.x < 0){
+      Serial.write(1);
+     aaReal.x = -(aaReal.x+1); 
+   }
+   else{
+      Serial.write(0); 
+   }
+  Serial.write(lowByte(aaReal.x));
+  Serial.write(highByte(aaReal.x));
+   
+   Serial.write('y');
+   if(aaReal.y < 0){
+      Serial.write(1);
+     aaReal.y = -(aaReal.y+1); 
+   }
+   else{
+      Serial.write(0); 
+   }
+   Serial.write(lowByte(aaReal.y));
+  Serial.write(highByte(aaReal.y));
+  
+  Serial.write('z');
+   if(aaReal.z < 0){
+      Serial.write(1);
+     aaReal.z = -(aaReal.z+1); 
+   }
+   else{
+      Serial.write(0); 
+   }
+   Serial.write(lowByte(aaReal.z));
+  Serial.write(highByte(aaReal.z));
+  */
+  
+  // ORIENTATION: YAW PITCH ROLL
+  // header - length - sign - value
+  
+  Serial.write('x');
+  uint8_t length = sizeof(float)
+  Serial.write(length);
+  float yaw = yawPitchRoll[0];
+  if(yaw < 0){
+    Serial.write(1);
+    yaw = -yaw;
+  }
+  uint8_t destination[length];
+  memcpy(destination, &floatValue, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+  /*
+  sends = (uint8_t *) &floatValue;
+  for(index = 0; index < sizeof(float); index++){
+    msa_Data1[index]= sends[index];
+  }*/
 
-    // move bits to change signed to unsigned by adding pow(2,15) = 32768;
+  /****** OLD CODE ******/
+ /*
+  // move bits to change signed to unsigned by adding pow(2,15)-1 = 32767;
   unsigned short gx = (gravity.x + 1.0) * 32768;
   unsigned short gy = (gravity.y + 1.0) * 32768;
   unsigned short gz = (gravity.z + 1.0) * 32768;
- 
- // send the header first and than the data
+  
+  // send the header first and than the data
   Serial.write('x');
   Serial.write(lowByte(gx));
   Serial.write(highByte(gx));
@@ -85,36 +152,13 @@ void sendData(){
   Serial.write('z');
   Serial.write(lowByte(gz));
   Serial.write(highByte(gz));
+  */
 }
-
-/*
-void processCommand(byte currentCommand){
-  
-  switch(currentCommand){
-  
-    case 0:
-    //  digitalWrite(GREEN_LED,LOW);
-    break;
-    
-    case 1:
-    //  digitalWrite(GREEN_LED,HIGH);
-    break;
-  }
-}
-*/
 
 void loop() {
-  
- // read data
-/* 
-  while(Serial.available()){
-      
-      currentCommand = Serial.read();
-      processCommand(currentCommand);
-    }
-    */
-
     if(initialized){
+      
+      digitalWrite(led, HIGH);
 
         // get current FIFO count
         fifoCount = mpu.getFIFOCount();
@@ -125,7 +169,6 @@ void loop() {
             //Serial.println(F("FIFO overflow!"));
             
         } else {
-          digitalWrite(led, LOW);  // turn off the led, everythink is fine
             // wait for correct available data length, should be a VERY short wait
             while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
 
@@ -135,10 +178,14 @@ void loop() {
             
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             //mpu.dmpGetGyro(&gyro,fifoBuffer);
-            //mpu.dmpGetAccel(&aa, fifoBuffer);
+            mpu.dmpGetAccel(&aa, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
-            //mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+            mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+              mpu.dmpGetYawPitchRoll(yawPitchRol, &q, &gravity);
             //mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
+            
+            // read raw accel/gyro measurements from device
+            //mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
             
             unsigned long currentMillis = millis();
         
@@ -149,7 +196,6 @@ void loop() {
      }
    } else {
      // when MPU not working properly
-     digitalWrite(led, HIGH);
      // send an error
      Serial.write('e');
    }

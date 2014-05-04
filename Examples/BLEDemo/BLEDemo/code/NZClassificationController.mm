@@ -10,6 +10,8 @@
 #import "GRT.h"
 #import "NZGestureRecognitionPipeline.h"
 #import "NZNotificationConstants.h"
+#import "NZConstants.h"
+#import "NZClassificationConstants.h"
 
 #define kPipelineKey            @"Pipeline"
 #define kClassesFile            @"classes.plist"
@@ -22,6 +24,16 @@
 
 @property (strong, nonatomic) NZGestureRecognitionPipeline *pipeline;
 
+// last object = most recent object (fifo)
+@property (nonatomic) NSMutableArray *sensorDataArray;
+@property (nonatomic) NSMutableArray *predictions;
+
+typedef enum staticDynamicPrediction {
+    UNDEFINED   = 0,
+    POSE        = 1,
+    GESTURE     = 2
+} StaticDynamicPrediction;
+
 @end
 
 @implementation NZClassificationController
@@ -32,6 +44,12 @@
 #pragma mark variables
 #pragma mark -
 GRT::LabelledClassificationData labelledData;
+//int windowSize = 20;
+GRT::MovingAverageFilter avgFilter(kFilterWindowSize,kSampleDimension);
+int indexLastPose = -1;
+int indexLastGesture = -1;
+StaticDynamicPrediction lastPrediction = UNDEFINED;
+
 
 #pragma mark -
 #pragma mark methods
@@ -45,12 +63,16 @@ GRT::LabelledClassificationData labelledData;
         labelledData = GRT::LabelledClassificationData(3);
         _state = ClassifierControllerStates::INITIAL_STATE;
         
-        // sunscribe
+        self.sensorDataArray = [[NSMutableArray alloc] init];
+        self.predictions = [[NSMutableArray alloc] init];
+        
+        // subscribe
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveData:) name:NZDidReceiveSensorDataNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateState:) name:NZClassifyVCDidTapClassifyButtonNotification object:nil];
+       /* [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateState:) name:NZClassifyVCDidTapClassifyButtonNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateState:) name:NZTrainingVCDidTapRecordButtonNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trainClassifier:) name:NZTrainingVCDidTapTrainClassifierButtonNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSavedData:) name:NZLoadSavedDataTappedNotification object:nil];
+        */
     }
     return self;
 }
@@ -74,6 +96,40 @@ GRT::LabelledClassificationData labelledData;
 
 - (void)addData:(SensorData *)data
 {
+    [self addSensorData:data];
+    
+    GRT::MatrixDouble grtSamples;
+    [self convertSensorDataArray:self.sensorDataArray toGrtMtrix:grtSamples];
+    
+    // 2. comoute standard deviation and set a threshold
+    GRT::VectorDouble stdDev;
+    [NZClassificationController stdDeviation:stdDev of:self.sensorDataArray];
+    
+    double stdDev3 = sqrt(stdDev[0]*stdDev[0] + stdDev[1]*stdDev[1] + stdDev[2]*stdDev[2]);
+    
+   // NSLog(@"STD of the vector:%f", stdDev[2]);
+    StaticDynamicPrediction prediction;
+    if (stdDev3 > kStdDeviationTh) {
+        prediction = GESTURE;
+        //self.lastPredictedLabel = @"GESTURE";
+    } else {
+        //self.lastPredictedLabel = @"POSE";
+        prediction = POSE;
+    }
+
+    [self addPrediction:(prediction)];
+    
+    self.lastPredictedLabel = [self predict];
+    
+    NSString * info = [NSString stringWithFormat:@"Standard Deviation:\r%f\r%f\r%f \r-> %f\r\rThreshold: %f", stdDev[0], stdDev[1], stdDev[2], stdDev3,kStdDeviationTh];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:self.lastPredictedLabel, NZPredictedClassLabelKey, info, NZSomeTextKey, nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NZClassificationControllerDidPredictClassNotification object:self userInfo:dic];
+}
+
+/*
+- (void)addData:(SensorData *)data
+{
     if ([self.classLabels count] == 0) {
         NSLog(@"Couldn't define the class label of the sample!!");
         return;
@@ -83,7 +139,7 @@ GRT::LabelledClassificationData labelledData;
     NSNumber *num = [[NSNumber alloc] initWithInt:labelledData.getNumSamples()];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys: num, NZNumOfRecordedDataKey, nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:NZClassificationControllerAddedDataNotification object:self userInfo:dic];
-}
+}*/
 
 - (BOOL)train
 {
@@ -118,6 +174,7 @@ GRT::LabelledClassificationData labelledData;
     [self.pipeline setUpPipeline];
 }
 
+/*
 - (NSString *)predict:(SensorData *)data
 {
     GRT::VectorDouble grtData = [NZClassificationController SensorDataToGrtFormat:data];
@@ -130,6 +187,90 @@ GRT::LabelledClassificationData labelledData;
     }
     NSString *classLabel = [self.classLabels objectAtIndex:(predictedLable-1)];
     return classLabel;
+  
+}*/
+
+- (BOOL)isPose
+{
+    if (kPoseMinLength==0) {
+        return false;
+    }
+    int numPredictions = [self.predictions count];
+    NSArray *subArray = [self.predictions subarrayWithRange:NSMakeRange(numPredictions-kPoseMinLength, kPoseMinLength)];
+    NSCountedSet *set = [NSCountedSet setWithArray:subArray];
+    int res = [set countForObject:[NSNumber numberWithInt:POSE]];
+    if (res/kPoseMinLength >= kPostProcessingTh) {
+        return true;
+    }
+    return false;
+}
+
+#warning merge with -isPose method
+- (BOOL)isGesture
+{
+    if (kGestureMinLength==0) {
+        return false;
+    }
+    int numPredictions = [self.predictions count];
+    NSArray *subArray = [self.predictions subarrayWithRange:NSMakeRange(numPredictions-kGestureMinLength, kGestureMinLength)];
+    NSCountedSet *set = [NSCountedSet setWithArray:subArray];
+    int res = [set countForObject:[NSNumber numberWithInt:GESTURE]];
+    if (res/kGestureMinLength >= kPostProcessingTh) {
+        return true;
+    }
+    return false;
+}
+
+- (NSString *)predict
+{
+    NSUInteger numPrediction = [self.predictions count];
+    
+    if (numPrediction < kPoseMinLength) {
+        lastPrediction = UNDEFINED;
+        return @"UNDEFINED";
+    }
+    
+#warning bad code!!
+    if (numPrediction < kGestureMinLength && numPrediction >= kPoseMinLength) {
+            if ([self isPose]) {
+                lastPrediction = POSE;
+                indexLastPose = numPrediction-1;
+                return @"POSE";
+            } else {
+                lastPrediction = UNDEFINED;
+                if (indexLastPose >= 0) {
+                    indexLastPose--;
+                }
+                return @"UNDEFINED";
+            }
+    }
+    if (lastPrediction == UNDEFINED || lastPrediction == GESTURE) {
+        if ([self isGesture]) {
+            lastPrediction = GESTURE;
+            indexLastGesture = numPrediction-1;
+            if (indexLastPose >= 0) {
+                indexLastPose--;
+            }
+            return @"GESTURE";
+        }
+    }
+    if ([self isPose]) {
+        lastPrediction = POSE;
+        indexLastPose = numPrediction-1;
+        if (indexLastGesture >= 0) {
+            indexLastGesture--;
+        }
+        return @"POSE";
+    }
+    
+    lastPrediction = UNDEFINED;
+    if (indexLastGesture >= 0) {
+        indexLastGesture--;
+    }
+    if (indexLastPose >= 0) {
+        indexLastPose--;
+    }
+    return @"UNDEFINED";
 }
 
 - (BOOL)saveLabelledDataToCSVFile
@@ -138,8 +279,7 @@ GRT::LabelledClassificationData labelledData;
     BOOL res = labelledData.saveDatasetToCSVFile([path UTF8String]);
     NSLog(@"saving labelled data to CSV file: %d", res);
     [self saveClassLabels];
-    return res;
-}
+    return res;}
 
 - (BOOL)loadLabelledDataFromCSVFile
 {
@@ -199,6 +339,33 @@ GRT::LabelledClassificationData labelledData;
 #pragma mark getters & setters
 #pragma mark -
 
+- (void)addSensorData:(SensorData *)sensorData
+{
+    //1. filer it
+    GRT::VectorDouble vec(3);
+    vec[0] = sensorData.x.value;
+    vec[1] = sensorData.y.value;
+    vec[2] = sensorData.z.value;
+    
+    vec = avgFilter.filter(vec);
+    sensorData.x.value = vec[0];
+    sensorData.y.value = vec[1];
+    sensorData.z.value = vec[2];
+    
+    if ([self.sensorDataArray count] >= kStorredSamplesMaxLegth) {
+        [self.sensorDataArray removeObjectAtIndex:0];
+    }
+    [self.sensorDataArray addObject:sensorData];
+}
+
+- (void)addPrediction:(StaticDynamicPrediction)prediction
+{
+    if ([self.predictions count] >= kStorredSamplesMaxLegth) {
+        [self.predictions removeObjectAtIndex:0];
+    }
+    [self.predictions addObject:[NSNumber numberWithInt:prediction ]];
+}
+
 - (NSMutableArray *)classLabels
 {
     if (!_classLabels) {
@@ -213,7 +380,7 @@ GRT::LabelledClassificationData labelledData;
     [self.classLabels addObject:classLabel];
     uint classLabelNumber = (uint)([self.classLabels count]);
     labelledData.addClass(classLabelNumber);
-    NSLog(@"number of classes: %ud", [self.classLabels count]);
+  //  NSLog(@"number of classes: %ud", [self.classLabels count]);
    // NSNumber *num = [NSNumber alloc] initWithInt:self.pipeline.numb
     [[NSNotificationCenter defaultCenter] postNotificationName:NZClassificationControllerDidAddClassLabel object:self];
 }
@@ -253,12 +420,102 @@ GRT::LabelledClassificationData labelledData;
     sample[0] = (uint)[[[NSNumber alloc] initWithInteger:data.x.value] unsignedIntegerValue];
     sample[1] = (uint)[[[NSNumber alloc] initWithInteger:data.y.value] unsignedIntegerValue];
     sample[3] = (uint)[[[NSNumber alloc] initWithInteger:data.z.value] unsignedIntegerValue];
+    
+   // NSLog( @"sample: %u %u, %u", sample[0], sample[1], sample[2] );
+   // NSLog( @"sensorData: %u, %u, %u", (data.x.value+1.0)*32767, (data.y.value+1.0)*32767, (data.z.value+1.0)*32767 );
+          
     /*
     sample[0] = (int)data.x.value;
     sample[1] = (int)data.y.value;
     sample[3] = (int)data.z.value;
      */
     return sample;
+}
+
++ (void)mean:(GRT::VectorDouble&)means of:(NSArray *)sensorData
+{
+    if (![sensorData count]) {
+        return;
+    }
+    means = GRT::VectorDouble(3);
+    means[0] = 0;
+    means[1] = 0;
+    means[2] = 0;
+    for (SensorData *data in sensorData){
+        means[0] = means[0] + data.x.value;
+        means[1] = means[1] + data.y.value;
+        means[2] = means[2] + data.z.value;
+    }
+    
+    means[0] /= [sensorData count];
+    means[1] /= [sensorData count];
+    means[2] /= [sensorData count];
+
+}
+
++ (void)stdDeviation:(GRT::VectorDouble&)stdDev of:(NSArray*)sensorData
+{
+    if (![sensorData count]) {
+        return;
+    }
+    
+    stdDev = GRT::VectorDouble(3);
+    
+    GRT::VectorDouble means;
+    [NZClassificationController mean:means of:sensorData];
+    
+/*    NSLog(@"MEANS:");
+    for (int i = 0; i < 3; i++) {
+        NSLog(@"%f", means[i]);
+    }
+ */
+    GRT::VectorDouble sumOfSquareDifferences(3);
+    sumOfSquareDifferences[0] = 0;
+    sumOfSquareDifferences[1] = 0;
+    sumOfSquareDifferences[2] = 0;
+    
+    for (SensorData *data in sensorData) {
+        
+        GRT::VectorDouble difference(3);
+    
+        difference[0] = data.x.value - means[0];
+        difference[1] = data.y.value - means[1];
+        difference[2] = data.z.value - means[2];
+        
+        sumOfSquareDifferences[0] += difference[0]*difference[0];
+        sumOfSquareDifferences[1] += difference[1]*difference[1];
+        sumOfSquareDifferences[2] += difference[2]*difference[2];
+        
+    }
+    GRT::VectorDouble res(3);
+    stdDev[0] = sqrt(sumOfSquareDifferences[0]/[sensorData count]);
+    stdDev[1] = sqrt(sumOfSquareDifferences[1]/[sensorData count]);
+    stdDev[2] = sqrt(sumOfSquareDifferences[2]/[sensorData count]);
+    
+    
+   /* NSLog(@"STD DEV:");
+    for (int i = 0; i < 3; i++) {
+        NSLog(@"%d: %f", i, stdDev[i]);
+    }
+    NSLog(@"______");
+    */
+}
+
+- (void)convertSensorDataArray:(NSArray*)array toGrtMtrix:(GRT::MatrixDouble&)matrix
+{
+   /* matrix = GRT::MatrixDouble(kFilterWindowSize,3);
+    for (int i = 0; i < [self.sensorDataArray count]; i++) {
+        GRT::VectorDouble vec = [NZClassificationController SensorDataToGrtFormat:[self.sensorDataArray objectAtIndex:i]];
+        matrix[i][0] =  vec[0];
+        matrix[i][1] =  vec[1];
+        matrix[i][2] =  vec[2];
+    }
+    for (int i = [self.sensorDataArray count]; i < windowSize; i++) {
+        for (int j = 0; j < 3; j++) {
+            matrix[i][j] = 0.0;
+        }
+    }
+    */
 }
 
 // writing to file

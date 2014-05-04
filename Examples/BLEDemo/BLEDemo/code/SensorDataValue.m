@@ -47,6 +47,7 @@
     if( length < [self.bytesNumber integerValue])
         return false;
     int headerLength = 1;
+    int signIndicatorLength = 1; // 1 for < 0 and 0 otherwise
     for (int i = 0; (i + headerLength + [self.bytesNumber integerValue]) <= length; i++) {
         if(buffer[i] == header){
             self.value = [[self class] intFromTwoBytes:buffer offset:(i+1)];
@@ -72,11 +73,17 @@
 
 /******** helper functions ***********/
 +(NSInteger) intFromTwoBytes:(uint8_t*) buffer offset:(NSInteger) offset{
+    // check the first byte for the sign indicator
     
-    uint8_t low = buffer[offset];
-    uint8_t high = buffer[offset+1];
-    int val = ((high << 8 | low) - 32768);
-    return val;
+    int isNegativ = buffer[offset];
+    
+    uint8_t low = buffer[offset+1];
+    uint8_t high = buffer[offset+2];
+    int value = (high << 8 | low);
+    if (isNegativ) {
+        value = (-value)-1;
+    }
+    return value;
 }
  
 

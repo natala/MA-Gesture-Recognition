@@ -15,7 +15,6 @@
 
 @implementation NZClassifyViewController
 @synthesize currentClassifiedLabel = _currentClassifiedLabel;
-@synthesize currentClassifyButtonLable = _currentClassifyButtonLable;
 
 //bool pipelineTrained = false;
 
@@ -31,7 +30,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pipelineDidFinishTraning:) name:NZClassificationControllerFinishedTrainingNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updadePredictedLabel:) name:NZClassificationControllerDidPredictClassNotification object:nil];
     self.classifiedClassLabel.text = self.currentClassifiedLabel;
     // Do any additional setup after loading the view.
@@ -44,11 +42,7 @@
 }
 
 - (IBAction)classifyButtonTapped:(id)sender {
-    // first check if the pipeline is trained
-    if (!self.isPipelineTrained) {
-        self.currentClassifiedLabel = @"classifier is not trained!";
-        return;
-    }
+
     UIButton *button = (UIButton *)sender;
     NSString *msg;
     if ([button.currentTitle isEqual:@"Classify"]) {
@@ -66,16 +60,10 @@
 #pragma mark Respond to Notifications
 #pragma mark -
 
-- (void)pipelineDidFinishTraning:(NSNotification *)notification
-{
-    if ([[[notification userInfo] objectForKey:NZClassifierStatusKey] isEqualToString:@"trained"]) {
-        self.isPipelineTrained = true;
-    } else self.isPipelineTrained = false;
-}
-
 - (void)updadePredictedLabel:(NSNotification *)notification
 {
     self.currentClassifiedLabel = [[notification userInfo] objectForKey:NZPredictedClassLabelKey];
+    self.infoLabel.text = [[notification userInfo] objectForKey:NZSomeTextKey];
 }
 
 #pragma mark - 
@@ -93,20 +81,6 @@
         _currentClassifiedLabel = @"___";
     }
     return _currentClassifiedLabel;
-}
-
-- (void)setCurrentClassifyButtonLable:(NSString *)currentClassifyButtonLable
-{
-    _currentClassifiedLabel = currentClassifyButtonLable;
-    [self.classifyButton setTitle:currentClassifyButtonLable forState:UIControlStateNormal];
-}
-
-- (NSString *)currentClassifyButtonLable
-{
-    if (!_currentClassifiedLabel) {
-        _currentClassifiedLabel = @"Classify";
-    }
-    return _currentClassifyButtonLable;
 }
 
 @end

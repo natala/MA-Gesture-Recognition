@@ -21,11 +21,10 @@
 @interface NZClassifyViewController : UIViewController
 
 @property (weak, nonatomic) id<NZClassifyViewControllerDelegate> delegate;
-@property (weak, nonatomic) IBOutlet UIButton *classifyButton;
-@property (nonatomic) NSString *currentClassifyButtonLable;
-@property (weak, nonatomic) IBOutlet UILabel *classifiedClassLabel;
-@property (nonatomic) NSString *currentClassifiedLabel;
-@property (nonatomic) BOOL isPipelineTrained;
 
-- (IBAction)classifyButtonTapped:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *classifiedClassLabel;
+@property (weak, nonatomic) IBOutlet UITextView *infoLabel;
+
+@property (nonatomic) NSString *currentClassifiedLabel;
+
 @end

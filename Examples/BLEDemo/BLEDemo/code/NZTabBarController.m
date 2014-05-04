@@ -83,6 +83,7 @@
 #pragma mark -
 
 -(void) didReceiveData:(uint8_t *)buffer lenght:(NSInteger)length{
+    self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:'x' Y:'y' Z:'z'];
     BOOL extractedData = [self.accelerometerData sensorDataFromBuffer:buffer withLength:length];
     if (extractedData) {
         [self.bleVC updateSensorDataTextWithSensorData:self.accelerometerData];
