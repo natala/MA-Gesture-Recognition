@@ -75,7 +75,7 @@ void sendData(){
   int16_t maxT = 32767;
   uint16_t uMinT, uMaxT;
   */
-  /*
+ 
   // LINEAR ACCELERATION
   Serial.write('x');
    if(aaReal.x < 0){
@@ -109,21 +109,54 @@ void sendData(){
    }
    Serial.write(lowByte(aaReal.z));
   Serial.write(highByte(aaReal.z));
-  */
+  
   
   // ORIENTATION: YAW PITCH ROLL
-  // header - length - sign - value
+  // header[0] - length[1] - sign[2] - value[3 - sizeof(float)+3]
   
-  Serial.write('x');
-  uint8_t length = sizeof(float)
+  uint8_t length = sizeof(float);  // length of the buffer
+  uint8_t destination[length];     // store the converted value
+  // send yaw
+  Serial.write('j');
   Serial.write(length);
   float yaw = yawPitchRoll[0];
   if(yaw < 0){
     Serial.write(1);
     yaw = -yaw;
+  } else {
+    Serial.write(0);
   }
-  uint8_t destination[length];
-  memcpy(destination, &floatValue, length);
+  memcpy(destination, &yaw, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+  
+  // send pitch
+  Serial.write('p');
+  Serial.write(length);
+  float pitch = yawPitchRoll[1];
+  if(pitch < 0){
+    Serial.write(1);
+    pitch = -pitch;
+  } else {
+    Serial.write(0);
+  }
+  memcpy(destination, &pitch, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+  
+  // send roll
+  Serial.write('r');
+  Serial.write(length);
+  float roll = yawPitchRoll[2];
+  if(roll < 0){
+    Serial.write(1);
+    roll = -roll;
+  } else {
+    Serial.write(0);
+  }
+  memcpy(destination, &roll, length);
   for (uint8_t i = 0; i < length; i++) {
     Serial.write(destination[i]);
   }
@@ -181,7 +214,7 @@ void loop() {
             mpu.dmpGetAccel(&aa, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
-              mpu.dmpGetYawPitchRoll(yawPitchRol, &q, &gravity);
+            mpu.dmpGetYawPitchRoll(yawPitchRoll, &q, &gravity);
             //mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
             
             // read raw accel/gyro measurements from device

@@ -46,6 +46,7 @@
 -(BOOL)setValueFromBuffer:(uint8_t *)buffer withBufferLength:(int) length{
     if( length < [self.bytesNumber integerValue])
         return false;
+    
     int headerLength = 1;
     int signIndicatorLength = 1; // 1 for < 0 and 0 otherwise
     for (int i = 0; (i + headerLength + [self.bytesNumber integerValue]) <= length; i++) {
@@ -72,8 +73,13 @@
 }*/
 
 /******** helper functions ***********/
-+(NSInteger) intFromTwoBytes:(uint8_t*) buffer offset:(NSInteger) offset{
++(NSInteger) intFromTwoBytes:(uint8_t *)buffer offset:(NSInteger)offset{
     // check the first byte for the sign indicator
+    
+    if (buffer[offset-1] == 'x') {
+        NSInteger valLength = buffer[offset];
+        float val = [SensorDataValue floatFromBuffer:buffer offset:(offset+1) length:valLength];
+    }
     
     int isNegativ = buffer[offset];
     
@@ -84,6 +90,21 @@
         value = (-value)-1;
     }
     return value;
+}
+
++(float) floatFromBuffer:(uint8_t *)buffer offset:(NSInteger)offset length:(NSInteger) length
+{
+    int isNegative = buffer[offset];
+    float floatValue;
+    memcpy(&floatValue, &(buffer[offset+1]), length);
+    if (isNegative) {
+        floatValue = -floatValue;
+    }
+    for (int i = offset+1; i < length; i++) {
+        NSLog(@"%d", buffer[i]);
+    }
+    
+    return floatValue;
 }
  
 
