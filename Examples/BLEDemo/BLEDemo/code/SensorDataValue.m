@@ -64,13 +64,13 @@
 
 #warning add int the data package the info about the value type [if floar or int16]
     // 2 - we asume it is a iny16_t, else it is a float
-    if (valLength == 2) {
+   // if (valLength == 2) {
         NSNumber *val = [NSNumber numberWithInteger:[[self class]intFromBuffer:buffer withOffset:(offset+1) andLength:valLength]];
         return val;
-    }
+    //}
     
-    NSNumber *val = [NSNumber numberWithFloat:[[self class] floatFromBuffer:buffer withOffset:(offset+1) andLength:valLength]];
-    return val;
+    //NSNumber *val = [NSNumber numberWithFloat:[[self class] floatFromBuffer:buffer withOffset:(offset+1) andLength:valLength]];
+   //return val;
 }
 
 + (NSInteger)intFromBuffer:(uint8_t *)buffer withOffset:(NSInteger)offset andLength:(NSInteger)valLength {

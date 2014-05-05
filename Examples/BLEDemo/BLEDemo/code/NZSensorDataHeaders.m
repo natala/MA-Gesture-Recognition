@@ -21,7 +21,7 @@ const uint8_t   kYaw       = 'w';
 const NSInteger kYawOffset = 0;
 
 const uint8_t   kPitch       = 'p';
-const NSInteger kPitchOffset = 7;
+const NSInteger kPitchOffset = 5;
 
 const uint8_t   kRoll       = 'r';
-const NSInteger kRollOffset = 14;
+const NSInteger kRollOffset = 10;

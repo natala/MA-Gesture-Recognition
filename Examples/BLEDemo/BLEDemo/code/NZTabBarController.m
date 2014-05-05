@@ -89,9 +89,9 @@
     BOOL isAccelerationExtracted = [self.accelerometerData sensorDataFromBuffer:buffer withLength:length];
     BOOL isOrientationExtracted = [self.orientationData sensorDataFromBuffer:buffer withLength:length];
     
-   // NSLog(@"yaw: %f:", [self.orientationData.x.value floatValue]);
-   // NSLog(@"pitch: %f:", [self.orientationData.y.value floatValue]);
-   // NSLog(@"roll: %f:", [self.orientationData.z.value floatValue]);
+    NSLog(@"yaw: %f:", [self.orientationData.x.value floatValue]);
+    NSLog(@"pitch: %f:", [self.orientationData.y.value floatValue]);
+    NSLog(@"roll: %f:", [self.orientationData.z.value floatValue]);
     
     if (isAccelerationExtracted) {
         [self.bleVC updateSensorDataTextWithSensorData:self.accelerometerData];

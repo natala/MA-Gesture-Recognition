@@ -2,6 +2,7 @@
 #include "I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
 #include "Wire.h"
+#include "nz_utils.h"
 
 //Maxbotix rangeSensorAD(A6, Maxbotix::AN, Maxbotix::HRLV, Maxbotix::BEST, 5);
 MPU6050 mpu;
@@ -25,12 +26,27 @@ int16_t gx, gy, gz;
 boolean initialized = 0;
 long previousMillis = 0;
 long interval = 25;  // send with frequency 40 Hrz 
-bool isSendAcceleration = true;
-bool isSendOrientation = false;
+bool isSendAcceleration = false;
+bool isSendOrientation = true;
 byte currentCommand;
 
 int led = 13;  // blink if Bluettoth or MPU not working correctly
 
+/*void sendInt16Valu( &int16_t value) {
+  uint8_t length = 2;
+  Serial.write(length);
+  if(value < 0){
+    Serial.write(1);
+    value = -(value+1);
+  } else {
+    Serial.write(0);
+  }
+  memcpy(destination, &value, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+}
+*/
 void setup() {
   
     // for debuging
@@ -72,10 +88,10 @@ void setup() {
 
 void sendOrientationData() {
    
-    uint8_t length = 4; //sizeof(float);
+    uint8_t length = sizeof(int16_t);
     uint8_t destination[length]; 
     
-    // header[0] - length[1] - sign[2] - value[3 - sizeof(float)+3]
+    // header[0] - length[1] - sign[2] - value[3 ; sizeof(float)+3]
   
   // ORIENTATION: YAW PITCH ROLL
   
@@ -83,13 +99,21 @@ void sendOrientationData() {
   Serial.write('w');
   Serial.write(length);
   float yaw = yawPitchRoll[0];
-  if(yaw < 0){
+  // the precision is anyway 0.xx
+  //sendInt16Valu( (int16_t)(yaw*10) );
+  //Serial.println("YAW");
+  //Serial.println(yaw);
+  int16_t intVal = (int16_t)(yaw*100);
+  //Serial.println("INT YAW");
+  //Serial.println(intVal);
+  if(intVal < 0){
     Serial.write(1);
-    yaw = -yaw;
+    intVal = -(intVal+1);
   } else {
     Serial.write(0);
   }
-  memcpy(destination, &yaw, length);
+  //Serial.println(yaw);
+  memcpy(destination, &intVal, length);
   for (uint8_t i = 0; i < length; i++) {
     Serial.write(destination[i]);
   }
@@ -98,13 +122,20 @@ void sendOrientationData() {
   Serial.write('p');
   Serial.write(length);
   float pitch = yawPitchRoll[1];
-  if(pitch < 0){
+  //sendInt16Valu( (int16_t)(pitch*10) );
+ // Serial.println("PITCH");
+ // Serial.println(pitch);
+  intVal = (int16_t)(pitch*100);
+  //Serial.println("INT PITCH");
+  //Serial.println(intVal);
+  if(intVal < 0){
     Serial.write(1);
-    pitch = -pitch;
+    intVal = -(intVal+1);
   } else {
     Serial.write(0);
   }
-  memcpy(destination, &pitch, length);
+  //Serial.println(yaw);
+  memcpy(destination, &intVal, length);
   for (uint8_t i = 0; i < length; i++) {
     Serial.write(destination[i]);
   }
@@ -113,13 +144,20 @@ void sendOrientationData() {
   Serial.write('r');
   Serial.write(length);
   float roll = yawPitchRoll[2];
-  if(roll < 0){
+  //sendInt16Valu( (int16_t)(roll*10) );
+  //Serial.println("ROLL");
+  //Serial.println(roll);
+  intVal = (int16_t)(roll*100);
+  //Serial.println("INT ROLL");
+  //Serial.println(intVal);
+  if(intVal < 0){
     Serial.write(1);
-    roll = -roll;
+    intVal = -(intVal+1);
   } else {
     Serial.write(0);
   }
-  memcpy(destination, &roll, length);
+  //Serial.println(yaw);
+  memcpy(destination, &intVal, length);
   for (uint8_t i = 0; i < length; i++) {
     Serial.write(destination[i]);
   }
@@ -128,8 +166,8 @@ void sendOrientationData() {
 
 void sendLinearAccelerationData(){
   //TEST
-  int16_t minT = -32768;
-  int16_t maxT = 32767;
+  //int16_t minT = -32768;
+  //int16_t maxT = 32767;
   //uint16_t uMinT, uMaxT;
  
   // header[0] - length[1] - sign[2] - value[3 - sizeof(uint16_t)+3]
@@ -244,10 +282,12 @@ void loop() {
                 previousMillis = currentMillis;
                 if (isSendAcceleration) {
                   sendLinearAccelerationData();
-                } 
-                //if (isSendOrientation) {
-                //  sendOrientationData;
-                //}
+                }
+               if (isSendOrientation) {
+                  sendOrientationData();
+                }
+                isSendAcceleration = !isSendAcceleration;
+                isSendOrientation = !isSendOrientation;
              }
      }
    } else {
