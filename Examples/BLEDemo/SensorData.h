@@ -12,12 +12,38 @@
 @interface SensorData : NSObject
 {}
 
+/*! \brief the name od the data
+ *
+ */
+@property (strong, nonatomic) NSString *name;
+
+/*! \brief the name od the data
+ *
+ */
+#warning change to an array of values. the names x/y/z are not good when yaw pitch roll
 @property (strong, nonatomic) SensorDataValue *x;
 @property (strong, nonatomic) SensorDataValue *y;
 @property (strong, nonatomic) SensorDataValue *z;
 
--(id)initWithValueHeadersX:(uint8_t) _x Y:(uint8_t) _y Z:(uint8_t) _z;
 
+/*! \brief true if values have been extracted
+ *
+ */
+@property BOOL hasValues;
+
+/*! \brief
+ *
+ */
+-(id)initWithValueHeadersX:(uint8_t) x Y:(uint8_t) y Z:(uint8_t) z andOffsetsX:(NSInteger)offsetX Y:(NSInteger)offsetY Z:(NSInteger)offsetZ;
+
+/*! \brief
+ *
+ */
+-(id)initWithValueHeadersX:(uint8_t) x Y:(uint8_t) y Z:(uint8_t) z andOffsetsX:(NSInteger)offsetX Y:(NSInteger)offsetY Z:(NSInteger)offsetZ andName:(NSString *)name;
+
+/*! \brief the name od the data
+ *
+ */
 - (BOOL)sensorDataFromBuffer:(uint8_t *)buffer withLength:(NSInteger)length;
 
 @end

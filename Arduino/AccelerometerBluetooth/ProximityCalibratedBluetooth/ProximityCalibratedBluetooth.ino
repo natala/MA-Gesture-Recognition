@@ -25,6 +25,8 @@ int16_t gx, gy, gz;
 boolean initialized = 0;
 long previousMillis = 0;
 long interval = 25;  // send with frequency 40 Hrz 
+bool isSendAcceleration = true;
+bool isSendOrientation = false;
 byte currentCommand;
 
 int led = 13;  // blink if Bluettoth or MPU not working correctly
@@ -68,56 +70,17 @@ void setup() {
     }
 }
 
-void sendData(){
-  /*
-  //TEST
-  int16_t minT = -32768;
-  int16_t maxT = 32767;
-  uint16_t uMinT, uMaxT;
-  */
- 
-  // LINEAR ACCELERATION
-  Serial.write('x');
-   if(aaReal.x < 0){
-      Serial.write(1);
-     aaReal.x = -(aaReal.x+1); 
-   }
-   else{
-      Serial.write(0); 
-   }
-  Serial.write(lowByte(aaReal.x));
-  Serial.write(highByte(aaReal.x));
+void sendOrientationData() {
    
-   Serial.write('y');
-   if(aaReal.y < 0){
-      Serial.write(1);
-     aaReal.y = -(aaReal.y+1); 
-   }
-   else{
-      Serial.write(0); 
-   }
-   Serial.write(lowByte(aaReal.y));
-  Serial.write(highByte(aaReal.y));
-  
-  Serial.write('z');
-   if(aaReal.z < 0){
-      Serial.write(1);
-     aaReal.z = -(aaReal.z+1); 
-   }
-   else{
-      Serial.write(0); 
-   }
-   Serial.write(lowByte(aaReal.z));
-  Serial.write(highByte(aaReal.z));
-  
+    uint8_t length = 4; //sizeof(float);
+    uint8_t destination[length]; 
+    
+    // header[0] - length[1] - sign[2] - value[3 - sizeof(float)+3]
   
   // ORIENTATION: YAW PITCH ROLL
-  // header[0] - length[1] - sign[2] - value[3 - sizeof(float)+3]
   
-  uint8_t length = sizeof(float);  // length of the buffer
-  uint8_t destination[length];     // store the converted value
   // send yaw
-  Serial.write('j');
+  Serial.write('w');
   Serial.write(length);
   float yaw = yawPitchRoll[0];
   if(yaw < 0){
@@ -160,12 +123,68 @@ void sendData(){
   for (uint8_t i = 0; i < length; i++) {
     Serial.write(destination[i]);
   }
-  /*
-  sends = (uint8_t *) &floatValue;
-  for(index = 0; index < sizeof(float); index++){
-    msa_Data1[index]= sends[index];
-  }*/
 
+}
+
+void sendLinearAccelerationData(){
+  //TEST
+  int16_t minT = -32768;
+  int16_t maxT = 32767;
+  //uint16_t uMinT, uMaxT;
+ 
+  // header[0] - length[1] - sign[2] - value[3 - sizeof(uint16_t)+3]
+ 
+  // LINEAR ACCELERATION
+  uint8_t length = sizeof(int16_t);
+  uint8_t destination[length]; 
+
+   Serial.write('x');
+   Serial.write(2);   // the length of the value to be send
+   if(aaReal.x < 0){
+      Serial.write(1);
+     aaReal.x = -(aaReal.x+1); 
+   }
+   else{
+      Serial.write(0); 
+   }
+   memcpy(destination, &aaReal.x, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+   //Serial.write(lowByte(aaReal.y));
+  //Serial.write(highByte(aaReal.y));
+  
+  Serial.write('y');
+  Serial.write(2);   // the length of the value to be send
+   if(aaReal.y < 0){
+      Serial.write(1);
+     aaReal.y = -(aaReal.y+1); 
+   }
+   else{
+      Serial.write(0); 
+   } 
+  memcpy(destination, &aaReal.y, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+
+  Serial.write('z');
+  Serial.write(2);   // the length of the value to be send
+   if(aaReal.z < 0){
+      Serial.write(1);
+     aaReal.z = -(aaReal.z+1); 
+   }
+   else{
+      Serial.write(0); 
+   }
+  memcpy(destination, &aaReal.z, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+  // Serial.write(lowByte(aaReal.z));
+  //Serial.write(highByte(aaReal.z));
+ 
+  
   /****** OLD CODE ******/
  /*
   // move bits to change signed to unsigned by adding pow(2,15)-1 = 32767;
@@ -221,11 +240,15 @@ void loop() {
             //mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
             
             unsigned long currentMillis = millis();
-        
             if(currentMillis - previousMillis > interval) {
                 previousMillis = currentMillis;
-                sendData();
-            }
+                if (isSendAcceleration) {
+                  sendLinearAccelerationData();
+                } 
+                //if (isSendOrientation) {
+                //  sendOrientationData;
+                //}
+             }
      }
    } else {
      // when MPU not working properly

@@ -50,6 +50,7 @@
 		E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BB318E2EB0D00AFF986 /* NZLeftSlideViewController.m */; };
 		E1CD3BFE18E3227800AFF986 /* NZBleConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */; };
 		E1D14D62191522CA004ACD67 /* NZClassificationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D14D61191522CA004ACD67 /* NZClassificationConstants.m */; };
+		E1D14D65191694A9004ACD67 /* NZSensorDataHeaders.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D14D64191694A9004ACD67 /* NZSensorDataHeaders.m */; };
 		E1D6554A18DB665D00A99748 /* NZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D6554918DB665D00A99748 /* NZConstants.m */; };
 		E1F16F3319095F08004C9330 /* NZClassificationDataset.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1F16F3219095F08004C9330 /* NZClassificationDataset.mm */; };
 		E1F16F361909781A004C9330 /* NZMyClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F16F351909781A004C9330 /* NZMyClassesViewController.m */; };
@@ -154,6 +155,8 @@
 		E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZBleConnectionViewController.m; sourceTree = "<group>"; };
 		E1D14D60191522CA004ACD67 /* NZClassificationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassificationConstants.h; sourceTree = "<group>"; };
 		E1D14D61191522CA004ACD67 /* NZClassificationConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZClassificationConstants.m; sourceTree = "<group>"; };
+		E1D14D63191694A9004ACD67 /* NZSensorDataHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZSensorDataHeaders.h; sourceTree = "<group>"; };
+		E1D14D64191694A9004ACD67 /* NZSensorDataHeaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZSensorDataHeaders.m; sourceTree = "<group>"; };
 		E1D6554818DB665D00A99748 /* NZConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZConstants.h; sourceTree = "<group>"; };
 		E1D6554918DB665D00A99748 /* NZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZConstants.m; sourceTree = "<group>"; };
 		E1F16F3119095F08004C9330 /* NZClassificationDataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassificationDataset.h; sourceTree = "<group>"; };
@@ -263,6 +266,8 @@
 				E171C18718FC2246002FCEEE /* NZNotificationConstants.m */,
 				E1D14D60191522CA004ACD67 /* NZClassificationConstants.h */,
 				E1D14D61191522CA004ACD67 /* NZClassificationConstants.m */,
+				E1D14D63191694A9004ACD67 /* NZSensorDataHeaders.h */,
+				E1D14D64191694A9004ACD67 /* NZSensorDataHeaders.m */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -509,6 +514,7 @@
 				E1CD3BB118E2EB0100AFF986 /* NZMainSlideViewController.m in Sources */,
 				9A79EADD182AD9F200F1983C /* MainViewController.m in Sources */,
 				E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */,
+				E1D14D65191694A9004ACD67 /* NZSensorDataHeaders.m in Sources */,
 				E1B08B2018DB04EC000DCDB5 /* NZGraphTextView.m in Sources */,
 				E1B6277B18D0C3A400436B8C /* SensorData.m in Sources */,
 				E1C3958818E0529500C2B0E4 /* NZMenuViewController.m in Sources */,

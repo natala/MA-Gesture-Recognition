@@ -11,24 +11,51 @@
 @interface SensorDataValue : NSObject
 {}
 
-@property (nonatomic) NSInteger value;
+/*! \brief offset in the buffer
+ *
+ */
+@property (nonatomic) NSInteger offset;
+
+@property (strong, nonatomic) NSNumber *value;
+
+/*! \brief indicated where to start processinf the buffer
+ *  supported headers are defined in NZSensorDataHeaders.h
+ */
 @property (nonatomic) uint8_t header;
-@property (strong, nonatomic) NSNumber *bytesNumber;
+
+/*! \brief
+ *
+ */
+//@property (nonatomic) NSInteger bytesNumber;
+
+/*! \brief name of the sensor data. For example "Linear Acceleration X"
+ *
+ */
+@property (strong, nonatomic) NSString *name;
 
 /*!
  * for later
  */
--(id)initWithHeader:(uint8_t) header andBytesLength: (int)valueLength;
--(uint8_t)headerWithLength:(NSNumber *)lenght;
+//-(id)initWithHeader:(uint8_t) header andBytesLength: (int)valueLength;
+//-(uint8_t)headerWithLength:(NSNumber *)lenght;
 
-/*!
- * 
+/*! \brief initialize with a given header
+ *  @param header the header indicating where to start extracting data form buffer
+ *  @param offset indicates where in the header should start reading the value
  */
--(id)initWithHeader:(uint8_t) header;
+- (id)initWithHeader:(uint8_t)header andOffset:(NSInteger)offset;
 
+/*! \brief initialize with a given header and value name
+ * @param header the header indicating where to start extracting data form buffer
+ * @param offset indicates where in the header should start reading the value
+ * @param name the name of the value
+ */
+- (id)initWithHeader:(uint8_t)header andOffset:(NSInteger)offset andName:(NSString *)name;
 
-/*!
- * returns true if value found
+/*! \brief set the value of the sensor data
+ * @param buffer the received buffer from which to extract
+ * @param length the length of the buffer
+ * @return if succeeded
  */
 -(BOOL)setValueFromBuffer:(uint8_t *)buffer withBufferLength:(int) length;
 
@@ -36,6 +63,6 @@
  * @param buffer the buffer from which the bytes will be read to initiate the number
  * @param offset indicates where in the buffer to start
  */
-+(NSInteger)intFromTwoBytes:(uint8_t*) buffer offset:(NSInteger) offset;
+//+(NSInteger)intFromTwoBytes:(uint8_t*) buffer offset:(NSInteger) offset;
 
 @end

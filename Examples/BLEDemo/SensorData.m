@@ -10,21 +10,35 @@
 
 @implementation SensorData
 
-@synthesize x,y,z;
-
--(id)initWithValueHeadersX:(uint8_t) xT Y:(uint8_t) yT Z:(uint8_t) zT{
+-(id)initWithValueHeadersX:(uint8_t) x Y:(uint8_t) y Z:(uint8_t) z andOffsetsX:(NSInteger)offsetX Y:(NSInteger)offsetY Z:(NSInteger)offsetZ{
     if( self = [super init] ){
-        self.x = [[SensorDataValue alloc] initWithHeader:xT];
-        self.y = [[SensorDataValue alloc] initWithHeader:yT];
-        self.z = [[SensorDataValue alloc] initWithHeader:zT];
+        self.x = [[SensorDataValue alloc] initWithHeader:x andOffset:offsetX];
+        self.y = [[SensorDataValue alloc] initWithHeader:y andOffset:offsetY];
+        self.z = [[SensorDataValue alloc] initWithHeader:z andOffset:offsetZ];
+        self.name = @"undefined";
+        self.hasValues = false;
         return self;
     } else return nil;
+}
+
+
+-(id)initWithValueHeadersX:(uint8_t) x Y:(uint8_t) y Z:(uint8_t) z andOffsetsX:(NSInteger)offsetX Y:(NSInteger)offsetY Z:(NSInteger)offsetZ andName:(NSString *)name {
+    if( self = [super init] ){
+        self.x = [[SensorDataValue alloc] initWithHeader:x andOffset:offsetX];
+        self.y = [[SensorDataValue alloc] initWithHeader:y andOffset:offsetY];
+        self.z = [[SensorDataValue alloc] initWithHeader:z andOffset:offsetZ];
+        self.name = name;
+        self.hasValues = false;
+        return self;
+    } else return nil;
+
 }
 
 - (BOOL)sensorDataFromBuffer:(uint8_t *)buffer withLength:(NSInteger)length;
 {
     bool readPackage = true;
-    // TODO move this to one method of the SensorData class
+    // TODO: move this to one method of the SensorData class
+    
     if( [self.x setValueFromBuffer:buffer withBufferLength:(int)length ] ){
         // NSLog(@"finished reading X data!");
     } else readPackage = false;
@@ -34,7 +48,8 @@
     if( [self.z setValueFromBuffer:buffer withBufferLength:(int)length ] ){
         //NSLog(@"finished reading Z data!");
     } else readPackage = false;
-
+    
+    self.hasValues = readPackage;
     return readPackage;
 }
 

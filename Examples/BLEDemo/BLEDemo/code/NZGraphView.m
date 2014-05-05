@@ -101,7 +101,7 @@
     
     //NSLog(@"%f, %f, %f", x.value*1.0f, y.value*1.0f, z.value*1.0f);
     
-    [self addX:x.value y:y.value z:z.value];
+    [self addX:[x.value floatValue] y:[y.value floatValue] z:[z.value floatValue]];
 }
 
 // The initial position of a segment that is meant to be displayed on the left side of the graph.

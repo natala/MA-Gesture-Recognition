@@ -12,6 +12,7 @@
 #import "SensorData.h"
 #import "NZMenuViewController.h"
 #import "NZNotificationConstants.h"
+#import "NZSensorDataHeaders.h"
 
 @interface NZTabBarController ()
 
@@ -41,7 +42,7 @@
 	[BLEDiscovery sharedInstance].peripheralDelegate = self;
     [BLEDiscovery sharedInstance].discoveryDelegate = self;
     [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
-    self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:'x' Y:'y' Z:'z'];
+    self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:kLinearAccelerationX Y:kLinearAccelerationY Z:kLinearAccelerationZ andOffsetsX:kLinearAccelerationXOffset Y:kLinearAccelerationYOffset Z:kLinearAccelerationZOffset andName:@"Linear Acceleration"];
     
     NSLog(@"#controllers: %luu",(unsigned long)([self.viewControllers count]));
     for (int i = 0; i < [self.viewControllers count]; i++) {
@@ -83,9 +84,16 @@
 #pragma mark -
 
 -(void) didReceiveData:(uint8_t *)buffer lenght:(NSInteger)length{
-    self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:'x' Y:'y' Z:'z'];
-    BOOL extractedData = [self.accelerometerData sensorDataFromBuffer:buffer withLength:length];
-    if (extractedData) {
+
+    [self initSensorData];
+    BOOL isAccelerationExtracted = [self.accelerometerData sensorDataFromBuffer:buffer withLength:length];
+    BOOL isOrientationExtracted = [self.orientationData sensorDataFromBuffer:buffer withLength:length];
+    
+   // NSLog(@"yaw: %f:", [self.orientationData.x.value floatValue]);
+   // NSLog(@"pitch: %f:", [self.orientationData.y.value floatValue]);
+   // NSLog(@"roll: %f:", [self.orientationData.z.value floatValue]);
+    
+    if (isAccelerationExtracted) {
         [self.bleVC updateSensorDataTextWithSensorData:self.accelerometerData];
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:self.accelerometerData, NZSensorDataKey, nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NZDidReceiveSensorDataNotification object:self userInfo:dic];
@@ -152,5 +160,15 @@
 -(void) reportMessage:(NSString*) message{
 }
 
+
+#pragma mark -
+#pragma mark helper functions
+#pragma mark -
+
+- (void) initSensorData {
+    self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:kLinearAccelerationX Y:kLinearAccelerationY Z:kLinearAccelerationZ andOffsetsX:kLinearAccelerationXOffset Y:kLinearAccelerationYOffset Z:kLinearAccelerationZOffset andName:@"Linear Acceleration"];
+    
+    self.orientationData = [[SensorData alloc] initWithValueHeadersX:kYaw Y:kPitch Z:kRoll andOffsetsX:kYawOffset Y:kPitchOffset Z:kRollOffset andName:@"Orientation Yaw Pitch Roll"];
+}
 
 @end

@@ -65,7 +65,7 @@ MainViewController.m
     //[accelerometerView lateInitWithFrame:frame maxAxisY:kMaxAxisY minAxisY:kMinAxisY];
     isPaused = NO;
 	// Do any additional setup after loading the view.
-    self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:'x' Y:'y' Z:'z'];
+  //self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:'x' Y:'y' Z:'z'];
     [BLEDiscovery sharedInstance].peripheralDelegate = self;
     [BLEDiscovery sharedInstance].discoveryDelegate = self;
     [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
@@ -222,7 +222,7 @@ MainViewController.m
 }
 
 -(void)updateSensorDataText{
-    self.receivedLabel.text = [[NSString alloc] initWithFormat:@"ax: %ld, ay: %ld, az: %ld", self.accelerometerData.x.value, self.accelerometerData.y.value, self.accelerometerData.z.value ];
+    self.receivedLabel.text = [[NSString alloc] initWithFormat:@"ax: %d, ay: %d, az: %d", [self.accelerometerData.x.value intValue], [self.accelerometerData.y.value intValue], [self.accelerometerData.z.value intValue]];
 }
 
 

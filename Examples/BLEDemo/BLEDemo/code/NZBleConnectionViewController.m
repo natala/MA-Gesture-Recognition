@@ -80,8 +80,8 @@
 }
  */
 
--(void)updateSensorDataTextWithSensorData:(SensorData*)data{
-    self.receivedDataLabel.text = [[NSString alloc] initWithFormat:@"ax: %ld, ay: %ld, az: %ld", data.x.value, data.y.value, data.z.value ];
+-(void)updateSensorDataTextWithSensorData:(SensorData *)data{
+    self.receivedDataLabel.text = [[NSString alloc] initWithFormat:@"ax: %d, ay: %d, az: %d", [data.x.value intValue], [data.y.value intValue], [data.z.value intValue] ];
 }
 
 

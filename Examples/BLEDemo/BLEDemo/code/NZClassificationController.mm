@@ -343,14 +343,14 @@ StaticDynamicPrediction lastPrediction = UNDEFINED;
 {
     //1. filer it
     GRT::VectorDouble vec(3);
-    vec[0] = sensorData.x.value;
-    vec[1] = sensorData.y.value;
-    vec[2] = sensorData.z.value;
+    vec[0] = [sensorData.x.value doubleValue];
+    vec[1] = [sensorData.y.value doubleValue];
+    vec[2] = [sensorData.z.value doubleValue];
     
     vec = avgFilter.filter(vec);
-    sensorData.x.value = vec[0];
-    sensorData.y.value = vec[1];
-    sensorData.z.value = vec[2];
+    sensorData.x.value = [NSNumber numberWithInt:(int)vec[0]];
+    sensorData.y.value = [NSNumber numberWithInt:(int)vec[1]];
+    sensorData.z.value = [NSNumber numberWithInt:(int)vec[2]];
     
     if ([self.sensorDataArray count] >= kStorredSamplesMaxLegth) {
         [self.sensorDataArray removeObjectAtIndex:0];
@@ -417,9 +417,9 @@ StaticDynamicPrediction lastPrediction = UNDEFINED;
 // convert sensor data to a GRT compatible format
 + (GRT::VectorDouble)SensorDataToGrtFormat:(SensorData *)data{
     GRT::VectorDouble sample = GRT::VectorDouble(3);
-    sample[0] = (uint)[[[NSNumber alloc] initWithInteger:data.x.value] unsignedIntegerValue];
-    sample[1] = (uint)[[[NSNumber alloc] initWithInteger:data.y.value] unsignedIntegerValue];
-    sample[3] = (uint)[[[NSNumber alloc] initWithInteger:data.z.value] unsignedIntegerValue];
+    sample[0] = (uint)[data.x.value unsignedIntegerValue];
+    sample[1] = (uint)[data.y.value unsignedIntegerValue];
+    sample[3] = (uint)[data.z.value unsignedIntegerValue];
     
    // NSLog( @"sample: %u %u, %u", sample[0], sample[1], sample[2] );
    // NSLog( @"sensorData: %u, %u, %u", (data.x.value+1.0)*32767, (data.y.value+1.0)*32767, (data.z.value+1.0)*32767 );
@@ -442,9 +442,9 @@ StaticDynamicPrediction lastPrediction = UNDEFINED;
     means[1] = 0;
     means[2] = 0;
     for (SensorData *data in sensorData){
-        means[0] = means[0] + data.x.value;
-        means[1] = means[1] + data.y.value;
-        means[2] = means[2] + data.z.value;
+        means[0] = means[0] + [data.x.value doubleValue];
+        means[1] = means[1] + [data.y.value doubleValue];
+        means[2] = means[2] + [data.z.value doubleValue];
     }
     
     means[0] /= [sensorData count];
@@ -478,9 +478,9 @@ StaticDynamicPrediction lastPrediction = UNDEFINED;
         
         GRT::VectorDouble difference(3);
     
-        difference[0] = data.x.value - means[0];
-        difference[1] = data.y.value - means[1];
-        difference[2] = data.z.value - means[2];
+        difference[0] = [data.x.value doubleValue] - means[0];
+        difference[1] = [data.y.value doubleValue] - means[1];
+        difference[2] = [data.z.value doubleValue] - means[2];
         
         sumOfSquareDifferences[0] += difference[0]*difference[0];
         sumOfSquareDifferences[1] += difference[1]*difference[1];
