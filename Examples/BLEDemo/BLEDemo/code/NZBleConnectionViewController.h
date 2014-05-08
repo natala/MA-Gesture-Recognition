@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *connectedLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *receivedDataLabel;
+@property (weak, nonatomic) IBOutlet UILabel *receivedAccelerationLabel;
 
 //@property (strong, nonatomic) SensorData *accelerometerData;
 
@@ -35,6 +36,7 @@
 
 -(void) updateConnectedLabel:(BOOL)connected;
 
--(void)updateSensorDataTextWithSensorData:(SensorData*)data;
+-(void)updateSensorDataTextWithAcceleration:(SensorData *)acceleration andOrientation:(SensorData *)orientation;
+
 
 @end

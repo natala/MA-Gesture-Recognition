@@ -42,13 +42,14 @@
 	return self;
 }
 
-- (id)initWithFrame:(CGRect)frame maxAxisY:(float)maxAxisY minAxisY:(float)minAxisY
+- (id)initWithFrame:(CGRect)frame maxAxisY:(float)maxAxisY minAxisY:(float)minAxisY andNormalizeFactor:(float)nom
 {
     self = [super initWithFrame:frame];
     if (self) {
         _maxAxisY = maxAxisY;
         _minAxisY = minAxisY;
         visibilityFrame = frame;
+        _normalizeFactor = nom;
         
         [self commonInit];
     }
@@ -61,7 +62,7 @@
     // Create the text view and add it as a subview. We keep a weak reference
 	// to that view afterwards for laying out the segment layers.
     CGRect frame = CGRectMake(0.0, 0.0, kGraphViewLeftAxisWidth, self.frame.size.height);
-    _text = [[NZGraphTextView alloc] initWithFrame:frame maxAxisY:self.maxAxisY minAxisY:self.minAxisY];
+    _text = [[NZGraphTextView alloc] initWithFrame:frame maxAxisY:self.maxAxisY/self.normalizeFactor minAxisY:self.minAxisY/self.normalizeFactor];
 	[self addSubview:self.text];
 	
 	// Create a mutable array to store segments, which is required by -addSegment
@@ -117,7 +118,7 @@
 {
 	// Create a new segment and add it to the segments array.
     CGRect frame = CGRectMake(kGraphViewLeftAxisWidth-kGraphSegmentSize-1, 0.0, kGraphSegmentSize-1, kSegmentHeight/*self.frame.size.height*/);
-    NZGraphViewSegment *segment = [[NZGraphViewSegment alloc] initWithFrame:frame];
+    NZGraphViewSegment *segment = [[NZGraphViewSegment alloc] initWithFrame:frame maxY:self.maxAxisY andMinY:self.minAxisY];
 	// We add it at the front of the array because -recycleSegment expects the oldest segment
 	// to be at the end of the array. As long as we always insert the youngest segment at the front
 	// this will be true.
@@ -171,7 +172,7 @@
 	// Fill in the background
 	//CGContextSetFillColorWithColor(context, graphBackgroundColor());
     //## COLOR
-    CGContextSetFillColorWithColor(context, CreateDeviceRGBColor(0.0, 1.0, 0.0, 1.0));
+    CGContextSetFillColorWithColor(context, CreateDeviceGrayColor(0.6, 1.0));
 	CGContextFillRect(context, self.bounds);
 	
 	//CGFloat width = self.bounds.size.width;
@@ -219,12 +220,14 @@
 }
 
 -(void) setMaxAxisY:(float)maxAxisY{
-    self.maxAxisY = maxAxisY;
+    _maxAxisY = maxAxisY;
+    self.text.maxAxisY = maxAxisY/self.normalizeFactor;
     [self.text setNeedsDisplay];
 }
 
 -(void) setMinAxisY:(float)minAxisY{
-    self.text.minAxisY = minAxisY;
+    _minAxisY = minAxisY;
+    self.text.minAxisY = minAxisY/self.normalizeFactor;
     [self.text setNeedsDisplay];
 }
 

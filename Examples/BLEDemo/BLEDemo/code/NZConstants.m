@@ -12,6 +12,10 @@ CGSize  const kGraphViewAxisLabelSize       = {36.0f, 16.0f};
 float   const kGraphViewGraphOffsetY        = 5.0f;
 float   const kGraphViewAxisLineWidth       = 6.0f;
 CGRect  const kGraphViewPosition            = {0.0f, 128.0f, 320.0f, 155.0f};
-int     const kMaxAxisY                     = 32768;
-int     const kMinAxisY                     = -32768;
-int     const kNormalizationAxisY           = 32768;
+float     const kMaxAxisY                     = 32768;
+float     const kMinAxisY                     = -32768;
+float     const kNormalizationAxisY           = 32768;
+
+float const kOrientationMaxAxisY              = 180;
+float const kOrientationMinAxisY              = -180;
+float const kOrientationNormalizationFactor   = 180;

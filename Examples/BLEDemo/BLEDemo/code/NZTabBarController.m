@@ -93,13 +93,23 @@
     NSLog(@"pitch: %f:", [self.orientationData.y.value floatValue]);
     NSLog(@"roll: %f:", [self.orientationData.z.value floatValue]);
     
+    SensorData *acceleration, *orientation;
     if (isAccelerationExtracted) {
-        [self.bleVC updateSensorDataTextWithSensorData:self.accelerometerData];
+        acceleration = self.accelerometerData;
+    }
+    if (isOrientationExtracted) {
+        orientation = self.orientationData;
+    }
+    
+    [self.bleVC updateSensorDataTextWithAcceleration:acceleration andOrientation:orientation];
+    [self.graphVC updateWithacceleration:acceleration andOrientation:orientation];
+    
+    if (isAccelerationExtracted) {
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:self.accelerometerData, NZSensorDataKey, nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NZDidReceiveSensorDataNotification object:self userInfo:dic];
 
 #warning implement the Notification mechanism
-        [self.graphVC updateWithData:self.accelerometerData];
+        
         // the root view controller of a navigation view controller is always
         if (![[self.menuNavigationController viewControllers] objectAtIndex:0]) {
             NSLog(@"The root controller of the navigation controller is nill!!!");

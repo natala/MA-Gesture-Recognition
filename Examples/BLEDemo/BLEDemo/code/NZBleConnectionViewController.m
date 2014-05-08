@@ -80,8 +80,14 @@
 }
  */
 
--(void)updateSensorDataTextWithSensorData:(SensorData *)data{
-    self.receivedDataLabel.text = [[NSString alloc] initWithFormat:@"ax: %d, ay: %d, az: %d", [data.x.value intValue], [data.y.value intValue], [data.z.value intValue] ];
+-(void)updateSensorDataTextWithAcceleration:(SensorData *)acceleration andOrientation:(SensorData *)orientation{
+    if (acceleration) {
+        self.receivedDataLabel.text = [[NSString alloc] initWithFormat:@"ax: %d, ay: %d, az: %d", [acceleration.x.value intValue], [acceleration.y.value intValue], [acceleration.z.value intValue] ];
+    }
+    
+    if (orientation) {
+        self.receivedAccelerationLabel.text = [[NSString alloc] initWithFormat:@"ax: %d, ay: %d, az: %d", [orientation.x.value intValue], [orientation.y.value intValue], [orientation.z.value intValue] ];
+    }
 }
 
 

@@ -48,8 +48,6 @@ MainViewController.m
     BOOL isPaused;
 }
 
-@synthesize accelerometerView, accelerometerData;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -70,10 +68,10 @@ MainViewController.m
     [BLEDiscovery sharedInstance].discoveryDelegate = self;
     [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
 
-    accelerometerView = [[NZGraphView alloc] initWithFrame:kGraphViewPosition maxAxisY:kMaxAxisY minAxisY:kMinAxisY];
-	[accelerometerView setIsAccessibilityElement:YES];
-	[accelerometerView setAccessibilityLabel:NSLocalizedString(@"unfliteredGraph", @"")];
-    [self.view addSubview:accelerometerView];
+   // self.accelerometerView = [[NZGraphView alloc] initWithFrame:kGraphViewPosition maxAxisY:kMaxAxisY minAxisY:kMinAxisY];
+	[self.accelerometerView setIsAccessibilityElement:YES];
+	[self.accelerometerView setAccessibilityLabel:NSLocalizedString(@"unfliteredGraph", @"")];
+    [self.view addSubview:self.accelerometerView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -169,7 +167,7 @@ MainViewController.m
         // Update the accelerometer graph view
         if (!isPaused)
         {
-            [accelerometerView addData:accelerometerData];
+            [self.accelerometerView addData:self.accelerometerData];
         }
     }
 
