@@ -16,15 +16,16 @@
 
 #pragma mark -
 #pragma mark properties
-#pragma mark - 
+#pragma mark -
 
 @property (weak, nonatomic) IBOutlet UILabel *connectedLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *receivedDataLabel;
+@property (weak, nonatomic) IBOutlet UILabel *receivedAccelerationLabel;
 
 //@property (strong, nonatomic) SensorData *accelerometerData;
 
-#pragma mark - 
+#pragma mark -
 #pragma mark methods
 #pragma mark -
 
@@ -35,6 +36,7 @@
 
 -(void) updateConnectedLabel:(BOOL)connected;
 
--(void)updateSensorDataTextWithSensorData:(SensorData*)data;
+-(void)updateSensorDataTextWithAcceleration:(SensorData *)acceleration andOrientation:(SensorData *)orientation;
+
 
 @end

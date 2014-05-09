@@ -52,9 +52,9 @@
     DrawHorizontalLine(context, kGraphViewAxisLabelSize.width, height / 2.0f, kGraphViewAxisLineWidth);
     StrokeLines(context);
     
-    NSString * topValue     = [NSString stringWithFormat:@"%d",(int)(self.maxAxisY/kNormalizationAxisY)];
+    NSString * topValue     = [NSString stringWithFormat:@"%d",(int)(self.maxAxisY/*/kNormalizationAxisY*/)];
     NSString * zero         = [NSString stringWithFormat:@"%d", 0];
-    NSString * bottomValue  = [NSString stringWithFormat:@"%d",(int)(self.minAxisY/kNormalizationAxisY)];
+    NSString * bottomValue  = [NSString stringWithFormat:@"%d",(int)(self.minAxisY/*/kNormalizationAxisY*/)];
     
     CGRect rect1 = CGRectMake(0.0, kGraphViewGraphOffsetY*1.5f, kGraphViewAxisLabelSize.width, kGraphViewAxisLabelSize.height);
     [topValue drawInRect:rect1 withFont:systemFont lineBreakMode:NSLineBreakByCharWrapping alignment:NSTextAlignmentRight];

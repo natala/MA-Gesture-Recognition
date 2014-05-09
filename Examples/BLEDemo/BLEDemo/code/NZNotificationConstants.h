@@ -41,3 +41,4 @@ extern NSString * const NZClassifierStatisticsKey;
 extern NSString * const NZNumOfClassLabelsKey;
 extern NSString * const NZIsTrainedKey;
 extern NSString * const NZPredictedClassLabelKey;
+extern NSString * const NZSomeTextKey;

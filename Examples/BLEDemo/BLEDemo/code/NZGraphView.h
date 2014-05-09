@@ -20,10 +20,11 @@
 @property (nonatomic) NZGraphTextView *text;
 @property (nonatomic) float maxAxisY;
 @property (nonatomic) float minAxisY;
+@property (nonatomic) float normalizeFactor;
 @property (nonatomic) CGRect visibilityFrame;
 
 
-- (id)initWithFrame:(CGRect)frame maxAxisY:(float)maxAxisY minAxisY:(float)minAxisY;
+- (id)initWithFrame:(CGRect)frame maxAxisY:(float)maxAxisY minAxisY:(float)minAxisY andNormalizeFactor:(float)nom;
 - (void)addX:(float)x y:(float)y z:(float)z;
 - (void)addData:(SensorData*) accelerometerData;
 

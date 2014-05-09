@@ -13,6 +13,7 @@
 @interface NZGraphViewController ()
 
 @property (weak, nonatomic) IBOutlet NZGraphView *graphView;
+@property (weak, nonatomic) IBOutlet NZGraphView *orientationView;
 
 @end
 
@@ -32,10 +33,24 @@ BOOL loaded = false;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    CGRect rect = [self.view layer].bounds;
-    rect.size.height = 180.0;
+    self.graphView.normalizeFactor = kNormalizationAxisY;
+    self.graphView.maxAxisY = kMaxAxisY;
+    self.graphView.minAxisY = kMinAxisY;
+    self.orientationView.normalizeFactor = kOrientationNormalizationFactor;
+    self.orientationView.maxAxisY = kOrientationMaxAxisY;
+    self.orientationView.minAxisY = kOrientationMinAxisY;
+    
+    /*CGRect rect = [self.graphView layer].bounds;
+    rect.size.height = kSegmentHeight;
+    [self.graphView layer].bounds = rect;
+    rect = [self.orientationView layer].bounds;
+    rect.size.height = kSegmentHeight;
+    [self.orientationView layer].bounds = rect;
+     */
     loaded = true;
 	// Do any additional setup after loading the view.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,10 +59,16 @@ BOOL loaded = false;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)updateWithData:(SensorData*) accelerometerData
+- (void)updateWithacceleration:(SensorData *)acceleration andOrientation:(SensorData *)orientation
 {
-    if (loaded) {
-        [self.graphView addData:accelerometerData];
+    if (!loaded) {
+        return;
+    }
+    if (acceleration) {
+        [self.graphView addData:acceleration];
+    }
+    if (orientation) {
+        [self.orientationView addData:orientation];
     }
 }
 

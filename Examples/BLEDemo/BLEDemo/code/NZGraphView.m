@@ -35,20 +35,21 @@
 	self = [super initWithCoder:decoder];
 	if (self != nil)
 	{
-        _maxAxisY = kMaxAxisY;
-        _minAxisY = kMinAxisY;
+        _maxAxisY = 0;
+        _minAxisY = 0;
 		[self commonInit];
 	}
 	return self;
 }
 
-- (id)initWithFrame:(CGRect)frame maxAxisY:(float)maxAxisY minAxisY:(float)minAxisY
+- (id)initWithFrame:(CGRect)frame maxAxisY:(float)maxAxisY minAxisY:(float)minAxisY andNormalizeFactor:(float)nom
 {
     self = [super initWithFrame:frame];
     if (self) {
         _maxAxisY = maxAxisY;
         _minAxisY = minAxisY;
         visibilityFrame = frame;
+        _normalizeFactor = nom;
         
         [self commonInit];
     }
@@ -60,12 +61,17 @@
 	
     // Create the text view and add it as a subview. We keep a weak reference
 	// to that view afterwards for laying out the segment layers.
+    _segments = [[NSMutableArray alloc] init];
     CGRect frame = CGRectMake(0.0, 0.0, kGraphViewLeftAxisWidth, self.frame.size.height);
-    _text = [[NZGraphTextView alloc] initWithFrame:frame maxAxisY:self.maxAxisY minAxisY:self.minAxisY];
+    if (self.maxAxisY == 0 && self.minAxisY == 0) {
+        _text = [[NZGraphTextView alloc] initWithFrame:frame maxAxisY:0 minAxisY:0];
+        [self addSubview:self.text];
+        return;
+    }
+    _text = [[NZGraphTextView alloc] initWithFrame:frame maxAxisY:self.maxAxisY/self.normalizeFactor minAxisY:self.minAxisY/self.normalizeFactor];
 	[self addSubview:self.text];
 	
 	// Create a mutable array to store segments, which is required by -addSegment
-	_segments = [[NSMutableArray alloc] init];
     
 	// Create a new current segment, which is required by -addX:y:z and other methods.
 	// This is also a weak reference (we assume that the 'segments' array will keep the strong reference).
@@ -75,6 +81,9 @@
 - (void)addX:(float)x y:(float)y z:(float)z
 {
 	// First, add the new acceleration value to the current segment
+    if (!self.current) {
+        self.current = [self addSegment];
+    }
 	if ([self.current addX:x y:y z:z])
 	{
 		// If after doing that we've filled up the current segment, then we need to
@@ -101,7 +110,7 @@
     
     //NSLog(@"%f, %f, %f", x.value*1.0f, y.value*1.0f, z.value*1.0f);
     
-    [self addX:x.value y:y.value z:z.value];
+    [self addX:[x.value floatValue] y:[y.value floatValue] z:[z.value floatValue]];
 }
 
 // The initial position of a segment that is meant to be displayed on the left side of the graph.
@@ -117,7 +126,7 @@
 {
 	// Create a new segment and add it to the segments array.
     CGRect frame = CGRectMake(kGraphViewLeftAxisWidth-kGraphSegmentSize-1, 0.0, kGraphSegmentSize-1, kSegmentHeight/*self.frame.size.height*/);
-    NZGraphViewSegment *segment = [[NZGraphViewSegment alloc] initWithFrame:frame];
+    NZGraphViewSegment *segment = [[NZGraphViewSegment alloc] initWithFrame:frame maxY:self.maxAxisY andMinY:self.minAxisY];
 	// We add it at the front of the array because -recycleSegment expects the oldest segment
 	// to be at the end of the array. As long as we always insert the youngest segment at the front
 	// this will be true.
@@ -171,7 +180,7 @@
 	// Fill in the background
 	//CGContextSetFillColorWithColor(context, graphBackgroundColor());
     //## COLOR
-    CGContextSetFillColorWithColor(context, CreateDeviceRGBColor(0.0, 1.0, 0.0, 1.0));
+    CGContextSetFillColorWithColor(context, CreateDeviceGrayColor(0.6, 1.0));
 	CGContextFillRect(context, self.bounds);
 	
 	//CGFloat width = self.bounds.size.width;
@@ -219,12 +228,14 @@
 }
 
 -(void) setMaxAxisY:(float)maxAxisY{
-    self.maxAxisY = maxAxisY;
+    _maxAxisY = maxAxisY;
+    self.text.maxAxisY = maxAxisY/self.normalizeFactor;
     [self.text setNeedsDisplay];
 }
 
 -(void) setMinAxisY:(float)minAxisY{
-    self.text.minAxisY = minAxisY;
+    _minAxisY = minAxisY;
+    self.text.minAxisY = minAxisY/self.normalizeFactor;
     [self.text setNeedsDisplay];
 }
 

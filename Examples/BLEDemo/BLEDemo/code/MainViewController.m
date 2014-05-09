@@ -65,12 +65,12 @@ MainViewController.m
     //[accelerometerView lateInitWithFrame:frame maxAxisY:kMaxAxisY minAxisY:kMinAxisY];
     isPaused = NO;
 	// Do any additional setup after loading the view.
-    self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:'x' Y:'y' Z:'z'];
+  //  self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:'x' Y:'y' Z:'z'];
     [BLEDiscovery sharedInstance].peripheralDelegate = self;
     [BLEDiscovery sharedInstance].discoveryDelegate = self;
     [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
 
-    accelerometerView = [[NZGraphView alloc] initWithFrame:kGraphViewPosition maxAxisY:kMaxAxisY minAxisY:kMinAxisY];
+ //   accelerometerView = [[NZGraphView alloc] initWithFrame:kGraphViewPosition maxAxisY:kMaxAxisY minAxisY:kMinAxisY];
 	[accelerometerView setIsAccessibilityElement:YES];
 	[accelerometerView setAccessibilityLabel:NSLocalizedString(@"unfliteredGraph", @"")];
     [self.view addSubview:accelerometerView];

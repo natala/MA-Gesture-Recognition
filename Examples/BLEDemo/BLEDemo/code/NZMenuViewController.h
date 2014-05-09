@@ -20,7 +20,6 @@
 - (IBAction)trainButtonTaped:(id)sender;
 - (IBAction)classifyButtonTaped:(id)sender;
 - (IBAction)myClassesButtonTaped:(id)sender;
-- (IBAction)showMpuDataTaped:(id)sender;
 
 - (void)receivedData:(SensorData *)data;
 

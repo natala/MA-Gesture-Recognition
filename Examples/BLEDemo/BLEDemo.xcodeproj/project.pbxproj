@@ -29,8 +29,11 @@
 		E1B08B2018DB04EC000DCDB5 /* NZGraphTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B08B1F18DB04EC000DCDB5 /* NZGraphTextView.m */; };
 		E1B08B2318DB25EB000DCDB5 /* NZGraphViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B08B2218DB25EB000DCDB5 /* NZGraphViewHelper.m */; };
 		E1B6277818D0614600436B8C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B6277718D0614600436B8C /* Images.xcassets */; };
-		E1B6277B18D0C3A400436B8C /* SensorData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B6277A18D0C3A400436B8C /* SensorData.m */; };
 		E1B6277E18D0DAD800436B8C /* SensorDataValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B6277D18D0DAD800436B8C /* SensorDataValue.m */; };
+		E1B81491191CED1400142C52 /* SensorData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B81490191CED1400142C52 /* SensorData.m */; };
+		E1B81497191CF2C400142C52 /* NZClassifyTmpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B81496191CF2C400142C52 /* NZClassifyTmpViewController.m */; };
+		E1B8149A191CFDBE00142C52 /* NZSensorDataHeaders.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B81499191CFDBE00142C52 /* NZSensorDataHeaders.m */; };
+		E1B814A0191D02A100142C52 /* NZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B8149F191D02A100142C52 /* NZConstants.m */; };
 		E1B86CF718E6FC57002475AE /* bluetooth-17-6.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CF618E6FC57002475AE /* bluetooth-17-6.png */; };
 		E1B86CFE18E6FD79002475AE /* bluetooth-17-2.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CF818E6FD79002475AE /* bluetooth-17-2.png */; };
 		E1B86CFF18E6FD79002475AE /* bluetooth-17-3.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CF918E6FD79002475AE /* bluetooth-17-3.png */; };
@@ -49,7 +52,6 @@
 		E1CD3BB118E2EB0100AFF986 /* NZMainSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BB018E2EB0100AFF986 /* NZMainSlideViewController.m */; };
 		E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BB318E2EB0D00AFF986 /* NZLeftSlideViewController.m */; };
 		E1CD3BFE18E3227800AFF986 /* NZBleConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */; };
-		E1D6554A18DB665D00A99748 /* NZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D6554918DB665D00A99748 /* NZConstants.m */; };
 		E1F16F3319095F08004C9330 /* NZClassificationDataset.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1F16F3219095F08004C9330 /* NZClassificationDataset.mm */; };
 		E1F16F361909781A004C9330 /* NZMyClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F16F351909781A004C9330 /* NZMyClassesViewController.m */; };
 /* End PBXBuildFile section */
@@ -121,10 +123,16 @@
 		E1B08B2118DB25EB000DCDB5 /* NZGraphViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphViewHelper.h; sourceTree = "<group>"; };
 		E1B08B2218DB25EB000DCDB5 /* NZGraphViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGraphViewHelper.m; sourceTree = "<group>"; };
 		E1B6277718D0614600436B8C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BLEDemo/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		E1B6277918D0C3A400436B8C /* SensorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SensorData.h; path = ../../SensorData.h; sourceTree = "<group>"; };
-		E1B6277A18D0C3A400436B8C /* SensorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SensorData.m; path = ../../SensorData.m; sourceTree = "<group>"; };
 		E1B6277C18D0DAD800436B8C /* SensorDataValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorDataValue.h; sourceTree = "<group>"; };
 		E1B6277D18D0DAD800436B8C /* SensorDataValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensorDataValue.m; sourceTree = "<group>"; };
+		E1B8148F191CED1400142C52 /* SensorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorData.h; sourceTree = "<group>"; };
+		E1B81490191CED1400142C52 /* SensorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensorData.m; sourceTree = "<group>"; };
+		E1B81495191CF2C400142C52 /* NZClassifyTmpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassifyTmpViewController.h; sourceTree = "<group>"; };
+		E1B81496191CF2C400142C52 /* NZClassifyTmpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZClassifyTmpViewController.m; sourceTree = "<group>"; };
+		E1B81498191CFDBE00142C52 /* NZSensorDataHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZSensorDataHeaders.h; sourceTree = "<group>"; };
+		E1B81499191CFDBE00142C52 /* NZSensorDataHeaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZSensorDataHeaders.m; sourceTree = "<group>"; };
+		E1B8149E191D02A100142C52 /* NZConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZConstants.h; sourceTree = "<group>"; };
+		E1B8149F191D02A100142C52 /* NZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZConstants.m; sourceTree = "<group>"; };
 		E1B86CF618E6FC57002475AE /* bluetooth-17-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-6.png"; sourceTree = SOURCE_ROOT; };
 		E1B86CF818E6FD79002475AE /* bluetooth-17-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-2.png"; sourceTree = SOURCE_ROOT; };
 		E1B86CF918E6FD79002475AE /* bluetooth-17-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-3.png"; sourceTree = SOURCE_ROOT; };
@@ -151,8 +159,6 @@
 		E1CD3BB318E2EB0D00AFF986 /* NZLeftSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZLeftSlideViewController.m; sourceTree = SOURCE_ROOT; };
 		E1CD3BFC18E3227800AFF986 /* NZBleConnectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZBleConnectionViewController.h; sourceTree = "<group>"; };
 		E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZBleConnectionViewController.m; sourceTree = "<group>"; };
-		E1D6554818DB665D00A99748 /* NZConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZConstants.h; sourceTree = "<group>"; };
-		E1D6554918DB665D00A99748 /* NZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZConstants.m; sourceTree = "<group>"; };
 		E1F16F3119095F08004C9330 /* NZClassificationDataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassificationDataset.h; sourceTree = "<group>"; };
 		E1F16F3219095F08004C9330 /* NZClassificationDataset.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZClassificationDataset.mm; sourceTree = "<group>"; };
 		E1F16F341909781A004C9330 /* NZMyClassesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZMyClassesViewController.h; sourceTree = "<group>"; };
@@ -254,8 +260,8 @@
 		E171C18218FC20F0002FCEEE /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				E1D6554818DB665D00A99748 /* NZConstants.h */,
-				E1D6554918DB665D00A99748 /* NZConstants.m */,
+				E1B8149E191D02A100142C52 /* NZConstants.h */,
+				E1B8149F191D02A100142C52 /* NZConstants.m */,
 				E171C18618FC2246002FCEEE /* NZNotificationConstants.h */,
 				E171C18718FC2246002FCEEE /* NZNotificationConstants.m */,
 			);
@@ -265,8 +271,10 @@
 		E171C18318FC2108002FCEEE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E1B6277918D0C3A400436B8C /* SensorData.h */,
-				E1B6277A18D0C3A400436B8C /* SensorData.m */,
+				E1B8148F191CED1400142C52 /* SensorData.h */,
+				E1B81490191CED1400142C52 /* SensorData.m */,
+				E1B81498191CFDBE00142C52 /* NZSensorDataHeaders.h */,
+				E1B81499191CFDBE00142C52 /* NZSensorDataHeaders.m */,
 				E1B6277C18D0DAD800436B8C /* SensorDataValue.h */,
 				E1B6277D18D0DAD800436B8C /* SensorDataValue.m */,
 			);
@@ -292,6 +300,8 @@
 				E1182D2C18FB2972003B8EED /* NZClassifyViewController.m */,
 				E1F16F341909781A004C9330 /* NZMyClassesViewController.h */,
 				E1F16F351909781A004C9330 /* NZMyClassesViewController.m */,
+				E1B81495191CF2C400142C52 /* NZClassifyTmpViewController.h */,
+				E1B81496191CF2C400142C52 /* NZClassifyTmpViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -485,8 +495,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1B81497191CF2C400142C52 /* NZClassifyTmpViewController.m in Sources */,
 				9A79EADC182AD9F200F1983C /* AppDelegate.m in Sources */,
-				E1D6554A18DB665D00A99748 /* NZConstants.m in Sources */,
+				E1B81491191CED1400142C52 /* SensorData.m in Sources */,
 				E171C18818FC2246002FCEEE /* NZNotificationConstants.m in Sources */,
 				E1B08B1D18DB04C5000DCDB5 /* NZGraphViewSegment.m in Sources */,
 				E1B08B2318DB25EB000DCDB5 /* NZGraphViewHelper.m in Sources */,
@@ -496,16 +507,17 @@
 				9A79EAE9182ADA1900F1983C /* main.m in Sources */,
 				E1F16F361909781A004C9330 /* NZMyClassesViewController.m in Sources */,
 				E1BE07A018E60C1C00B00F54 /* NZGraphViewController.m in Sources */,
+				E1B814A0191D02A100142C52 /* NZConstants.m in Sources */,
 				E1BE079D18E5CA2300B00F54 /* NZTabBarController.m in Sources */,
 				E1CD3BAE18E2E90400AFF986 /* NZMainViewController.m in Sources */,
 				E185625118F1CCF600F371C0 /* NZTraningViewController.m in Sources */,
 				E1B08B1A18DB0230000DCDB5 /* NZGraphView.m in Sources */,
 				E1182D2D18FB2972003B8EED /* NZClassifyViewController.m in Sources */,
 				E1CD3BB118E2EB0100AFF986 /* NZMainSlideViewController.m in Sources */,
+				E1B8149A191CFDBE00142C52 /* NZSensorDataHeaders.m in Sources */,
 				9A79EADD182AD9F200F1983C /* MainViewController.m in Sources */,
 				E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */,
 				E1B08B2018DB04EC000DCDB5 /* NZGraphTextView.m in Sources */,
-				E1B6277B18D0C3A400436B8C /* SensorData.m in Sources */,
 				E1C3958818E0529500C2B0E4 /* NZMenuViewController.m in Sources */,
 				E1CD3BFE18E3227800AFF986 /* NZBleConnectionViewController.m in Sources */,
 				E1182D2A18FA84FB003B8EED /* NZGestureRecognitionPipeline.mm in Sources */,

@@ -11,18 +11,20 @@
 
 @implementation NZGraphViewSegment
 
-@synthesize layer;
 
-- (id)initWithFrame:(CGRect) frame
+- (id)initWithFrame:(CGRect) frame maxY:(float)maxY andMinY:(float)minY
 {
     self = [super init];
 	if (self != nil) {
-		layer = [[CALayer alloc] init];
-		layer.delegate = self;
-        layer.frame = frame;
+		_layer = [[CALayer alloc] init];
+		_layer.delegate = self;
+        _layer.frame = frame;
         _height = frame.size.height;
+        _minY = minY;
+        _maxY = maxY;
 		//layer.opaque = YES;
 		index = kGraphSegmentSize;
+ //       NSLog(@"SegmentHeight: %f", _height);
 	}
 	return self;
 }
@@ -39,9 +41,9 @@
 
 - (void)resetLayer
 {
-    CGRect frame = layer.frame;
+    CGRect frame = self.layer.frame;
     frame.origin = CGPointMake(kGraphViewLeftAxisWidth-kGraphSegmentSize, 0.0);
-    layer.frame = frame;
+    self.layer.frame = frame;
 }
 
 - (void)reset
@@ -52,7 +54,7 @@
 	memset(zHistory, 0, sizeof(zHistory));
 	index = kSegmentSize;
 	// Inform Core Animation that we need to redraw this layer.
-	[layer setNeedsDisplay];
+	[self.layer setNeedsDisplay];
 }
 
 - (BOOL)isFull
@@ -64,7 +66,7 @@
 - (BOOL)isVisibleInRect:(CGRect)r
 {
 	// Just check if there is an intersection between the layer's frame and the given rect.
-	return CGRectIntersectsRect(r, layer.frame);
+	return CGRectIntersectsRect(r, self.layer.frame);
 }
 
 - (BOOL)addX:(float)x y:(float)y z:(float)z
@@ -78,7 +80,7 @@
 		yHistory[index] = y;
 		zHistory[index] = z;
 		// And inform Core Animation to redraw the layer.
-		[layer setNeedsDisplay];
+		[self.layer setNeedsDisplay];
 	}
 	// And return if we are now full or not (really just avoids needing to call isFull after adding a value).
 	return index == 0;
@@ -90,7 +92,7 @@
 	CGContextSetFillColorWithColor(context, graphBackgroundColor());
     // ## COLOR
     //CGContextSetFillColorWithColor(context, CreateDeviceRGBColor(1.0, 1.0, 1.0, 1.0));
-	CGContextFillRect(context, layer.bounds);
+	CGContextFillRect(context, self.layer.bounds);
 	
     // Line for max value
     DrawHorizontalLine(context, 0.0, kGraphViewGraphOffsetY + kGraphViewAxisLabelSize.height / 2.0f, kGraphSegmentSize*1.0f);
@@ -104,7 +106,7 @@
 	CGPoint lines[(kGraphSegmentSize-1)*2];
 	int i;
     float offset = kGraphViewGraphOffsetY + kGraphViewAxisLabelSize.height / 2.0f;
-    float resolution = (abs(kMaxAxisY) + abs(kMinAxisY)) / (_height - offset*2.0f);
+    float resolution = (abs(self.maxY) + abs(self.maxY)) / (_height - offset*2.0f);
     
 	// X
 	for (i = 0; i < kGraphSegmentSize-1; ++i)

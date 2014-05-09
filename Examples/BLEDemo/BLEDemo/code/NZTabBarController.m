@@ -12,6 +12,8 @@
 #import "SensorData.h"
 #import "NZMenuViewController.h"
 #import "NZNotificationConstants.h"
+#import "NZSensorDataHeaders.h"
+#import "NZSensorDataHeaders.h"
 
 @interface NZTabBarController ()
 
@@ -41,7 +43,7 @@
 	[BLEDiscovery sharedInstance].peripheralDelegate = self;
     [BLEDiscovery sharedInstance].discoveryDelegate = self;
     [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
-    self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:'x' Y:'y' Z:'z'];
+    self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:kLinearAccelerationX Y:kLinearAccelerationY Z:kLinearAccelerationZ andOffsetsX:kLinearAccelerationXOffset Y:kLinearAccelerationYOffset Z:kLinearAccelerationZOffset andName:@"Linear Acceleration"];
     
     NSLog(@"#controllers: %luu",(unsigned long)([self.viewControllers count]));
     for (int i = 0; i < [self.viewControllers count]; i++) {
@@ -51,10 +53,10 @@
         } else if ([[self.viewControllers objectAtIndex:i] isKindOfClass:[NZGraphViewController class]]) {
             self.graphVC = (NZGraphViewController *)[self.viewControllers objectAtIndex:i];
             self.graphVCIndex = i;
-           // [self.graphVC loadView];
+            // [self.graphVC loadView];
         } else if ([[self.viewControllers objectAtIndex:i] isKindOfClass:[UINavigationController class]]) {
-           self.menuNavigationController = (UINavigationController *)[self.viewControllers objectAtIndex:i];
-           self.menuNCIndex = i;
+            self.menuNavigationController = (UINavigationController *)[self.viewControllers objectAtIndex:i];
+            self.menuNCIndex = i;
         }
     }
 }
@@ -71,7 +73,7 @@
 
 -(void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-   // NSLog(@"seleted item: %lu", self.selectedIndex);
+    // NSLog(@"seleted item: %lu", self.selectedIndex);
     if ([item isEqual:[self.tabBar.items objectAtIndex:self.bleVCIndex] ]) {
         [[self.tabBar.items objectAtIndex:self.bleVCIndex] setBadgeValue:nil];
     }
@@ -83,14 +85,32 @@
 #pragma mark -
 
 -(void) didReceiveData:(uint8_t *)buffer lenght:(NSInteger)length{
-    BOOL extractedData = [self.accelerometerData sensorDataFromBuffer:buffer withLength:length];
-    if (extractedData) {
-        [self.bleVC updateSensorDataTextWithSensorData:self.accelerometerData];
+    
+    [self initSensorData];
+    BOOL isAccelerationExtracted = [self.accelerometerData sensorDataFromBuffer:buffer withLength:length];
+    BOOL isOrientationExtracted = [self.orientationData sensorDataFromBuffer:buffer withLength:length];
+    
+    NSLog(@"yaw: %f:", [self.orientationData.x.value floatValue]);
+    NSLog(@"pitch: %f:", [self.orientationData.y.value floatValue]);
+    NSLog(@"roll: %f:", [self.orientationData.z.value floatValue]);
+    
+    SensorData *acceleration, *orientation;
+    if (isAccelerationExtracted) {
+        acceleration = self.accelerometerData;
+    }
+    if (isOrientationExtracted) {
+        orientation = self.orientationData;
+    }
+    
+    [self.bleVC updateSensorDataTextWithAcceleration:acceleration andOrientation:orientation];
+    [self.graphVC updateWithacceleration:acceleration andOrientation:orientation];
+    
+    if (isAccelerationExtracted) {
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:self.accelerometerData, NZSensorDataKey, nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NZDidReceiveSensorDataNotification object:self userInfo:dic];
-
+        
 #warning implement the Notification mechanism
-        [self.graphVC updateWithData:self.accelerometerData];
+        
         // the root view controller of a navigation view controller is always
         if (![[self.menuNavigationController viewControllers] objectAtIndex:0]) {
             NSLog(@"The root controller of the navigation controller is nill!!!");
@@ -136,9 +156,9 @@
     //[self updateConnectedLabel];
 }
 -(void) bleServiceDidDisconnect:(BLEService *)service{
-        [self.bleVC updateConnectedLabel:([BLEDiscovery sharedInstance].connectedService != nil)];
-        [[self.tabBar.items objectAtIndex:self.bleVCIndex] setBadgeValue:@":("];
-        //[self updateConnectedLabel];
+    [self.bleVC updateConnectedLabel:([BLEDiscovery sharedInstance].connectedService != nil)];
+    [[self.tabBar.items objectAtIndex:self.bleVCIndex] setBadgeValue:@":("];
+    //[self updateConnectedLabel];
 }
 
 -(void) bleServiceIsReady:(BLEService *)service{
@@ -151,5 +171,15 @@
 -(void) reportMessage:(NSString*) message{
 }
 
+
+#pragma mark -
+#pragma mark helper functions
+#pragma mark -
+
+- (void) initSensorData {
+    self.accelerometerData = [[SensorData alloc] initWithValueHeadersX:kLinearAccelerationX Y:kLinearAccelerationY Z:kLinearAccelerationZ andOffsetsX:kLinearAccelerationXOffset Y:kLinearAccelerationYOffset Z:kLinearAccelerationZOffset andName:@"Linear Acceleration"];
+    
+    self.orientationData = [[SensorData alloc] initWithValueHeadersX:kYaw Y:kPitch Z:kRoll andOffsetsX:kYawOffset Y:kPitchOffset Z:kRollOffset andName:@"Orientation Yaw Pitch Roll"];
+}
 
 @end

@@ -23,10 +23,12 @@
 
 @property (nonatomic, readonly) CALayer *layer;
 @property (nonatomic) float height;
+@property (nonatomic) float maxY;
+@property (nonatomic) float minY;
 //@property (nonatomic) CGRect frame;
 
 //- (id)initWithHeight:(float) height;
-- (id)initWithFrame:(CGRect) frame;
+- (id)initWithFrame:(CGRect) frame maxY:(float)maxY andMinY:(float)minY;
 - (BOOL)addX:(float)x y:(float)y z:(float)z;
 - (void)reset;
 - (BOOL)isFull;

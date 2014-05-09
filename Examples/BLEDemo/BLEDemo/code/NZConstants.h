@@ -15,7 +15,7 @@
 #define kLocalizedPause         NSLocalizedString(@"Pause","pause taking samples")
 #define kLocalizedResume        NSLocalizedString(@"Resume","resume taking samples")
 #define kSegmentSize            33
-#define kSegmentHeight          205.0
+#define kSegmentHeight          154.0
 #define kGraphViewLeftAxisWidth 42.0
 #define kGraphSegmentSize       33
 
@@ -27,8 +27,15 @@ extern float    const kGraphViewAxisLineWidth;
 
 //defines the positon and size of the GraphView within the View Controller
 extern CGRect   const kGraphViewPosition;
-extern int      const kMaxAxisY;
-extern int      const kMinAxisY;
-extern int      const kNormalizationAxisY;
+extern float      const kMaxAxisY;
+extern float      const kMinAxisY;
+extern float      const kNormalizationAxisY;
+
+/*!
+ * For the orientation graph
+ */
+extern float const kOrientationMaxAxisY;
+extern float const kOrientationMinAxisY;
+extern float const kOrientationNormalizationFactor;
 
 #endif

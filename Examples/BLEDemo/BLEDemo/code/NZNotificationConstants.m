@@ -42,3 +42,4 @@ NSString * const NZClassifierStatisticsKey                              = @"clas
 NSString * const NZNumOfClassLabelsKey = @"NZNumOfClassLabels";
 NSString * const NZIsTrainedKey = @"NZIsTarinedKey";
 NSString * const NZPredictedClassLabelKey = @"NZPredictedClassLabelKey";
+NSString * const NZSomeTextKey = @"NZSomeTextKey";

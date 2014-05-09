@@ -8,12 +8,14 @@
 
 #import "NZMenuViewController.h"
 #import "NZClassificationController.h"
+#import "NZClassifyTmpViewController.h"
 
 @interface NZMenuViewController ()
 
 @property (strong, nonatomic) NZClassificationController *classificationController;
 @property (weak, nonatomic) NZTraningViewController *trainingVC;
 @property (weak, nonatomic) NZClassifyViewController *classifyVC;
+@property (weak, nonatomic) NZClassifyTmpViewController *classifyTmpVC;
 #warning only temporary
 @property NSNumber *numberOfSamples;
 @property BOOL classifierTrained;
@@ -73,6 +75,14 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if ([segue.identifier isEqualToString:@"GO"]){
+        NZClassifyTmpViewController *classifyVC = (NZClassifyTmpViewController *)[segue destinationViewController];
+        classifyVC.delegate = self;
+        self.classifyTmpVC = classifyVC;
+        classifyVC.currentClassifiedLabel = self.classificationController.lastPredictedLabel;
+    }
+
     if([segue.identifier isEqualToString:@"train"]){
         NZTraningViewController *trainVC =(NZTraningViewController *)[segue destinationViewController];
         trainVC.currentClassLable = self.currentClassLabel;
@@ -119,6 +129,7 @@
     } else if (self.classify){
         NSString *classLabel = [self.classificationController predict:data];
         [self updateClassifiedLable:self.classifyVC withLabel:classLabel];
+        [self updateClassifiedLableTmp:self.classifyTmpVC withLabel:classLabel];
     }
     
 }
@@ -226,6 +237,10 @@
 }
 
 - (void)updateClassifiedLable:(NZClassifyViewController *)classificationVC withLabel:(NSString *)classLabel{
+    classificationVC.classifiedClassLabel.text = classLabel;
+}
+
+- (void)updateClassifiedLableTmp:(NZClassifyTmpViewController *)classificationVC withLabel:(NSString *)classLabel{
     classificationVC.classifiedClassLabel.text = classLabel;
 }
 

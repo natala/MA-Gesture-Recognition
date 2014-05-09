@@ -10,6 +10,7 @@
 #import "GRT.h"
 #import "NZGestureRecognitionPipeline.h"
 #import "NZNotificationConstants.h"
+#import "NZConstants.h"
 
 #define kPipelineKey            @"Pipeline"
 #define kClassesFile            @"classes.plist"
@@ -250,9 +251,9 @@ GRT::LabelledClassificationData labelledData;
 // convert sensor data to a GRT compatible format
 + (GRT::VectorDouble)SensorDataToGrtFormat:(SensorData *)data{
     GRT::VectorDouble sample = GRT::VectorDouble(3);
-    sample[0] = (uint)[[[NSNumber alloc] initWithInteger:data.x.value] unsignedIntegerValue];
-    sample[1] = (uint)[[[NSNumber alloc] initWithInteger:data.y.value] unsignedIntegerValue];
-    sample[3] = (uint)[[[NSNumber alloc] initWithInteger:data.z.value] unsignedIntegerValue];
+    sample[0] = (uint)[data.x.value unsignedIntegerValue];
+    sample[1] = (uint)[data.y.value unsignedIntegerValue];
+    sample[3] = (uint)[data.z.value unsignedIntegerValue];
     /*
     sample[0] = (int)data.x.value;
     sample[1] = (int)data.y.value;
