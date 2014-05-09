@@ -16,6 +16,6 @@ float     const kMaxAxisY                     = 32768;
 float     const kMinAxisY                     = -32768;
 float     const kNormalizationAxisY           = 32768;
 
-float const kOrientationMaxAxisY              = 180;
-float const kOrientationMinAxisY              = -180;
-float const kOrientationNormalizationFactor   = 180;
+float const kOrientationMaxAxisY              = 360;
+float const kOrientationMinAxisY              = -360;
+float const kOrientationNormalizationFactor   = 1;

@@ -35,8 +35,8 @@
 	self = [super initWithCoder:decoder];
 	if (self != nil)
 	{
-        _maxAxisY = kMaxAxisY;
-        _minAxisY = kMinAxisY;
+        _maxAxisY = 0;
+        _minAxisY = 0;
 		[self commonInit];
 	}
 	return self;
@@ -61,12 +61,17 @@
 	
     // Create the text view and add it as a subview. We keep a weak reference
 	// to that view afterwards for laying out the segment layers.
+    _segments = [[NSMutableArray alloc] init];
     CGRect frame = CGRectMake(0.0, 0.0, kGraphViewLeftAxisWidth, self.frame.size.height);
+    if (self.maxAxisY == 0 && self.minAxisY == 0) {
+        _text = [[NZGraphTextView alloc] initWithFrame:frame maxAxisY:0 minAxisY:0];
+        [self addSubview:self.text];
+        return;
+    }
     _text = [[NZGraphTextView alloc] initWithFrame:frame maxAxisY:self.maxAxisY/self.normalizeFactor minAxisY:self.minAxisY/self.normalizeFactor];
 	[self addSubview:self.text];
 	
 	// Create a mutable array to store segments, which is required by -addSegment
-	_segments = [[NSMutableArray alloc] init];
     
 	// Create a new current segment, which is required by -addX:y:z and other methods.
 	// This is also a weak reference (we assume that the 'segments' array will keep the strong reference).
@@ -76,6 +81,9 @@
 - (void)addX:(float)x y:(float)y z:(float)z
 {
 	// First, add the new acceleration value to the current segment
+    if (!self.current) {
+        self.current = [self addSegment];
+    }
 	if ([self.current addX:x y:y z:z])
 	{
 		// If after doing that we've filled up the current segment, then we need to
