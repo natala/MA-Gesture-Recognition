@@ -1,7 +1,9 @@
 #include <Arduino.h>
 #include "I2Cdev.h"
-#include "MPU6050_6Axis_MotionApps20.h"
+//#include "MPU6050_6Axis_MotionApps20.h"
+#include "MPU6050_9Axis_MotionApps41.h"
 #include "Wire.h"
+#include "nz_utils.h"
 
 //Maxbotix rangeSensorAD(A6, Maxbotix::AN, Maxbotix::HRLV, Maxbotix::BEST, 5);
 MPU6050 mpu;
@@ -17,19 +19,39 @@ VectorInt16 aaReal;
 VectorInt16 aaWorld;
 VectorFloat gravity;
 Quaternion q;
+float yawPitchRoll[3];
+
+int16_t ax, ay, az;
+int16_t gx, gy, gz;
 
 boolean initialized = 0;
 long previousMillis = 0;
-long interval = 25;  // send with frequency 40 Hrz
+long interval = 25;  // send with frequency 40 Hrz 
+bool isSendAcceleration = false;
+bool isSendOrientation = true;
 byte currentCommand;
 
 int led = 13;  // blink if Bluettoth or MPU not working correctly
 
+/*void sendInt16Valu( &int16_t value) {
+  uint8_t length = 2;
+  Serial.write(length);
+  if(value < 0){
+    Serial.write(1);
+    value = -(value+1);
+  } else {
+    Serial.write(0);
+  }
+  memcpy(destination, &value, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+}
+*/
 void setup() {
   
     // for debuging
   pinMode(led, OUTPUT);
-digitalWrite(led, HIGH);
     Wire.begin();
     TWBR = 24; // 400kHz I2C clock (200kHz if CPU is 8MHz)
 
@@ -65,15 +87,151 @@ digitalWrite(led, HIGH);
     }
 }
 
+void sendOrientationData() {
+   
+    uint8_t length = sizeof(int16_t);
+    uint8_t destination[length]; 
+    
+    // header[0] - length[1] - sign[2] - value[3 ; sizeof(float)+3]
+  
+  // ORIENTATION: YAW PITCH ROLL
+  
+  // send yaw
+  Serial.write('w');
+  Serial.write(length);
+  float yaw = yawPitchRoll[0];
+  // the precision is anyway 0.xx
+  //sendInt16Valu( (int16_t)(yaw*10) );
+  //Serial.println("YAW");
+  //Serial.println(yaw);
+  int16_t intVal = (int16_t)(yaw*100);
+  //Serial.println("INT YAW");
+  //Serial.println(intVal);
+  if(intVal < 0){
+    Serial.write(1);
+    intVal = -(intVal+1);
+  } else {
+    Serial.write(0);
+  }
+  //Serial.println(yaw);
+  memcpy(destination, &intVal, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+  
+  // send pitch
+  Serial.write('p');
+  Serial.write(length);
+  float pitch = yawPitchRoll[1];
+  //sendInt16Valu( (int16_t)(pitch*10) );
+ // Serial.println("PITCH");
+ // Serial.println(pitch);
+  intVal = (int16_t)(pitch*100);
+  //Serial.println("INT PITCH");
+  //Serial.println(intVal);
+  if(intVal < 0){
+    Serial.write(1);
+    intVal = -(intVal+1);
+  } else {
+    Serial.write(0);
+  }
+  //Serial.println(yaw);
+  memcpy(destination, &intVal, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+  
+  // send roll
+  Serial.write('r');
+  Serial.write(length);
+  float roll = yawPitchRoll[2];
+  //sendInt16Valu( (int16_t)(roll*10) );
+  //Serial.println("ROLL");
+  //Serial.println(roll);
+  intVal = (int16_t)(roll*100);
+  //Serial.println("INT ROLL");
+  //Serial.println(intVal);
+  if(intVal < 0){
+    Serial.write(1);
+    intVal = -(intVal+1);
+  } else {
+    Serial.write(0);
+  }
+  //Serial.println(yaw);
+  memcpy(destination, &intVal, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
 
-void sendData(){
+}
 
-    // move bits to change signed to unsigned by adding pow(2,15) = 32768;
+void sendLinearAccelerationData(){
+  //TEST
+  //int16_t minT = -32768;
+  //int16_t maxT = 32767;
+  //uint16_t uMinT, uMaxT;
+ 
+  // header[0] - length[1] - sign[2] - value[3 - sizeof(uint16_t)+3]
+ 
+  // LINEAR ACCELERATION
+  uint8_t length = sizeof(int16_t);
+  uint8_t destination[length]; 
+
+   Serial.write('x');
+   Serial.write(2);   // the length of the value to be send
+   if(aaReal.x < 0){
+      Serial.write(1);
+     aaReal.x = -(aaReal.x+1); 
+   }
+   else{
+      Serial.write(0); 
+   }
+   memcpy(destination, &aaReal.x, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+   //Serial.write(lowByte(aaReal.y));
+  //Serial.write(highByte(aaReal.y));
+  
+  Serial.write('y');
+  Serial.write(2);   // the length of the value to be send
+   if(aaReal.y < 0){
+      Serial.write(1);
+     aaReal.y = -(aaReal.y+1); 
+   }
+   else{
+      Serial.write(0); 
+   } 
+  memcpy(destination, &aaReal.y, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+
+  Serial.write('z');
+  Serial.write(2);   // the length of the value to be send
+   if(aaReal.z < 0){
+      Serial.write(1);
+     aaReal.z = -(aaReal.z+1); 
+   }
+   else{
+      Serial.write(0); 
+   }
+  memcpy(destination, &aaReal.z, length);
+  for (uint8_t i = 0; i < length; i++) {
+    Serial.write(destination[i]);
+  }
+  // Serial.write(lowByte(aaReal.z));
+  //Serial.write(highByte(aaReal.z));
+ 
+  
+  /****** OLD CODE ******/
+ /*
+  // move bits to change signed to unsigned by adding pow(2,15)-1 = 32767;
   unsigned short gx = (gravity.x + 1.0) * 32768;
   unsigned short gy = (gravity.y + 1.0) * 32768;
   unsigned short gz = (gravity.z + 1.0) * 32768;
- 
- // send the header first and than the data
+  
+  // send the header first and than the data
   Serial.write('x');
   Serial.write(lowByte(gx));
   Serial.write(highByte(gx));
@@ -85,36 +243,13 @@ void sendData(){
   Serial.write('z');
   Serial.write(lowByte(gz));
   Serial.write(highByte(gz));
+  */
 }
-
-/*
-void processCommand(byte currentCommand){
-  
-  switch(currentCommand){
-  
-    case 0:
-    //  digitalWrite(GREEN_LED,LOW);
-    break;
-    
-    case 1:
-    //  digitalWrite(GREEN_LED,HIGH);
-    break;
-  }
-}
-*/
 
 void loop() {
-  
- // read data
-/* 
-  while(Serial.available()){
-      
-      currentCommand = Serial.read();
-      processCommand(currentCommand);
-    }
-    */
-
     if(initialized){
+      
+      digitalWrite(led, HIGH);
 
         // get current FIFO count
         fifoCount = mpu.getFIFOCount();
@@ -125,7 +260,6 @@ void loop() {
             //Serial.println(F("FIFO overflow!"));
             
         } else {
-          digitalWrite(led, LOW);  // turn off the led, everythink is fine
             // wait for correct available data length, should be a VERY short wait
             while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
 
@@ -135,21 +269,30 @@ void loop() {
             
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             //mpu.dmpGetGyro(&gyro,fifoBuffer);
-            //mpu.dmpGetAccel(&aa, fifoBuffer);
+            mpu.dmpGetAccel(&aa, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
-            //mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+            mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+            mpu.dmpGetYawPitchRoll(yawPitchRoll, &q, &gravity);
             //mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
             
+            // read raw accel/gyro measurements from device
+            //mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+            
             unsigned long currentMillis = millis();
-        
             if(currentMillis - previousMillis > interval) {
                 previousMillis = currentMillis;
-                sendData();
-            }
+                if (isSendAcceleration) {
+                  sendLinearAccelerationData();
+                }
+               if (isSendOrientation) {
+                  sendOrientationData();
+                }
+                isSendAcceleration = !isSendAcceleration;
+                isSendOrientation = !isSendOrientation;
+             }
      }
    } else {
      // when MPU not working properly
-     digitalWrite(led, HIGH);
      // send an error
      Serial.write('e');
    }
