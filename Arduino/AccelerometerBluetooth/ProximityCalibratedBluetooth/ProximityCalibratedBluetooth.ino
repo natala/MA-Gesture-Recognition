@@ -1,9 +1,8 @@
 #include <Arduino.h>
 #include "I2Cdev.h"
-//#include "MPU6050_6Axis_MotionApps20.h"
-#include "MPU6050_9Axis_MotionApps41.h"
+#include "MPU6050_6Axis_MotionApps20.h"
+//#include "MPU6050_9Axis_MotionApps41.h"
 #include "Wire.h"
-#include "nz_utils.h"
 
 //Maxbotix rangeSensorAD(A6, Maxbotix::AN, Maxbotix::HRLV, Maxbotix::BEST, 5);
 MPU6050 mpu;
@@ -27,8 +26,8 @@ int16_t gx, gy, gz;
 boolean initialized = 0;
 long previousMillis = 0;
 long interval = 25;  // send with frequency 40 Hrz 
-bool isSendAcceleration = false;
-bool isSendOrientation = true;
+bool isSendAcceleration = true;
+bool isSendOrientation = false;
 byte currentCommand;
 
 int led = 13;  // blink if Bluettoth or MPU not working correctly
@@ -284,7 +283,7 @@ void loop() {
                 if (isSendAcceleration) {
                   sendLinearAccelerationData();
                 }
-               if (isSendOrientation) {
+                if (isSendOrientation) {
                   sendOrientationData();
                 }
                 isSendAcceleration = !isSendAcceleration;

@@ -41,6 +41,11 @@
  */
 -(id)initWithValueHeadersX:(uint8_t) x Y:(uint8_t) y Z:(uint8_t) z andOffsetsX:(NSInteger)offsetX Y:(NSInteger)offsetY Z:(NSInteger)offsetZ andName:(NSString *)name;
 
+/*! \brief
+ *
+ */
+- (id)initWithSensorData:(SensorData *)sensorData;
+
 /*! \brief the name od the data
  *
  */

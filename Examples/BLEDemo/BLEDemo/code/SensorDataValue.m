@@ -29,6 +29,16 @@
     } else return nil;
 }
 
+- (id)initWithSensorValue:(SensorDataValue *)sensorValue {
+    if (self = [super init]) {
+        self.header = sensorValue.header;
+        self.name = [[NSString alloc] initWithString:sensorValue.name];
+        self.offset = sensorValue.offset;
+        self.value = [[NSNumber alloc] initWithInteger:[sensorValue.value integerValue]];
+        return self;
+    } else return nil;
+}
+
 -(BOOL)setValueFromBuffer:(uint8_t *)buffer withBufferLength:(int) length{
     
     // check if at least header and value length is there

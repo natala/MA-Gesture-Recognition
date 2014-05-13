@@ -43,7 +43,7 @@ GRT::LabelledClassificationData labelledData;
     if (self) {
         //pipeline = GRT::GestureRecognitionPipeline();
         _pipeline = [[NZGestureRecognitionPipeline alloc] init];
-        labelledData = GRT::LabelledClassificationData(3);
+        labelledData = GRT::LabelledClassificationData(6);
         _state = ClassifierControllerStates::INITIAL_STATE;
         
         // sunscribe
@@ -56,7 +56,7 @@ GRT::LabelledClassificationData labelledData;
     return self;
 }
 
-- (void)addData:(SensorData *)data withLabel:(NSString *)classLabel
+- (void)addAcceleration:(SensorData *)acceleration andOrientation:(SensorData *)orientation withLabel:(NSString *)classLabel
 {
     NSLog(@"GRT adding data with label: %@", classLabel);
     // get the class as number
@@ -67,20 +67,24 @@ GRT::LabelledClassificationData labelledData;
         // the classLabel for GRT can not be 0 so add 1
         classIndex++;
         // add the sample and chek if succeeded
-        if (!labelledData.addSample((uint)classIndex, [NZClassificationController SensorDataToGrtFormat:data])) {
+        GRT::VectorDouble accSample, orientSample, finalSample;
+        [NZClassificationController SensorDataTo:accSample format:acceleration];
+        [NZClassificationController SensorDataTo:orientSample format:orientation];
+        [NZClassificationController CombineSample:accSample with:orientSample toSample:finalSample];
+        if (!labelledData.addSample((uint)classIndex, finalSample)) {
             NSLog(@"failed to add sample to labelledData, error in GRT lib");
         }
     }
 }
 
-- (void)addData:(SensorData *)data
+- (void)addAcceleration:(SensorData *)acceleration andOrientation:(SensorData *)orientation
 {
     if ([self.classLabels count] == 0) {
         NSLog(@"Couldn't define the class label of the sample!!");
         return;
     }
     NSString *label = (NSString *)[self.classLabels lastObject];
-    [self addData:data withLabel:label];
+    [self addAcceleration:acceleration andOrientation:orientation withLabel:label];
     NSNumber *num = [[NSNumber alloc] initWithInt:labelledData.getNumSamples()];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys: num, NZNumOfRecordedDataKey, nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:NZClassificationControllerAddedDataNotification object:self userInfo:dic];
@@ -118,11 +122,28 @@ GRT::LabelledClassificationData labelledData;
 {
     [self.pipeline setUpPipeline];
 }
-
+/*
 - (NSString *)predict:(SensorData *)data
 {
     GRT::VectorDouble grtData = [NZClassificationController SensorDataToGrtFormat:data];
     int predictedLable = [self.pipeline predict:grtData];
+    if (predictedLable == -1) {
+        return @"unknown";
+    }
+    if (predictedLable > [self.classLabels count]) {
+        return @"unknown";
+    }
+    NSString *classLabel = [self.classLabels objectAtIndex:(predictedLable-1)];
+    return classLabel;
+}*/
+
+- (NSString *)predictUsingAcceleration:(SensorData *)acceleration andOrientation:(SensorData *)orientation {
+    
+    GRT::VectorDouble accSample, orientSample, finalSample;
+    [NZClassificationController SensorDataTo:accSample format:acceleration];
+    [NZClassificationController SensorDataTo:orientSample format:orientation];
+    [NZClassificationController CombineSample:accSample with:orientSample toSample:finalSample];
+    int predictedLable = [self.pipeline predict:finalSample];
     if (predictedLable == -1) {
         return @"unknown";
     }
@@ -249,17 +270,22 @@ GRT::LabelledClassificationData labelledData;
 #pragma mark -
 
 // convert sensor data to a GRT compatible format
-+ (GRT::VectorDouble)SensorDataToGrtFormat:(SensorData *)data{
-    GRT::VectorDouble sample = GRT::VectorDouble(3);
-    sample[0] = (uint)[data.x.value unsignedIntegerValue];
-    sample[1] = (uint)[data.y.value unsignedIntegerValue];
-    sample[3] = (uint)[data.z.value unsignedIntegerValue];
++ (void) SensorDataTo:(GRT::VectorDouble&)grt format:(SensorData *)data{
+    grt = GRT::VectorDouble(3);
+    grt[0] = [data.x.value doubleValue];
+    grt[1] = [data.y.value doubleValue];
+    grt[2] = [data.z.value doubleValue];
     /*
     sample[0] = (int)data.x.value;
     sample[1] = (int)data.y.value;
     sample[3] = (int)data.z.value;
      */
-    return sample;
+}
+
++ (void) CombineSample:(GRT::VectorDouble&)sample1 with:(GRT::VectorDouble&)sample2 toSample:(GRT::VectorDouble&)sample {
+    sample = sample1;
+    sample.insert(sample.end(), sample2.begin(), sample2.end());
+ 
 }
 
 // writing to file
@@ -305,11 +331,12 @@ GRT::LabelledClassificationData labelledData;
         //don't do anything with the data
         return;
     }
-    SensorData *sensorData = [[notification userInfo] valueForKey:NZSensorDataKey];
+    SensorData *accelerationData = [[notification userInfo] valueForKey:NZAccelerationDataKey];
+    SensorData *orientationData = [[notification userInfo] valueForKey:NZOrientationDataKey];
     if (self.state == ClassifierControllerStates::RECORDING_SAMPLES) {
-        [self addData:sensorData];
+        [self addAcceleration:accelerationData andOrientation:orientationData];
     } else if (self.state == ClassifierControllerStates::PREDICTING) {
-        self.lastPredictedLabel = [self predict:sensorData];
+        self.lastPredictedLabel = [self predictUsingAcceleration:accelerationData andOrientation:orientationData];
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:self.lastPredictedLabel, NZPredictedClassLabelKey, nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NZClassificationControllerDidPredictClassNotification object:self userInfo:dic];
     }

@@ -13,7 +13,6 @@
 		9A1735CE17B12B3D001DD4A4 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1735CD17B12B3D001DD4A4 /* CoreBluetooth.framework */; };
 		9A1735D017B12BBD001DD4A4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1735CF17B12BBD001DD4A4 /* QuartzCore.framework */; };
 		9A79EADC182AD9F200F1983C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A79EAD9182AD9F200F1983C /* AppDelegate.m */; };
-		9A79EADD182AD9F200F1983C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A79EADB182AD9F200F1983C /* MainViewController.m */; };
 		9A79EAE9182ADA1900F1983C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A79EAE6182ADA1900F1983C /* main.m */; };
 		9A79EAEA182ADA1900F1983C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A79EAE7182ADA1900F1983C /* Storyboard.storyboard */; };
 		9A79EAEC182ADA2000F1983C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A79EAEB182ADA2000F1983C /* Default-568h@2x.png */; };
@@ -46,12 +45,13 @@
 		E1B86D0B18E71B12002475AE /* bleImage.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86D0A18E71B12002475AE /* bleImage.png */; };
 		E1BE079D18E5CA2300B00F54 /* NZTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */; };
 		E1BE07A018E60C1C00B00F54 /* NZGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BE079F18E60C1C00B00F54 /* NZGraphViewController.m */; };
-		E1C3958818E0529500C2B0E4 /* NZMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */; };
 		E1CD3BAB18E2E50200AFF986 /* SKSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BAA18E2E50200AFF986 /* SKSlideViewController.m */; };
 		E1CD3BAE18E2E90400AFF986 /* NZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BAD18E2E90400AFF986 /* NZMainViewController.m */; };
 		E1CD3BB118E2EB0100AFF986 /* NZMainSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BB018E2EB0100AFF986 /* NZMainSlideViewController.m */; };
 		E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BB318E2EB0D00AFF986 /* NZLeftSlideViewController.m */; };
 		E1CD3BFE18E3227800AFF986 /* NZBleConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */; };
+		E1EF14D719222B070015A500 /* NZClassificationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EF14D619222B070015A500 /* NZClassificationConstants.m */; };
+		E1EF14DA192230730015A500 /* NZMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EF14D9192230730015A500 /* NZMenuViewController.m */; };
 		E1F16F3319095F08004C9330 /* NZClassificationDataset.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1F16F3219095F08004C9330 /* NZClassificationDataset.mm */; };
 		E1F16F361909781A004C9330 /* NZMyClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F16F351909781A004C9330 /* NZMyClassesViewController.m */; };
 /* End PBXBuildFile section */
@@ -96,8 +96,6 @@
 		9A1735CF17B12BBD001DD4A4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9A79EAD8182AD9F200F1983C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9A79EAD9182AD9F200F1983C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9A79EADA182AD9F200F1983C /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		9A79EADB182AD9F200F1983C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		9A79EAE5182ADA1900F1983C /* BLEDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BLEDemo-Prefix.pch"; path = "BLEDemo/BLEDemo-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		9A79EAE6182ADA1900F1983C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BLEDemo/main.m; sourceTree = SOURCE_ROOT; };
 		9A79EAE7182ADA1900F1983C /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = BLEDemo/Storyboard.storyboard; sourceTree = SOURCE_ROOT; };
@@ -147,8 +145,6 @@
 		E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZTabBarController.m; sourceTree = "<group>"; };
 		E1BE079E18E60C1C00B00F54 /* NZGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphViewController.h; sourceTree = "<group>"; };
 		E1BE079F18E60C1C00B00F54 /* NZGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGraphViewController.m; sourceTree = "<group>"; };
-		E1C3958618E0529500C2B0E4 /* NZMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZMenuViewController.h; sourceTree = "<group>"; };
-		E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZMenuViewController.m; sourceTree = "<group>"; };
 		E1CD3BA918E2E50200AFF986 /* SKSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSlideViewController.h; sourceTree = "<group>"; };
 		E1CD3BAA18E2E50200AFF986 /* SKSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSlideViewController.m; sourceTree = "<group>"; };
 		E1CD3BAC18E2E90400AFF986 /* NZMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZMainViewController.h; path = ../NZMainViewController.h; sourceTree = "<group>"; };
@@ -159,6 +155,10 @@
 		E1CD3BB318E2EB0D00AFF986 /* NZLeftSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZLeftSlideViewController.m; sourceTree = SOURCE_ROOT; };
 		E1CD3BFC18E3227800AFF986 /* NZBleConnectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZBleConnectionViewController.h; sourceTree = "<group>"; };
 		E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZBleConnectionViewController.m; sourceTree = "<group>"; };
+		E1EF14D519222B070015A500 /* NZClassificationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassificationConstants.h; sourceTree = "<group>"; };
+		E1EF14D619222B070015A500 /* NZClassificationConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZClassificationConstants.m; sourceTree = "<group>"; };
+		E1EF14D8192230730015A500 /* NZMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZMenuViewController.h; sourceTree = "<group>"; };
+		E1EF14D9192230730015A500 /* NZMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZMenuViewController.m; sourceTree = "<group>"; };
 		E1F16F3119095F08004C9330 /* NZClassificationDataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassificationDataset.h; sourceTree = "<group>"; };
 		E1F16F3219095F08004C9330 /* NZClassificationDataset.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZClassificationDataset.mm; sourceTree = "<group>"; };
 		E1F16F341909781A004C9330 /* NZMyClassesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZMyClassesViewController.h; sourceTree = "<group>"; };
@@ -261,6 +261,8 @@
 			isa = PBXGroup;
 			children = (
 				E1B8149E191D02A100142C52 /* NZConstants.h */,
+				E1EF14D519222B070015A500 /* NZClassificationConstants.h */,
+				E1EF14D619222B070015A500 /* NZClassificationConstants.m */,
 				E1B8149F191D02A100142C52 /* NZConstants.m */,
 				E171C18618FC2246002FCEEE /* NZNotificationConstants.h */,
 				E171C18718FC2246002FCEEE /* NZNotificationConstants.m */,
@@ -284,16 +286,14 @@
 		E171C18418FC2164002FCEEE /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				9A79EADA182AD9F200F1983C /* MainViewController.h */,
-				9A79EADB182AD9F200F1983C /* MainViewController.m */,
+				E1EF14D8192230730015A500 /* NZMenuViewController.h */,
+				E1EF14D9192230730015A500 /* NZMenuViewController.m */,
 				E1BE079B18E5CA2300B00F54 /* NZTabBarController.h */,
 				E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */,
 				E1BE079E18E60C1C00B00F54 /* NZGraphViewController.h */,
 				E1BE079F18E60C1C00B00F54 /* NZGraphViewController.m */,
 				E1CD3BFC18E3227800AFF986 /* NZBleConnectionViewController.h */,
 				E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */,
-				E1C3958618E0529500C2B0E4 /* NZMenuViewController.h */,
-				E1C3958718E0529500C2B0E4 /* NZMenuViewController.m */,
 				E185624F18F1CCF600F371C0 /* NZTraningViewController.h */,
 				E185625018F1CCF600F371C0 /* NZTraningViewController.m */,
 				E1182D2B18FB2972003B8EED /* NZClassifyViewController.h */,
@@ -510,15 +510,15 @@
 				E1B814A0191D02A100142C52 /* NZConstants.m in Sources */,
 				E1BE079D18E5CA2300B00F54 /* NZTabBarController.m in Sources */,
 				E1CD3BAE18E2E90400AFF986 /* NZMainViewController.m in Sources */,
+				E1EF14D719222B070015A500 /* NZClassificationConstants.m in Sources */,
 				E185625118F1CCF600F371C0 /* NZTraningViewController.m in Sources */,
+				E1EF14DA192230730015A500 /* NZMenuViewController.m in Sources */,
 				E1B08B1A18DB0230000DCDB5 /* NZGraphView.m in Sources */,
 				E1182D2D18FB2972003B8EED /* NZClassifyViewController.m in Sources */,
 				E1CD3BB118E2EB0100AFF986 /* NZMainSlideViewController.m in Sources */,
 				E1B8149A191CFDBE00142C52 /* NZSensorDataHeaders.m in Sources */,
-				9A79EADD182AD9F200F1983C /* MainViewController.m in Sources */,
 				E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */,
 				E1B08B2018DB04EC000DCDB5 /* NZGraphTextView.m in Sources */,
-				E1C3958818E0529500C2B0E4 /* NZMenuViewController.m in Sources */,
 				E1CD3BFE18E3227800AFF986 /* NZBleConnectionViewController.m in Sources */,
 				E1182D2A18FA84FB003B8EED /* NZGestureRecognitionPipeline.mm in Sources */,
 				E185625418F1CDAC00F371C0 /* NZClassificationController.mm in Sources */,

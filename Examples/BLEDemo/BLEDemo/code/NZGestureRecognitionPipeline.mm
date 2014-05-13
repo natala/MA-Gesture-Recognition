@@ -40,6 +40,8 @@ GRT::GestureRecognitionPipeline pipeline;
     } else {
         pipeline.setClassifier(GRT::KNN());
     }
+    
+    pipeline.getClassifier()->enableNullRejection(true);
 }
 
 - (void)setUpPipeline

@@ -34,6 +34,18 @@
 
 }
 
+- (id)initWithSensorData:(SensorData *)sensorData
+{
+    if( self = [super init] ){
+        self.x = [[SensorDataValue alloc] initWithSensorValue:sensorData.x];
+        self.y = [[SensorDataValue alloc] initWithSensorValue:sensorData.y];
+        self.z = [[SensorDataValue alloc] initWithSensorValue:sensorData.z];
+        self.name = [[NSString alloc] initWithString:sensorData.name];
+        self.hasValues = false;
+        return self;
+    } else return nil;
+}
+
 - (BOOL)sensorDataFromBuffer:(uint8_t *)buffer withLength:(NSInteger)length;
 {
     bool readPackage = true;

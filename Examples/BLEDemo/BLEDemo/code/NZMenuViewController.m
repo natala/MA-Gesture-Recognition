@@ -97,7 +97,7 @@
         trainVC.delegate = self;
         self.trainingVC = trainVC;
         //NSNumber *numSamples = [self.classificationController numberOfDataSamples];
-        //[self updateNumberOfRecordedSamples:numSamples in:trainVC];
+        //[self updateNumberRecordedSamples:numSamples in:trainVC];
         //if ([self classifierTrained]) {
         //    trainVC.classifierTrainingStaus = @"trained";
         //} else {
@@ -114,7 +114,7 @@
         classifyVC.isPipelineTrained = self.classificationController.isTrained;
     }
 }
-
+/*
 - (void)receivedData:(SensorData *)data
 {
     //NSLog(@"menuViewConrroller has received data!!!");
@@ -133,7 +133,7 @@
     }
     
 }
-
+*/
 - (IBAction)trainButtonTaped:(id)sender {
 }
 

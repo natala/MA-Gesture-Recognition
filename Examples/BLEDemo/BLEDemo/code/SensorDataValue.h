@@ -52,6 +52,12 @@
  */
 - (id)initWithHeader:(uint8_t)header andOffset:(NSInteger)offset andName:(NSString *)name;
 
+/*! \brief initialize with the same header value but no data value
+ * @param sensorValue copy the header and value
+ */
+- (id)initWithSensorValue:(SensorDataValue *)sensorValue;
+
+
 /*! \brief set the value of the sensor data
  * @param buffer the received buffer from which to extract
  * @param length the length of the buffer

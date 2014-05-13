@@ -14,14 +14,5 @@
 @interface NZTabBarController : UITabBarController <BLEDiscoveryDelegate, BLEServiceDelegate, BLEServiceDataDelegate>
 
 
-/*! \brief linear acceleration in 3 dimensions
- *
- */
-@property (strong, nonatomic) SensorData *accelerometerData;
-
-/*! \brief orientation in 3 dimensions
- *
- */
-@property (strong, nonatomic) SensorData *orientationData;
 
 @end

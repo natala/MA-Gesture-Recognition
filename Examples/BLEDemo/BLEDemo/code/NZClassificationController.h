@@ -21,10 +21,10 @@ typedef enum classifierControllerStates {
 @property ClassifierControllerStates state;
 @property (strong, nonatomic) NSString *lastPredictedLabel;
 
-- (void)addData:(SensorData *)data withLabel:(NSString *)classLabel;
+- (void)addAcceleration:(SensorData *)acceleration andOrientation:(SensorData *)orientation withLabel:(NSString *)classLabel;
 
 // adds data with the label that is at the and of the classLabels
-- (void)addData:(SensorData *)data;
+- (void)addAcceleration:(SensorData *)acceleration andOrientation:(SensorData *)orientation;
 - (void)addClassLabel:(NSString *)classLabel;
 - (BOOL)saveClassLabels;
 - (BOOL)loadClassLabels;
@@ -34,7 +34,8 @@ typedef enum classifierControllerStates {
 
 - (void)setUpPipeline;
 
-- (NSString *)predict:(SensorData *)data;
+//- (NSString *)predict:(SensorData *)data;
+- (NSString *)predictUsingAcceleration:(SensorData *)acceleration andOrientation:(SensorData *)orientation;
 
 - (BOOL)saveLabelledDataToCSVFile;
 - (BOOL)loadLabelledDataFromCSVFile;

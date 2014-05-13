@@ -24,6 +24,13 @@
 @property int graphVCIndex;
 @property int menuNCIndex;
 
+@property BOOL isAcceleration;  // ture if extraceted acc
+@property BOOL isOrientation;   // true if extracted orientation
+@property (strong, nonatomic) SensorData *accelerometerData;
+@property (strong, nonatomic) SensorData *orientationData;
+@property (strong, nonatomic) SensorData *accelerometerDataPreviois;
+@property (strong, nonatomic) SensorData *orientationDataPrevious;
+
 @end
 
 @implementation NZTabBarController
@@ -32,8 +39,10 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self initSensorData];
     }
+    self.isAcceleration = false;
+    self.isOrientation = false;
     return self;
 }
 
@@ -87,31 +96,53 @@
 -(void) didReceiveData:(uint8_t *)buffer lenght:(NSInteger)length{
     
     [self initSensorData];
+
     BOOL isAccelerationExtracted = [self.accelerometerData sensorDataFromBuffer:buffer withLength:length];
     BOOL isOrientationExtracted = [self.orientationData sensorDataFromBuffer:buffer withLength:length];
     
-    NSLog(@"yaw: %f:", [self.orientationData.x.value floatValue]);
-    NSLog(@"pitch: %f:", [self.orientationData.y.value floatValue]);
-    NSLog(@"roll: %f:", [self.orientationData.z.value floatValue]);
+    if (isAccelerationExtracted) {
+        self.isAcceleration = true;
+        self.accelerometerDataPreviois = [[SensorData alloc] initWithSensorData:self.accelerometerData];
+    }
+    if (isOrientationExtracted) {
+        self.isOrientation = true;
+        self.orientationDataPrevious = [[SensorData alloc] initWithSensorData:self.orientationData];
+        NSLog(@"yaw: %f:", [self.orientationData.x.value floatValue]);
+        NSLog(@"pitch: %f:", [self.orientationData.y.value floatValue]);
+        NSLog(@"roll: %f:", [self.orientationData.z.value floatValue]);
+    }
+    
     
     SensorData *acceleration, *orientation;
     if (isAccelerationExtracted) {
-        acceleration = self.accelerometerData;
+        acceleration = self.accelerometerDataPreviois;
     }
     if (isOrientationExtracted) {
-        orientation = self.orientationData;
+        orientation = self.orientationDataPrevious;
     }
     
     [self.bleVC updateSensorDataTextWithAcceleration:acceleration andOrientation:orientation];
     [self.graphVC updateWithacceleration:acceleration andOrientation:orientation];
     
-    if (isAccelerationExtracted) {
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:self.accelerometerData, NZSensorDataKey, nil];
+    if (self.isAcceleration && self.isOrientation) {
+        // now we can send the pair firther
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:self.accelerometerDataPreviois, NZAccelerationDataKey, self.orientationDataPrevious, NZOrientationDataKey, nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NZDidReceiveSensorDataNotification object:self userInfo:dic];
+        
+        // reset
+        self.accelerometerDataPreviois = nil;
+        self.orientationDataPrevious = nil;
+        self.isOrientation = false;
+        self.isAcceleration = false;
+    }
+    
+/*    if (isAccelerationExtracted) {
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:self.accelerometerData, NZAccelerationDataKey, nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NZDidReceiveSensorDataNotification object:self userInfo:dic];
         
 #warning implement the Notification mechanism
         
-        // the root view controller of a navigation view controller is always
+        // the root view controller of a navigation view controller is always 0
         if (![[self.menuNavigationController viewControllers] objectAtIndex:0]) {
             NSLog(@"The root controller of the navigation controller is nill!!!");
         } else if ([[[self.menuNavigationController viewControllers] objectAtIndex:0] isKindOfClass:[NZMenuViewController class]]) {
@@ -124,6 +155,7 @@
             NSLog(@"the root controller of navigation controller is not a NZMenuViewController!!!");
         }
     }
+ */
 }
 
 #pragma mark -

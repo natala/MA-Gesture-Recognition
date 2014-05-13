@@ -34,7 +34,9 @@ NSString * const NZClassifyVCDidTapClassifyButtonNotification           = @"NZCl
 NSString * const NZLoadSavedDataTappedNotification  = @"NZLoadSavedDataTappedNotification";
 
 // userInfo dictionary keyes
-NSString * const NZSensorDataKey                                        = @"accelerometerData";
+NSString * const NZAccelerationDataKey                                        = @"accelerometerData";
+NSString * const NZOrientationDataKey                                        = @"orientationData";
+
 NSString * const NZStartStopButtonStateKey                              = @"startStopButtonState";
 NSString * const NZNumOfRecordedDataKey                                 = @"numOfRecordedData";
 NSString * const NZClassifierStatusKey                                  = @"classifierStatus";

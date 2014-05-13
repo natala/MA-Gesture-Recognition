@@ -33,7 +33,8 @@ extern NSString * const NZClassifyVCDidTapClassifyButtonNotification;
 extern NSString * const NZLoadSavedDataTappedNotification;
 
 // userInfo dictionary keyes
-extern NSString * const NZSensorDataKey;
+extern NSString * const NZAccelerationDataKey;
+extern NSString * const NZOrientationDataKey;
 extern NSString * const NZStartStopButtonStateKey;
 extern NSString * const NZNumOfRecordedDataKey;
 extern NSString * const NZClassifierStatusKey;

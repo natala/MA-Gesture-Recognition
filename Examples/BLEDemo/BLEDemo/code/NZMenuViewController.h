@@ -21,6 +21,6 @@
 - (IBAction)classifyButtonTaped:(id)sender;
 - (IBAction)myClassesButtonTaped:(id)sender;
 
-- (void)receivedData:(SensorData *)data;
+//- (void)receivedData:(SensorData *)data;
 
 @end
