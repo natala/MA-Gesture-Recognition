@@ -91,7 +91,7 @@
     if ( [self.recordControlButton.titleLabel.text isEqualToString:@"stop"] ) {
         NSLog(@"stop recording");
         msg= @"stop";
-        //[self.delegate stopRecordingData];
+        [self.delegate stopRecordingData];
 #warning disable edidting parameters while recording
         self.currentRecordControlButtonText = @"record";
         //[self.recordControlButton setTitle:@"record" forState:UIControlStateNormal];
@@ -151,7 +151,8 @@
 {
     NSNumber *num = [[notification userInfo] objectForKey:NZNumOfRecordedDataKey];
     self.currentNumberOfSamples = num;
-    //[self updateNumberOfSamples:num];
+   // self.currentNumberOfSamples = [[NSNumber alloc] initWithInt:10];
+ //   [self updateNumberOfSamples:num];
 }
 
 - (void)updateClassifierStatus:(NSNotification *)notification
