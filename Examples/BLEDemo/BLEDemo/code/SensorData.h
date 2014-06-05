@@ -37,7 +37,9 @@
 -(id)initWithValueHeadersX:(uint8_t) x Y:(uint8_t) y Z:(uint8_t) z andOffsetsX:(NSInteger)offsetX Y:(NSInteger)offsetY Z:(NSInteger)offsetZ;
 
 /*! \brief
- *
+ * @param offset the index where to start reading from the buffor
+ * @param length the length of the whole buffer
+ * @return true if successfully read the x,y and z value
  */
 -(id)initWithValueHeadersX:(uint8_t) x Y:(uint8_t) y Z:(uint8_t) z andOffsetsX:(NSInteger)offsetX Y:(NSInteger)offsetY Z:(NSInteger)offsetZ andName:(NSString *)name;
 
@@ -45,6 +47,11 @@
  *
  */
 - (id)initWithSensorData:(SensorData *)sensorData;
+
+/*! \brief
+ * extraxts sensor without headesrs
+ */
+- (BOOL)sensorDataFromBuffer:(uint8_t *)buffer withOffset:(NSInteger)offstet andLength:(NSInteger)length;
 
 /*! \brief the name od the data
  *

@@ -17,11 +17,11 @@ const NSInteger kLinearAccelerationYOffset = 5;
 const uint8_t   kLinearAccelerationZ       = 'z';
 const NSInteger kLinearAccelerationZOffset = 10;
 
-const uint8_t   kYaw       = 'w';
+const uint8_t   kYaw       = 'x';
 const NSInteger kYawOffset = 0;
 
-const uint8_t   kPitch       = 'p';
+const uint8_t   kPitch       = 'y';
 const NSInteger kPitchOffset = 5;
 
-const uint8_t   kRoll       = 'r';
+const uint8_t   kRoll       = 'z';
 const NSInteger kRollOffset = 10;

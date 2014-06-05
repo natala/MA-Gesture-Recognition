@@ -46,7 +46,41 @@
     } else return nil;
 }
 
-- (BOOL)sensorDataFromBuffer:(uint8_t *)buffer withLength:(NSInteger)length;
+- (BOOL)sensorDataFromBuffer:(uint8_t *)buffer withOffset:(NSInteger)offstet andLength:(NSInteger)length
+{
+    //if (length-offstet < 12) {
+    //    return false;
+    //}
+    // create packages - a shortcut for now, later needs to be nicely refactored
+    uint8_t bufferXYZ [15];
+   // uint8_t bufferY [4];
+   // uint8_t bufferZ [4];
+    
+    bufferXYZ[0] = 'x';
+    bufferXYZ[1] = 2;
+    bufferXYZ[5] = 'y';
+    bufferXYZ[6] = 2;
+    bufferXYZ[10] = 'z';
+    bufferXYZ[11] = 2;
+    
+    int j = offstet;
+    int i = 2;
+    for (; i < 5; i++, j++) {
+        bufferXYZ[i] = buffer[j];
+    }
+    i+=2;
+    for (; i < 10; i++, j++) {
+        bufferXYZ[i] = buffer[j];
+    }
+    i+=2;
+    for (; i < 15; i++, j++) {
+        bufferXYZ[i] = buffer[j];
+    }
+    
+    BOOL res = [self sensorDataFromBuffer:bufferXYZ withLength:15];
+    return res;
+}
+- (BOOL)sensorDataFromBuffer:(uint8_t *)buffer withLength:(NSInteger)length
 {
     bool readPackage = true;
     // TODO: move this to one method of the SensorData class

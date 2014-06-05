@@ -62,13 +62,23 @@ void setup() {
     mpu.initialize();
     devStatus = mpu.dmpInitialize();   
     
-    mpu.setXAccelOffset(-2153);
+    /*mpu.setXAccelOffset(-2153);
     mpu.setYAccelOffset(1333);
     mpu.setZAccelOffset(1455);
    
     mpu.setXGyroOffset(29);
     mpu.setYGyroOffset(18);
     mpu.setZGyroOffset(-16);
+    */
+    
+    // CALIBRATION FORM 03.06.2014 
+    mpu.setXAccelOffset(-2424);
+    mpu.setYAccelOffset(-1631);
+    mpu.setZAccelOffset(610);
+
+    mpu.setXGyroOffset(90);
+    mpu.setYGyroOffset(1);
+    mpu.setZGyroOffset(-40);
     
     // make sure it worked (returns 0 if so)
     if (devStatus == 0) {
@@ -88,16 +98,19 @@ void setup() {
 
 void sendOrientationData() {
    
-    uint8_t length = sizeof(int16_t);
+    uint8_t length = 2;
     uint8_t destination[length]; 
+    //yawPitchRoll[0] = -1.0f;
+    //yawPitchRoll[1] = 1.0f;
+    //yawPitchRoll[2] = 10.0f;
     
     // header[0] - length[1] - sign[2] - value[3 ; sizeof(float)+3]
   
   // ORIENTATION: YAW PITCH ROLL
   
   // send yaw
-  Serial.write('w');
-  Serial.write(length);
+ // Serial.write('w');
+ // Serial.write(length);
   float yaw = yawPitchRoll[0];
   // the precision is anyway 0.xx
   //sendInt16Valu( (int16_t)(yaw*10) );
@@ -119,8 +132,8 @@ void sendOrientationData() {
   }
   
   // send pitch
-  Serial.write('p');
-  Serial.write(length);
+  //Serial.write('p');
+  //Serial.write(length);
   float pitch = yawPitchRoll[1];
   //sendInt16Valu( (int16_t)(pitch*10) );
  // Serial.println("PITCH");
@@ -141,8 +154,8 @@ void sendOrientationData() {
   }
   
   // send roll
-  Serial.write('r');
-  Serial.write(length);
+  //Serial.write('r');
+  //Serial.write(length);
   float roll = yawPitchRoll[2];
   //sendInt16Valu( (int16_t)(roll*10) );
   //Serial.println("ROLL");
@@ -176,8 +189,8 @@ void sendLinearAccelerationData(){
   uint8_t length = sizeof(int16_t);
   uint8_t destination[length]; 
 
-   Serial.write('x');
-   Serial.write(2);   // the length of the value to be send
+ //  Serial.write('x');
+ //  Serial.write(2);   // the length of the value to be send
    if(aaReal.x < 0){
       Serial.write(1);
      aaReal.x = -(aaReal.x+1); 
@@ -192,8 +205,8 @@ void sendLinearAccelerationData(){
    //Serial.write(lowByte(aaReal.y));
   //Serial.write(highByte(aaReal.y));
   
-  Serial.write('y');
-  Serial.write(2);   // the length of the value to be send
+ // Serial.write('y');
+ // Serial.write(2);   // the length of the value to be send
    if(aaReal.y < 0){
       Serial.write(1);
      aaReal.y = -(aaReal.y+1); 
@@ -206,8 +219,8 @@ void sendLinearAccelerationData(){
     Serial.write(destination[i]);
   }
 
-  Serial.write('z');
-  Serial.write(2);   // the length of the value to be send
+ // Serial.write('z');
+//  Serial.write(2);   // the length of the value to be send
    if(aaReal.z < 0){
       Serial.write(1);
      aaReal.z = -(aaReal.z+1); 
@@ -245,8 +258,14 @@ void sendLinearAccelerationData(){
   */
 }
 
+
 void loop() {
-    if(initialized){
+  /*digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);               // wait for a second
+  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
+  delay(1000);               // wait for a second
+  */
+   if(initialized){
       
       digitalWrite(led, HIGH);
 
@@ -272,6 +291,7 @@ void loop() {
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
             mpu.dmpGetYawPitchRoll(yawPitchRoll, &q, &gravity);
+           // Serial.println("bla bla");
             //mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
             
             // read raw accel/gyro measurements from device
@@ -280,7 +300,10 @@ void loop() {
             unsigned long currentMillis = millis();
             if(currentMillis - previousMillis > interval) {
                 previousMillis = currentMillis;
-                if (isSendAcceleration) {
+               sendLinearAccelerationData();
+               sendOrientationData();
+              // sendData();
+               /* if (isSendAcceleration) {
                   sendLinearAccelerationData();
                 }
                 if (isSendOrientation) {
@@ -288,6 +311,7 @@ void loop() {
                 }
                 isSendAcceleration = !isSendAcceleration;
                 isSendOrientation = !isSendOrientation;
+                */
              }
      }
    } else {
@@ -295,5 +319,6 @@ void loop() {
      // send an error
      Serial.write('e');
    }
+   
   
 }

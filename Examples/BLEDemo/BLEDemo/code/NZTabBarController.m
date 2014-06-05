@@ -97,8 +97,10 @@
     
     [self initSensorData];
 
-    BOOL isAccelerationExtracted = [self.accelerometerData sensorDataFromBuffer:buffer withLength:length];
-    BOOL isOrientationExtracted = [self.orientationData sensorDataFromBuffer:buffer withLength:length];
+    BOOL isAccelerationExtracted = [self.accelerometerData sensorDataFromBuffer:buffer withOffset:0 andLength:length];
+//    BOOL isAccelerationExtracted = [self.accelerometerData sensorDataFromBuffer:buffer withLength:length];
+    BOOL isOrientationExtracted = [self.orientationData sensorDataFromBuffer:buffer withOffset:9 andLength:length];
+//    BOOL isOrientationExtracted = [self.orientationData sensorDataFromBuffer:buffer withLength:length];
     
     if (isAccelerationExtracted) {
         self.isAcceleration = true;
@@ -107,9 +109,9 @@
     if (isOrientationExtracted) {
         self.isOrientation = true;
         self.orientationDataPrevious = [[SensorData alloc] initWithSensorData:self.orientationData];
-        NSLog(@"yaw: %f:", [self.orientationData.x.value floatValue]);
-        NSLog(@"pitch: %f:", [self.orientationData.y.value floatValue]);
-        NSLog(@"roll: %f:", [self.orientationData.z.value floatValue]);
+   //     NSLog(@"yaw: %f:", [self.orientationData.x.value floatValue]);
+   //     NSLog(@"pitch: %f:", [self.orientationData.y.value floatValue]);
+   //     NSLog(@"roll: %f:", [self.orientationData.z.value floatValue]);
     }
     
     
