@@ -183,6 +183,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A0DF6E7195C823D0029E5F3 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		9A17354717B11CA7001DD4A4 = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +225,7 @@
 		9A17355917B11CA7001DD4A4 /* BLEDemo */ = {
 			isa = PBXGroup;
 			children = (
+				8A0DF6E7195C823D0029E5F3 /* iPad */,
 				E1B86CF318E6FB54002475AE /* Assets */,
 				9A79EAD7182AD9F200F1983C /* code */,
 				E1B6277718D0614600436B8C /* Images.xcassets */,
@@ -609,7 +617,9 @@
 				GCC_PREFIX_HEADER = "BLEDemo/BLEDemo-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "BLEDemo/BLEDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = BLEDemo;
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../Frameworks/BLE/** Frameworks/GRTStatic/GRT/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -625,7 +635,9 @@
 				GCC_PREFIX_HEADER = "BLEDemo/BLEDemo-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "BLEDemo/BLEDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = BLEDemo;
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../Frameworks/BLE/** Frameworks/GRTStatic/GRT/**";
 				WRAPPER_EXTENSION = app;
 			};

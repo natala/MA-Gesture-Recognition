@@ -1,0 +1,670 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9A17355417B11CA7001DD4A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A17355317B11CA7001DD4A4 /* UIKit.framework */; };
+		9A17355617B11CA7001DD4A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A17355517B11CA7001DD4A4 /* Foundation.framework */; };
+		9A17355817B11CA7001DD4A4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A17355717B11CA7001DD4A4 /* CoreGraphics.framework */; };
+		9A1735CE17B12B3D001DD4A4 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1735CD17B12B3D001DD4A4 /* CoreBluetooth.framework */; };
+		9A1735D017B12BBD001DD4A4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1735CF17B12BBD001DD4A4 /* QuartzCore.framework */; };
+		9A79EADC182AD9F200F1983C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A79EAD9182AD9F200F1983C /* AppDelegate.m */; };
+		9A79EAE9182ADA1900F1983C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A79EAE6182ADA1900F1983C /* main.m */; };
+		9A79EAEA182ADA1900F1983C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A79EAE7182ADA1900F1983C /* Storyboard.storyboard */; };
+		9A79EAEC182ADA2000F1983C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A79EAEB182ADA2000F1983C /* Default-568h@2x.png */; };
+		9A95FADB18CA7343009A724F /* libBLE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A95FAD818CA4957009A724F /* libBLE.a */; };
+		E1182D2A18FA84FB003B8EED /* NZGestureRecognitionPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1182D2918FA84FB003B8EED /* NZGestureRecognitionPipeline.mm */; };
+		E1182D2D18FB2972003B8EED /* NZClassifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1182D2C18FB2972003B8EED /* NZClassifyViewController.m */; };
+		E171C18818FC2246002FCEEE /* NZNotificationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E171C18718FC2246002FCEEE /* NZNotificationConstants.m */; };
+		E185624E18F1C4BB00F371C0 /* libGRTStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E185624B18F1C48600F371C0 /* libGRTStatic.a */; };
+		E185625118F1CCF600F371C0 /* NZTraningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E185625018F1CCF600F371C0 /* NZTraningViewController.m */; };
+		E185625418F1CDAC00F371C0 /* NZClassificationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E185625318F1CDAC00F371C0 /* NZClassificationController.mm */; };
+		E1B08B1A18DB0230000DCDB5 /* NZGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B08B1918DB0230000DCDB5 /* NZGraphView.m */; };
+		E1B08B1D18DB04C5000DCDB5 /* NZGraphViewSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B08B1C18DB04C5000DCDB5 /* NZGraphViewSegment.m */; };
+		E1B08B2018DB04EC000DCDB5 /* NZGraphTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B08B1F18DB04EC000DCDB5 /* NZGraphTextView.m */; };
+		E1B08B2318DB25EB000DCDB5 /* NZGraphViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B08B2218DB25EB000DCDB5 /* NZGraphViewHelper.m */; };
+		E1B6277818D0614600436B8C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B6277718D0614600436B8C /* Images.xcassets */; };
+		E1B6277E18D0DAD800436B8C /* SensorDataValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B6277D18D0DAD800436B8C /* SensorDataValue.m */; };
+		E1B81491191CED1400142C52 /* SensorData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B81490191CED1400142C52 /* SensorData.m */; };
+		E1B81497191CF2C400142C52 /* NZClassifyTmpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B81496191CF2C400142C52 /* NZClassifyTmpViewController.m */; };
+		E1B8149A191CFDBE00142C52 /* NZSensorDataHeaders.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B81499191CFDBE00142C52 /* NZSensorDataHeaders.m */; };
+		E1B814A0191D02A100142C52 /* NZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B8149F191D02A100142C52 /* NZConstants.m */; };
+		E1B86CF718E6FC57002475AE /* bluetooth-17-6.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CF618E6FC57002475AE /* bluetooth-17-6.png */; };
+		E1B86CFE18E6FD79002475AE /* bluetooth-17-2.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CF818E6FD79002475AE /* bluetooth-17-2.png */; };
+		E1B86CFF18E6FD79002475AE /* bluetooth-17-3.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CF918E6FD79002475AE /* bluetooth-17-3.png */; };
+		E1B86D0018E6FD79002475AE /* bluetooth-17-4.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CFA18E6FD79002475AE /* bluetooth-17-4.png */; };
+		E1B86D0118E6FD79002475AE /* bluetooth-17-5.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CFB18E6FD79002475AE /* bluetooth-17-5.png */; };
+		E1B86D0218E6FD79002475AE /* bluetooth-17.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CFC18E6FD79002475AE /* bluetooth-17.png */; };
+		E1B86D0318E6FD79002475AE /* Rss_feed_subscribe_social_button_black_square_reader_orange_news.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86CFD18E6FD79002475AE /* Rss_feed_subscribe_social_button_black_square_reader_orange_news.png */; };
+		E1B86D0718E7044D002475AE /* bluetooth-17-25x25.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86D0618E7044D002475AE /* bluetooth-17-25x25.png */; };
+		E1B86D0918E71B0B002475AE /* bluetooth-logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E1B86D0818E71B0B002475AE /* bluetooth-logo.jpg */; };
+		E1B86D0B18E71B12002475AE /* bleImage.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B86D0A18E71B12002475AE /* bleImage.png */; };
+		E1BE079D18E5CA2300B00F54 /* NZTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */; };
+		E1BE07A018E60C1C00B00F54 /* NZGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BE079F18E60C1C00B00F54 /* NZGraphViewController.m */; };
+		E1CD3BAB18E2E50200AFF986 /* SKSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BAA18E2E50200AFF986 /* SKSlideViewController.m */; };
+		E1CD3BAE18E2E90400AFF986 /* NZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BAD18E2E90400AFF986 /* NZMainViewController.m */; };
+		E1CD3BB118E2EB0100AFF986 /* NZMainSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BB018E2EB0100AFF986 /* NZMainSlideViewController.m */; };
+		E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BB318E2EB0D00AFF986 /* NZLeftSlideViewController.m */; };
+		E1CD3BFE18E3227800AFF986 /* NZBleConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */; };
+		E1EF14D719222B070015A500 /* NZClassificationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EF14D619222B070015A500 /* NZClassificationConstants.m */; };
+		E1EF14DA192230730015A500 /* NZMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EF14D9192230730015A500 /* NZMenuViewController.m */; };
+		E1F16F3319095F08004C9330 /* NZClassificationDataset.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1F16F3219095F08004C9330 /* NZClassificationDataset.mm */; };
+		E1F16F361909781A004C9330 /* NZMyClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F16F351909781A004C9330 /* NZMyClassesViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9A95FAD718CA4957009A724F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A95FAD318CA4957009A724F /* BLE.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A17359617B11D87001DD4A4;
+			remoteInfo = BLE;
+		};
+		9A95FAD918CA733E009A724F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A95FAD318CA4957009A724F /* BLE.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A17359517B11D87001DD4A4;
+			remoteInfo = BLE;
+		};
+		E185624A18F1C48600F371C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E185605818F1BD7C00F371C0;
+			remoteInfo = GRTStatic;
+		};
+		E185624C18F1C4AC00F371C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E185605718F1BD7C00F371C0;
+			remoteInfo = GRTStatic;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9A17355017B11CA7001DD4A4 /* BLEDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLEDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A17355317B11CA7001DD4A4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9A17355517B11CA7001DD4A4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9A17355717B11CA7001DD4A4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9A1735CD17B12B3D001DD4A4 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		9A1735CF17B12BBD001DD4A4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9A79EAD8182AD9F200F1983C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9A79EAD9182AD9F200F1983C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9A79EAE5182ADA1900F1983C /* BLEDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BLEDemo-Prefix.pch"; path = "BLEDemo/BLEDemo-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		9A79EAE6182ADA1900F1983C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BLEDemo/main.m; sourceTree = SOURCE_ROOT; };
+		9A79EAE7182ADA1900F1983C /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = BLEDemo/Storyboard.storyboard; sourceTree = SOURCE_ROOT; };
+		9A79EAEB182ADA2000F1983C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		9A95FAD318CA4957009A724F /* BLE.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BLE.xcodeproj; path = ../../Frameworks/BLE/BLE.xcodeproj; sourceTree = "<group>"; };
+		E1182D2818FA84FB003B8EED /* NZGestureRecognitionPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGestureRecognitionPipeline.h; sourceTree = "<group>"; };
+		E1182D2918FA84FB003B8EED /* NZGestureRecognitionPipeline.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZGestureRecognitionPipeline.mm; sourceTree = "<group>"; };
+		E1182D2B18FB2972003B8EED /* NZClassifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassifyViewController.h; sourceTree = "<group>"; };
+		E1182D2C18FB2972003B8EED /* NZClassifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZClassifyViewController.m; sourceTree = "<group>"; };
+		E171C18618FC2246002FCEEE /* NZNotificationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZNotificationConstants.h; sourceTree = "<group>"; };
+		E171C18718FC2246002FCEEE /* NZNotificationConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZNotificationConstants.m; sourceTree = "<group>"; };
+		E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GRTStatic.xcodeproj; path = Frameworks/GRTStatic/GRTStatic.xcodeproj; sourceTree = "<group>"; };
+		E185624F18F1CCF600F371C0 /* NZTraningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZTraningViewController.h; sourceTree = "<group>"; };
+		E185625018F1CCF600F371C0 /* NZTraningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZTraningViewController.m; sourceTree = "<group>"; };
+		E185625218F1CDAC00F371C0 /* NZClassificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassificationController.h; sourceTree = "<group>"; };
+		E185625318F1CDAC00F371C0 /* NZClassificationController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZClassificationController.mm; sourceTree = "<group>"; };
+		E1B08B1818DB0230000DCDB5 /* NZGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphView.h; sourceTree = "<group>"; };
+		E1B08B1918DB0230000DCDB5 /* NZGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGraphView.m; sourceTree = "<group>"; };
+		E1B08B1B18DB04C5000DCDB5 /* NZGraphViewSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphViewSegment.h; sourceTree = "<group>"; };
+		E1B08B1C18DB04C5000DCDB5 /* NZGraphViewSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGraphViewSegment.m; sourceTree = "<group>"; };
+		E1B08B1E18DB04EC000DCDB5 /* NZGraphTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphTextView.h; sourceTree = "<group>"; };
+		E1B08B1F18DB04EC000DCDB5 /* NZGraphTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGraphTextView.m; sourceTree = "<group>"; };
+		E1B08B2118DB25EB000DCDB5 /* NZGraphViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphViewHelper.h; sourceTree = "<group>"; };
+		E1B08B2218DB25EB000DCDB5 /* NZGraphViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGraphViewHelper.m; sourceTree = "<group>"; };
+		E1B6277718D0614600436B8C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BLEDemo/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		E1B6277C18D0DAD800436B8C /* SensorDataValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorDataValue.h; sourceTree = "<group>"; };
+		E1B6277D18D0DAD800436B8C /* SensorDataValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensorDataValue.m; sourceTree = "<group>"; };
+		E1B8148F191CED1400142C52 /* SensorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorData.h; sourceTree = "<group>"; };
+		E1B81490191CED1400142C52 /* SensorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensorData.m; sourceTree = "<group>"; };
+		E1B81495191CF2C400142C52 /* NZClassifyTmpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassifyTmpViewController.h; sourceTree = "<group>"; };
+		E1B81496191CF2C400142C52 /* NZClassifyTmpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZClassifyTmpViewController.m; sourceTree = "<group>"; };
+		E1B81498191CFDBE00142C52 /* NZSensorDataHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZSensorDataHeaders.h; sourceTree = "<group>"; };
+		E1B81499191CFDBE00142C52 /* NZSensorDataHeaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZSensorDataHeaders.m; sourceTree = "<group>"; };
+		E1B8149E191D02A100142C52 /* NZConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZConstants.h; sourceTree = "<group>"; };
+		E1B8149F191D02A100142C52 /* NZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZConstants.m; sourceTree = "<group>"; };
+		E1B86CF618E6FC57002475AE /* bluetooth-17-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-6.png"; sourceTree = SOURCE_ROOT; };
+		E1B86CF818E6FD79002475AE /* bluetooth-17-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-2.png"; sourceTree = SOURCE_ROOT; };
+		E1B86CF918E6FD79002475AE /* bluetooth-17-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-3.png"; sourceTree = SOURCE_ROOT; };
+		E1B86CFA18E6FD79002475AE /* bluetooth-17-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-4.png"; sourceTree = SOURCE_ROOT; };
+		E1B86CFB18E6FD79002475AE /* bluetooth-17-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-5.png"; sourceTree = SOURCE_ROOT; };
+		E1B86CFC18E6FD79002475AE /* bluetooth-17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17.png"; sourceTree = SOURCE_ROOT; };
+		E1B86CFD18E6FD79002475AE /* Rss_feed_subscribe_social_button_black_square_reader_orange_news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rss_feed_subscribe_social_button_black_square_reader_orange_news.png; sourceTree = SOURCE_ROOT; };
+		E1B86D0618E7044D002475AE /* bluetooth-17-25x25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth-17-25x25.png"; sourceTree = SOURCE_ROOT; };
+		E1B86D0818E71B0B002475AE /* bluetooth-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bluetooth-logo.jpg"; sourceTree = SOURCE_ROOT; };
+		E1B86D0A18E71B12002475AE /* bleImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bleImage.png; sourceTree = SOURCE_ROOT; };
+		E1BE079B18E5CA2300B00F54 /* NZTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZTabBarController.h; sourceTree = "<group>"; };
+		E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZTabBarController.m; sourceTree = "<group>"; };
+		E1BE079E18E60C1C00B00F54 /* NZGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphViewController.h; sourceTree = "<group>"; };
+		E1BE079F18E60C1C00B00F54 /* NZGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGraphViewController.m; sourceTree = "<group>"; };
+		E1CD3BA918E2E50200AFF986 /* SKSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSlideViewController.h; sourceTree = "<group>"; };
+		E1CD3BAA18E2E50200AFF986 /* SKSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSlideViewController.m; sourceTree = "<group>"; };
+		E1CD3BAC18E2E90400AFF986 /* NZMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZMainViewController.h; path = ../NZMainViewController.h; sourceTree = "<group>"; };
+		E1CD3BAD18E2E90400AFF986 /* NZMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZMainViewController.m; path = ../NZMainViewController.m; sourceTree = "<group>"; };
+		E1CD3BAF18E2EB0100AFF986 /* NZMainSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZMainSlideViewController.h; sourceTree = SOURCE_ROOT; };
+		E1CD3BB018E2EB0100AFF986 /* NZMainSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZMainSlideViewController.m; sourceTree = SOURCE_ROOT; };
+		E1CD3BB218E2EB0D00AFF986 /* NZLeftSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZLeftSlideViewController.h; sourceTree = SOURCE_ROOT; };
+		E1CD3BB318E2EB0D00AFF986 /* NZLeftSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZLeftSlideViewController.m; sourceTree = SOURCE_ROOT; };
+		E1CD3BFC18E3227800AFF986 /* NZBleConnectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZBleConnectionViewController.h; sourceTree = "<group>"; };
+		E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZBleConnectionViewController.m; sourceTree = "<group>"; };
+		E1EF14D519222B070015A500 /* NZClassificationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassificationConstants.h; sourceTree = "<group>"; };
+		E1EF14D619222B070015A500 /* NZClassificationConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZClassificationConstants.m; sourceTree = "<group>"; };
+		E1EF14D8192230730015A500 /* NZMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZMenuViewController.h; sourceTree = "<group>"; };
+		E1EF14D9192230730015A500 /* NZMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZMenuViewController.m; sourceTree = "<group>"; };
+		E1F16F3119095F08004C9330 /* NZClassificationDataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassificationDataset.h; sourceTree = "<group>"; };
+		E1F16F3219095F08004C9330 /* NZClassificationDataset.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZClassificationDataset.mm; sourceTree = "<group>"; };
+		E1F16F341909781A004C9330 /* NZMyClassesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZMyClassesViewController.h; sourceTree = "<group>"; };
+		E1F16F351909781A004C9330 /* NZMyClassesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZMyClassesViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9A17354D17B11CA7001DD4A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E185624E18F1C4BB00F371C0 /* libGRTStatic.a in Frameworks */,
+				9A95FADB18CA7343009A724F /* libBLE.a in Frameworks */,
+				9A1735D017B12BBD001DD4A4 /* QuartzCore.framework in Frameworks */,
+				9A1735CE17B12B3D001DD4A4 /* CoreBluetooth.framework in Frameworks */,
+				9A17355417B11CA7001DD4A4 /* UIKit.framework in Frameworks */,
+				9A17355617B11CA7001DD4A4 /* Foundation.framework in Frameworks */,
+				9A17355817B11CA7001DD4A4 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8A1732F8195AF6D100BD86B9 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+		9A17354717B11CA7001DD4A4 = {
+			isa = PBXGroup;
+			children = (
+				9A79EAEB182ADA2000F1983C /* Default-568h@2x.png */,
+				9A17355917B11CA7001DD4A4 /* BLEDemo */,
+				9A17355217B11CA7001DD4A4 /* Frameworks */,
+				9A17355117B11CA7001DD4A4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9A17355117B11CA7001DD4A4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A17355017B11CA7001DD4A4 /* BLEDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9A17355217B11CA7001DD4A4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */,
+				9A95FAD318CA4957009A724F /* BLE.xcodeproj */,
+				9A1735CF17B12BBD001DD4A4 /* QuartzCore.framework */,
+				9A1735CD17B12B3D001DD4A4 /* CoreBluetooth.framework */,
+				9A17355317B11CA7001DD4A4 /* UIKit.framework */,
+				9A17355517B11CA7001DD4A4 /* Foundation.framework */,
+				9A17355717B11CA7001DD4A4 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9A17355917B11CA7001DD4A4 /* BLEDemo */ = {
+			isa = PBXGroup;
+			children = (
+				8A1732F8195AF6D100BD86B9 /* iPad */,
+				E1B86CF318E6FB54002475AE /* Assets */,
+				9A79EAD7182AD9F200F1983C /* code */,
+				E1B6277718D0614600436B8C /* Images.xcassets */,
+				9A17355A17B11CA7001DD4A4 /* Supporting Files */,
+			);
+			name = BLEDemo;
+			path = BLEFirmataDemo;
+			sourceTree = "<group>";
+		};
+		9A17355A17B11CA7001DD4A4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9A79EAE5182ADA1900F1983C /* BLEDemo-Prefix.pch */,
+				9A79EAE6182ADA1900F1983C /* main.m */,
+				9A79EAE7182ADA1900F1983C /* Storyboard.storyboard */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9A79EAD7182AD9F200F1983C /* code */ = {
+			isa = PBXGroup;
+			children = (
+				E1BE079718E5B8DD00B00F54 /* FinalVersion */,
+				E1CD3BA818E2E50200AFF986 /* SKSlideViewController */,
+				9A79EAD8182AD9F200F1983C /* AppDelegate.h */,
+				9A79EAD9182AD9F200F1983C /* AppDelegate.m */,
+			);
+			name = code;
+			path = BLEDemo/code;
+			sourceTree = SOURCE_ROOT;
+		};
+		9A95FAD418CA4957009A724F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A95FAD818CA4957009A724F /* libBLE.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E171C18218FC20F0002FCEEE /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				E1B8149E191D02A100142C52 /* NZConstants.h */,
+				E1EF14D519222B070015A500 /* NZClassificationConstants.h */,
+				E1EF14D619222B070015A500 /* NZClassificationConstants.m */,
+				E1B8149F191D02A100142C52 /* NZConstants.m */,
+				E171C18618FC2246002FCEEE /* NZNotificationConstants.h */,
+				E171C18718FC2246002FCEEE /* NZNotificationConstants.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		E171C18318FC2108002FCEEE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E1B8148F191CED1400142C52 /* SensorData.h */,
+				E1B81490191CED1400142C52 /* SensorData.m */,
+				E1B81498191CFDBE00142C52 /* NZSensorDataHeaders.h */,
+				E1B81499191CFDBE00142C52 /* NZSensorDataHeaders.m */,
+				E1B6277C18D0DAD800436B8C /* SensorDataValue.h */,
+				E1B6277D18D0DAD800436B8C /* SensorDataValue.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E171C18418FC2164002FCEEE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E1EF14D8192230730015A500 /* NZMenuViewController.h */,
+				E1EF14D9192230730015A500 /* NZMenuViewController.m */,
+				E1BE079B18E5CA2300B00F54 /* NZTabBarController.h */,
+				E1BE079C18E5CA2300B00F54 /* NZTabBarController.m */,
+				E1BE079E18E60C1C00B00F54 /* NZGraphViewController.h */,
+				E1BE079F18E60C1C00B00F54 /* NZGraphViewController.m */,
+				E1CD3BFC18E3227800AFF986 /* NZBleConnectionViewController.h */,
+				E1CD3BFD18E3227800AFF986 /* NZBleConnectionViewController.m */,
+				E185624F18F1CCF600F371C0 /* NZTraningViewController.h */,
+				E185625018F1CCF600F371C0 /* NZTraningViewController.m */,
+				E1182D2B18FB2972003B8EED /* NZClassifyViewController.h */,
+				E1182D2C18FB2972003B8EED /* NZClassifyViewController.m */,
+				E1F16F341909781A004C9330 /* NZMyClassesViewController.h */,
+				E1F16F351909781A004C9330 /* NZMyClassesViewController.m */,
+				E1B81495191CF2C400142C52 /* NZClassifyTmpViewController.h */,
+				E1B81496191CF2C400142C52 /* NZClassifyTmpViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E1855E3918F19B8B00F371C0 /* GRT wrapers */ = {
+			isa = PBXGroup;
+			children = (
+				E1182D2818FA84FB003B8EED /* NZGestureRecognitionPipeline.h */,
+				E1182D2918FA84FB003B8EED /* NZGestureRecognitionPipeline.mm */,
+				E185625218F1CDAC00F371C0 /* NZClassificationController.h */,
+				E185625318F1CDAC00F371C0 /* NZClassificationController.mm */,
+				E1F16F3119095F08004C9330 /* NZClassificationDataset.h */,
+				E1F16F3219095F08004C9330 /* NZClassificationDataset.mm */,
+			);
+			name = "GRT wrapers";
+			sourceTree = "<group>";
+		};
+		E185624718F1C48500F371C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E185624B18F1C48600F371C0 /* libGRTStatic.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1B08B1718DB01E5000DCDB5 /* GraphView */ = {
+			isa = PBXGroup;
+			children = (
+				E1B08B1818DB0230000DCDB5 /* NZGraphView.h */,
+				E1B08B1918DB0230000DCDB5 /* NZGraphView.m */,
+				E1B08B1B18DB04C5000DCDB5 /* NZGraphViewSegment.h */,
+				E1B08B1C18DB04C5000DCDB5 /* NZGraphViewSegment.m */,
+				E1B08B1E18DB04EC000DCDB5 /* NZGraphTextView.h */,
+				E1B08B1F18DB04EC000DCDB5 /* NZGraphTextView.m */,
+				E1B08B2118DB25EB000DCDB5 /* NZGraphViewHelper.h */,
+				E1B08B2218DB25EB000DCDB5 /* NZGraphViewHelper.m */,
+			);
+			name = GraphView;
+			sourceTree = "<group>";
+		};
+		E1B86CF318E6FB54002475AE /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				E1B86D0A18E71B12002475AE /* bleImage.png */,
+				E1B86D0818E71B0B002475AE /* bluetooth-logo.jpg */,
+				E1B86CF818E6FD79002475AE /* bluetooth-17-2.png */,
+				E1B86D0618E7044D002475AE /* bluetooth-17-25x25.png */,
+				E1B86CF918E6FD79002475AE /* bluetooth-17-3.png */,
+				E1B86CFA18E6FD79002475AE /* bluetooth-17-4.png */,
+				E1B86CFB18E6FD79002475AE /* bluetooth-17-5.png */,
+				E1B86CFC18E6FD79002475AE /* bluetooth-17.png */,
+				E1B86CFD18E6FD79002475AE /* Rss_feed_subscribe_social_button_black_square_reader_orange_news.png */,
+				E1B86CF618E6FC57002475AE /* bluetooth-17-6.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		E1BE079718E5B8DD00B00F54 /* FinalVersion */ = {
+			isa = PBXGroup;
+			children = (
+				E171C18418FC2164002FCEEE /* ViewControllers */,
+				E1855E3918F19B8B00F371C0 /* GRT wrapers */,
+				E171C18318FC2108002FCEEE /* Model */,
+				E1B08B1718DB01E5000DCDB5 /* GraphView */,
+				E171C18218FC20F0002FCEEE /* Constants */,
+			);
+			name = FinalVersion;
+			sourceTree = "<group>";
+		};
+		E1CD3BA818E2E50200AFF986 /* SKSlideViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E1CD3BAC18E2E90400AFF986 /* NZMainViewController.h */,
+				E1CD3BAD18E2E90400AFF986 /* NZMainViewController.m */,
+				E1CD3BAF18E2EB0100AFF986 /* NZMainSlideViewController.h */,
+				E1CD3BB018E2EB0100AFF986 /* NZMainSlideViewController.m */,
+				E1CD3BB218E2EB0D00AFF986 /* NZLeftSlideViewController.h */,
+				E1CD3BB318E2EB0D00AFF986 /* NZLeftSlideViewController.m */,
+				E1CD3BA918E2E50200AFF986 /* SKSlideViewController.h */,
+				E1CD3BAA18E2E50200AFF986 /* SKSlideViewController.m */,
+			);
+			path = SKSlideViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9A17354F17B11CA7001DD4A4 /* BLEDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A17356D17B11CA7001DD4A4 /* Build configuration list for PBXNativeTarget "BLEDemo" */;
+			buildPhases = (
+				9A17354C17B11CA7001DD4A4 /* Sources */,
+				9A17354D17B11CA7001DD4A4 /* Frameworks */,
+				9A17354E17B11CA7001DD4A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E185624D18F1C4AC00F371C0 /* PBXTargetDependency */,
+				9A95FADA18CA733E009A724F /* PBXTargetDependency */,
+			);
+			name = BLEDemo;
+			productName = BLEFirmataDemo;
+			productReference = 9A17355017B11CA7001DD4A4 /* BLEDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9A17354817B11CA7001DD4A4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = BLEF;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = TUM;
+				TargetAttributes = {
+					9A17354F17B11CA7001DD4A4 = {
+						DevelopmentTeam = 7PLLZ436SG;
+					};
+				};
+			};
+			buildConfigurationList = 9A17354B17B11CA7001DD4A4 /* Build configuration list for PBXProject "BLEDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9A17354717B11CA7001DD4A4;
+			productRefGroup = 9A17355117B11CA7001DD4A4 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9A95FAD418CA4957009A724F /* Products */;
+					ProjectRef = 9A95FAD318CA4957009A724F /* BLE.xcodeproj */;
+				},
+				{
+					ProductGroup = E185624718F1C48500F371C0 /* Products */;
+					ProjectRef = E185624618F1C48500F371C0 /* GRTStatic.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				9A17354F17B11CA7001DD4A4 /* BLEDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9A95FAD818CA4957009A724F /* libBLE.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBLE.a;
+			remoteRef = 9A95FAD718CA4957009A724F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E185624B18F1C48600F371C0 /* libGRTStatic.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGRTStatic.a;
+			remoteRef = E185624A18F1C48600F371C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9A17354E17B11CA7001DD4A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1B86D0B18E71B12002475AE /* bleImage.png in Resources */,
+				E1B86D0018E6FD79002475AE /* bluetooth-17-4.png in Resources */,
+				E1B86D0918E71B0B002475AE /* bluetooth-logo.jpg in Resources */,
+				E1B86CFE18E6FD79002475AE /* bluetooth-17-2.png in Resources */,
+				E1B86D0118E6FD79002475AE /* bluetooth-17-5.png in Resources */,
+				E1B6277818D0614600436B8C /* Images.xcassets in Resources */,
+				9A79EAEA182ADA1900F1983C /* Storyboard.storyboard in Resources */,
+				9A79EAEC182ADA2000F1983C /* Default-568h@2x.png in Resources */,
+				E1B86D0218E6FD79002475AE /* bluetooth-17.png in Resources */,
+				E1B86CFF18E6FD79002475AE /* bluetooth-17-3.png in Resources */,
+				E1B86D0718E7044D002475AE /* bluetooth-17-25x25.png in Resources */,
+				E1B86CF718E6FC57002475AE /* bluetooth-17-6.png in Resources */,
+				E1B86D0318E6FD79002475AE /* Rss_feed_subscribe_social_button_black_square_reader_orange_news.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9A17354C17B11CA7001DD4A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1B81497191CF2C400142C52 /* NZClassifyTmpViewController.m in Sources */,
+				9A79EADC182AD9F200F1983C /* AppDelegate.m in Sources */,
+				E1B81491191CED1400142C52 /* SensorData.m in Sources */,
+				E171C18818FC2246002FCEEE /* NZNotificationConstants.m in Sources */,
+				E1B08B1D18DB04C5000DCDB5 /* NZGraphViewSegment.m in Sources */,
+				E1B08B2318DB25EB000DCDB5 /* NZGraphViewHelper.m in Sources */,
+				E1CD3BAB18E2E50200AFF986 /* SKSlideViewController.m in Sources */,
+				E1F16F3319095F08004C9330 /* NZClassificationDataset.mm in Sources */,
+				E1B6277E18D0DAD800436B8C /* SensorDataValue.m in Sources */,
+				9A79EAE9182ADA1900F1983C /* main.m in Sources */,
+				E1F16F361909781A004C9330 /* NZMyClassesViewController.m in Sources */,
+				E1BE07A018E60C1C00B00F54 /* NZGraphViewController.m in Sources */,
+				E1B814A0191D02A100142C52 /* NZConstants.m in Sources */,
+				E1BE079D18E5CA2300B00F54 /* NZTabBarController.m in Sources */,
+				E1CD3BAE18E2E90400AFF986 /* NZMainViewController.m in Sources */,
+				E1EF14D719222B070015A500 /* NZClassificationConstants.m in Sources */,
+				E185625118F1CCF600F371C0 /* NZTraningViewController.m in Sources */,
+				E1EF14DA192230730015A500 /* NZMenuViewController.m in Sources */,
+				E1B08B1A18DB0230000DCDB5 /* NZGraphView.m in Sources */,
+				E1182D2D18FB2972003B8EED /* NZClassifyViewController.m in Sources */,
+				E1CD3BB118E2EB0100AFF986 /* NZMainSlideViewController.m in Sources */,
+				E1B8149A191CFDBE00142C52 /* NZSensorDataHeaders.m in Sources */,
+				E1CD3BB418E2EB0D00AFF986 /* NZLeftSlideViewController.m in Sources */,
+				E1B08B2018DB04EC000DCDB5 /* NZGraphTextView.m in Sources */,
+				E1CD3BFE18E3227800AFF986 /* NZBleConnectionViewController.m in Sources */,
+				E1182D2A18FA84FB003B8EED /* NZGestureRecognitionPipeline.mm in Sources */,
+				E185625418F1CDAC00F371C0 /* NZClassificationController.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9A95FADA18CA733E009A724F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BLE;
+			targetProxy = 9A95FAD918CA733E009A724F /* PBXContainerItemProxy */;
+		};
+		E185624D18F1C4AC00F371C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GRTStatic;
+			targetProxy = E185624C18F1C4AC00F371C0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		9A17356B17B11CA7001DD4A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "Frameworks/BLEFirmata/BLEFirmata/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9A17356C17B11CA7001DD4A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "Frameworks/BLEFirmata/BLEFirmata/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9A17356E17B11CA7001DD4A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BLEDemo/BLEDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "BLEDemo/BLEDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = BLEDemo;
+				TARGETED_DEVICE_FAMILY = 2;
+				USER_HEADER_SEARCH_PATHS = "../../Frameworks/BLE/** Frameworks/GRTStatic/GRT/**";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9A17356F17B11CA7001DD4A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BLEDemo/BLEDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "BLEDemo/BLEDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = BLEDemo;
+				TARGETED_DEVICE_FAMILY = 2;
+				USER_HEADER_SEARCH_PATHS = "../../Frameworks/BLE/** Frameworks/GRTStatic/GRT/**";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9A17354B17B11CA7001DD4A4 /* Build configuration list for PBXProject "BLEDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A17356B17B11CA7001DD4A4 /* Debug */,
+				9A17356C17B11CA7001DD4A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A17356D17B11CA7001DD4A4 /* Build configuration list for PBXNativeTarget "BLEDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A17356E17B11CA7001DD4A4 /* Debug */,
+				9A17356F17B11CA7001DD4A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9A17354817B11CA7001DD4A4 /* Project object */;
+}

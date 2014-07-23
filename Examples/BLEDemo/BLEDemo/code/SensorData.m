@@ -17,7 +17,6 @@
         self.z = [[SensorDataValue alloc] initWithHeader:z andOffset:offsetZ];
         self.name = @"undefined";
         self.hasValues = false;
-        return self;
     } else return nil;
 }
 

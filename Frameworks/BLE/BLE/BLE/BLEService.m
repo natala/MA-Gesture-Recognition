@@ -349,6 +349,8 @@ const NSTimeInterval kFlushInterval = 1.0f/10.0f;
 
 - (void) peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     
+    NSLog(@"DID RECEIVE DATA!!!!!!!");
+    
 	if (peripheral != _peripheral) {
 		NSLog(@"Wrong peripheral\n");
 		return;
